@@ -1,0 +1,21 @@
+﻿@model LoginViewModel
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<div class="account-block">
+    <form asp-action="Login" asp-controller="Account" method="post" class="login-form">
+        <div class="form-group form-input-group">
+            <input type="email" asp-for="Email" value="" class="form-control form-input" placeholder="Email Address">
+        </div>
+        <div class="form-group form-input-group">
+            <input type="password" asp-for="Password" value="" class="form-control form-input" placeholder="Password">
+        </div>
+        <button type="submit" value="Login" class="button login-form-submit">Login</button>
+        <p style="margin-top:3px">Forgot your password? click <a>here</a>.</p>
+    </form>
+    <div class="login-form-signup">
+        <p style="margin-bottom: 3px;">Don't have an account yet?</p>
+        <a href="@Url.Action("Info", "Home", "register")" class="button login-form-signup-button">Sign Up</a>
+    </div>
+</div>

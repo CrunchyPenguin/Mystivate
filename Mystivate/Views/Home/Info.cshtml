@@ -1,0 +1,37 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Info</title>
+</head>
+<body>
+    <div class="info-top">
+        <img src="~/images/wizardLogoFinal.svg" id="info-logo" />
+        <h1 id="info-top-name">Mystivate</h1>
+    </div>
+    <div class="info-main">
+        <div class="info-main-content">
+
+        </div>
+        <div class="info-main-content">
+            @if (ViewBag.partial == "login")
+            {
+                @await Html.PartialAsync("/Views/Account/_Login.cshtml");
+            }
+            else
+            {
+                @await Html.PartialAsync("/Views/Account/_Register.cshtml");
+            }
+        </div>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,142 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
+for details on configuring this project to bundle and minify static web assets. */
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background-color: #0F9AAA;
+    padding: 0;
+    font-family: Roboto, sans-serif;
+}
+
+p{
+    color: white;
+    font-size: 15px;
+}
+
+h1,h2,h3,h4,h5,h6{
+    color: white;
+    font-family: 'Berlin Sans FB', sans-serif;
+}
+
+a {
+    color: #FFDD00;
+}
+
+a:hover {
+    color: #817E6B;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+.button {
+    background-color: #EEB902;
+    border: none;
+    padding: 10px 30px;
+    font-size: 20px;
+    color: white;
+}
+
+.button a:hover{
+    color: white
+}
+
+
+/*Info page*/
+.info-top {
+    display: flex;
+}
+
+#info-logo {
+    margin-top: 20px;
+    margin-left: 25px;
+    height: 70px;
+}
+
+#info-top-name{
+    font-size: 60px;
+    margin-left: 20px;
+}
+
+.info-main {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+}
+
+.info-main-content {
+    width:50%;
+}
+
+.account-block {
+    background-color: rgba(255, 255, 255, 0.3);
+    display: block;
+    height: 600px;
+    width: 500px;
+    text-align: center;
+    margin-left: 30px;
+    padding: 40px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    text-align: center;
+}
+
+.login-form-submit {
+    width: 80%;
+    margin: auto auto 0 auto;
+
+}
+
+.form-input {
+    border: none;
+    border-radius: 0;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+.login-form-signup{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 20%;
+}
+
+.login-form-signup-button{
+    width: 50%;
+    margin: 0 auto;
+    font-size: 16px;
+}
