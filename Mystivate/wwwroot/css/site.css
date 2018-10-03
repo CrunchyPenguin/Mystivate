@@ -65,8 +65,16 @@ a:hover {
     color: white;
 }
 
-.button a:hover{
-    color: white
+.button:hover {
+    outline: 2px solid slategray;
+    color: white;
+    text-decoration: none;
+}
+
+.button:focus {
+    outline: 2px solid slategray;
+    color: white;
+    text-decoration: none;
 }
 
 
@@ -90,6 +98,7 @@ a:hover {
     display: flex;
     justify-content: center;
     margin-top: 60px;
+    height: 100%;
 }
 
 .info-main-content {
@@ -120,12 +129,16 @@ a:hover {
 }
 
 .form-input {
+    /*border: 2px solid slategray;*/
     border: none;
     border-radius: 0;
     width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
+    padding: 28px 20px;
     box-sizing: border-box;
+}
+
+.form-input:focus {
+    outline: 2px solid slategray;
 }
 
 .login-form-signup{

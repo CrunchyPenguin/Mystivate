@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Mystivate.Models;
 
@@ -12,12 +14,18 @@ namespace Mystivate.Controllers
     {
         public IActionResult Index()
         {
-            return RedirectToAction("Info");
+            var principal = User as ClaimsPrincipal;
+            var check = User.Identity.IsAuthenticated;
+            
+            if (!check)
+                return RedirectToAction("Info", new { register = false });
+            else
+                return View();
         }
 
-        public IActionResult Info(string partialSignIn = "login")
+        public IActionResult Info(bool register = false)
         {
-            ViewBag.partial = partialSignIn;
+            ViewData["register"] = register;
             return View();
         }
 

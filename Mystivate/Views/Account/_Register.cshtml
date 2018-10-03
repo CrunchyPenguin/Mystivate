@@ -1,4 +1,24 @@
-﻿
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model RegisterViewModel
+
+<div class="account-block">
+    <form asp-action="Register" asp-controller="Account" method="post" class="login-form">
+        <div class="form-group form-input-group">
+            <input asp-for="Username" value="" class="form-control form-input" placeholder="Username">
+        </div>
+        <div class="form-group form-input-group">
+            <input type="email" asp-for="Email" value="" class="form-control form-input" placeholder="Email Address">
+        </div>
+        <div class="form-group form-input-group">
+            <input type="password" asp-for="Password" value="" class="form-control form-input" placeholder="Password">
+        </div>
+        <div class="form-group form-input-group">
+            <input type="password" asp-for="ConfirmPassword" value="" class="form-control form-input" placeholder="Confirm Password">
+        </div>
+        <button type="submit" value="Register" class="button login-form-submit">Register</button>
+    </form>
+    <div class="login-form-signup">
+        <p style="margin-bottom: 3px;">Already have an account?</p>
+        <a href="@Url.Action("Info", "Home", new { register = false })" class="button login-form-signup-button">Sign In</a>
+    </div>
+</div>
+

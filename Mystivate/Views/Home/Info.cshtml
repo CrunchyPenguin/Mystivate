@@ -22,7 +22,7 @@
 
         </div>
         <div class="info-main-content">
-            @if (ViewBag.partial == "login")
+            @if (!(bool)ViewData["register"])
             {
                 @await Html.PartialAsync("/Views/Account/_Login.cshtml");
             }
@@ -31,6 +31,9 @@
                 @await Html.PartialAsync("/Views/Account/_Register.cshtml");
             }
         </div>
+    </div>
+    <div class="info-bottom">
+
     </div>
     
 </body>

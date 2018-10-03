@@ -12,10 +12,11 @@
             <input type="password" asp-for="Password" value="" class="form-control form-input" placeholder="Password">
         </div>
         <button type="submit" value="Login" class="button login-form-submit">Login</button>
-        <p style="margin-top:3px">Forgot your password? click <a>here</a>.</p>
+        @*<p style="margin-top:3px">Forgot your password? click <a>here</a>.</p>*@
     </form>
     <div class="login-form-signup">
         <p style="margin-bottom: 3px;">Don't have an account yet?</p>
-        <a href="@Url.Action("Info", "Home", "register")" class="button login-form-signup-button">Sign Up</a>
+        <a href="@Url.Action("Info", "Home", new { register = true })" class="button login-form-signup-button">Sign Up</a>
     </div>
 </div>
+
