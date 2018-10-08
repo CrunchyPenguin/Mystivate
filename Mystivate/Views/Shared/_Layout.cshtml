@@ -17,8 +17,8 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+    <nav class="navbar navbar-inverse navbar-fixed-top navbar-custom">
+        <div>
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -26,13 +26,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Mystivate</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">
+                    <img src="~/images/wizardLogoFinal.svg" width="30" height="30" class="d-inline-block align-top" alt="" style="float: left;" />
+                    <h1 style="float: left; margin-left: 10px">Mystivate</h1>
+                </a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index"><h1>Tasks</h1></a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="About"><h1>About</h1></a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Contact"><h1>Contact</h1></a></li>
                 </ul>
                 <partial name="_LoginPartial" />
             </div>
@@ -41,12 +44,8 @@
 
     <partial name="_CookieConsentPartial" />
 
-    <div class="container body-content">
+    <div class="body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2018 - Mystivate</p>
-        </footer>
     </div>
 
     <environment include="Development">

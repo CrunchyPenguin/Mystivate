@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 505 204.951">
+  <defs>
+    <style>
+      .cls-1, .cls-3 {
+        fill: #fff;
+      }
+
+      .cls-1, .cls-4, .cls-6 {
+        stroke: #707070;
+      }
+
+      .cls-1, .cls-6 {
+        stroke-width: 2px;
+      }
+
+      .cls-2 {
+        fill: #f5ad32;
+      }
+
+      .cls-11, .cls-4, .cls-8 {
+        fill: none;
+      }
+
+      .cls-4, .cls-8 {
+        stroke-width: 6px;
+      }
+
+      .cls-4 {
+        opacity: 0.15;
+      }
+
+      .cls-5, .cls-9 {
+        fill: #303030;
+        font-size: 22px;
+        font-family: Roboto-Regular, Roboto;
+      }
+
+      .cls-6 {
+        fill: #e1e1e1;
+      }
+
+      .cls-7 {
+        fill: #979797;
+      }
+
+      .cls-8 {
+        stroke: #979797;
+      }
+
+      .cls-9 {
+        opacity: 0.56;
+      }
+
+      .cls-10 {
+        stroke: none;
+      }
+    </style>
+  </defs>
+  <g id="InfoTasks" transform="translate(-130 -2083)">
+    <g id="Group_22" data-name="Group 22" transform="translate(-555 1516)">
+      <g id="Rectangle_15" data-name="Rectangle 15" class="cls-1" transform="translate(687 569)">
+        <rect class="cls-10" width="501" height="60.951" rx="8"/>
+        <rect class="cls-11" x="-1" y="-1" width="503" height="62.951" rx="9"/>
+      </g>
+      <path id="Path_9" data-name="Path 9" class="cls-2" d="M8,0H63.042V60.951H8a8,8,0,0,1-8-8V8A8,8,0,0,1,8,0Z" transform="translate(687 569)"/>
+      <rect id="Rectangle_14" data-name="Rectangle 14" class="cls-3" width="47.865" height="46.278" rx="8" transform="translate(694.172 575.901)"/>
+      <path id="Path_6" data-name="Path 6" class="cls-4" d="M19.569-6.227,5.221,14.115-2.737,7.331" transform="translate(709.5 595.193)"/>
+      <text id="DailyText" class="cls-5" transform="translate(762 586)"><tspan x="0" y="21">Work on school project</tspan></text>
+    </g>
+    <g id="Group_23" data-name="Group 23" transform="translate(-555 1586)">
+      <g id="Rectangle_15-2" data-name="Rectangle 15" class="cls-6" transform="translate(687 569)">
+        <rect class="cls-10" width="501" height="60.951" rx="8"/>
+        <rect class="cls-11" x="-1" y="-1" width="503" height="62.951" rx="9"/>
+      </g>
+      <path id="Path_9-2" data-name="Path 9" class="cls-7" d="M8,0H63.042V60.951H8a8,8,0,0,1-8-8V8A8,8,0,0,1,8,0Z" transform="translate(687 569)"/>
+      <rect id="Rectangle_14-2" data-name="Rectangle 14" class="cls-3" width="47.865" height="46.278" rx="8" transform="translate(694.172 575.901)"/>
+      <path id="Path_6-2" data-name="Path 6" class="cls-8" d="M19.569-6.227,5.221,14.115-2.737,7.331" transform="translate(709.5 595.193)"/>
+      <text id="Dailytext-2" data-name="Dailytext" class="cls-9" transform="translate(762 586)"><tspan x="0" y="21">Read</tspan></text>
+    </g>
+    <g id="Group_24" data-name="Group 24" transform="translate(-555 1656)">
+      <g id="Rectangle_15-3" data-name="Rectangle 15" class="cls-1" transform="translate(687 569)">
+        <rect class="cls-10" width="501" height="60.951" rx="8"/>
+        <rect class="cls-11" x="-1" y="-1" width="503" height="62.951" rx="9"/>
+      </g>
+      <path id="Path_9-3" data-name="Path 9" class="cls-2" d="M8,0H63.042V60.951H8a8,8,0,0,1-8-8V8A8,8,0,0,1,8,0Z" transform="translate(687 569)"/>
+      <rect id="Rectangle_14-3" data-name="Rectangle 14" class="cls-3" width="47.865" height="46.278" rx="8" transform="translate(694.172 575.901)"/>
+      <path id="Path_6-3" data-name="Path 6" class="cls-4" d="M19.569-6.227,5.221,14.115-2.737,7.331" transform="translate(709.5 595.193)"/>
+      <text id="DailyText-3" data-name="DailyText" class="cls-5" transform="translate(762 586)"><tspan x="0" y="21">Training/Exercise</tspan></text>
+    </g>
+  </g>
+</svg>

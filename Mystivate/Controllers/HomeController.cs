@@ -12,23 +12,24 @@ namespace Mystivate.Controllers
 {
     public class HomeController : Controller
     {
+        [Authorize]
         public IActionResult Index()
         {
-            var principal = User as ClaimsPrincipal;
-            var check = User.Identity.IsAuthenticated;
-            
-            if (!check)
-                return RedirectToAction("Info", new { register = false });
-            else
-                return View();
+            return View();
         }
-
+        
+        
         public IActionResult Info(bool register = false)
         {
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index");
+            }
             ViewData["register"] = register;
             return View();
         }
 
+        [Authorize]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
@@ -36,6 +37,7 @@ namespace Mystivate.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
@@ -43,6 +45,7 @@ namespace Mystivate.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult Privacy()
         {
             return View();

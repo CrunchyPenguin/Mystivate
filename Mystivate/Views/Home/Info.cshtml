@@ -12,29 +12,62 @@
     <meta name="viewport" content="width=device-width" />
     <title>Info</title>
 </head>
-<body>
-    <div class="info-top">
-        <img src="~/images/wizardLogoFinal.svg" id="info-logo" />
-        <h1 id="info-top-name">Mystivate</h1>
-    </div>
-    <div class="info-main">
-        <div class="info-main-content">
-
+<body style="padding:0;">
+    <div class="info-home">
+        <div class="info-top">
+            <img src="~/images/wizardLogoFinal.svg" id="info-logo" />
+            <h1 id="info-top-name">Mystivate</h1>
         </div>
-        <div class="info-main-content">
-            @if (!(bool)ViewData["register"])
-            {
-                @await Html.PartialAsync("/Views/Account/_Login.cshtml");
-            }
-            else
-            {
-                @await Html.PartialAsync("/Views/Account/_Register.cshtml");
-            }
+        <div class="info-main">
+            <div class="info-main-content">
+                <div class="info-main-infoblock">
+                    <img src="~/images/MageBoss.svg" style="width: 320px" />
+                    <p style="font-size: 35px">Improve your day to day life!</p>
+                    <p style="font-size: 20px">And kill bosses in the progress.</p>
+                </div>
+            </div>
+            <div class="info-main-content">
+                @if (!(bool)ViewData["register"])
+                {
+                    @await Html.PartialAsync("/Views/Account/_Login.cshtml");
+                }
+                else
+                {
+                    @await Html.PartialAsync("/Views/Account/_Register.cshtml");
+                }
+            </div>
+        </div>
+        <div class="info-moreinfo">
+            <p>More info?</p>
+            <img src="~/images/InfoArrow.svg" />
         </div>
     </div>
     <div class="info-bottom">
-
+        <div class="info-bottom-infoblock">
+            <h1 style="font-size: 55px;">Mystivate?</h1>
+            <p style="font-size: 25px;">Mystivate is a free motivational application to help you to work trough your daily tasks. The rewards you can earn will keep you going strong troughout the day and help you improve your day to day life!</p>
+        </div>
+        <div class="info-bottom-flow">
+            <div class="info-bottom-flow-content">
+                <img src="~/images/InfoTasks.svg" />
+                <h1>Check off your daily Tasks</h1>
+            </div>
+            <img class="info-bottom-flow-arrow" src="~/images/Arrow.svg" />
+            <div class="info-bottom-flow-content">
+                <img src="~/images/InfoStars.svg" />
+                <h1>Earn rewards</h1>
+            </div>
+            <img class="info-bottom-flow-arrow" src="~/images/Arrow.svg" />
+            <div class="info-bottom-flow-content">
+                <img src="~/images/InfoMonster.svg" />
+                <h1>Defeat stronger monsters</h1>
+            </div>
+        </div>
+        <div class="info-footer">
+            @*<p>© 2018 Mystivate. All rights reserved.</p>*@
+            <img src="~/images/wizardLogoFinal.svg" style="width: 33px; margin: 86px 0 10px 0" />
+        </div>
     </div>
-    
+
 </body>
 </html>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 74.895 61.899">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: none;
+        stroke: #fff;
+      }
+
+      .cls-1 {
+        stroke-width: 10px;
+      }
+
+      .cls-2 {
+        stroke-width: 5px;
+      }
+    </style>
+  </defs>
+  <g id="Arrow" transform="translate(-934.641 -978.087)">
+    <path id="Path_2" data-name="Path 2" class="cls-1" d="M0,0,26.649,29.655,53.2,0" transform="translate(945.285 987.919)"/>
+    <path id="Path_3" data-name="Path 3" class="cls-2" d="M0,0,35.653,39.675,71.172,0" transform="translate(936.5 996.567)"/>
+    <path id="Path_4" data-name="Path 4" class="cls-2" d="M0,0,17.206,19.147,34.348,0" transform="translate(955.168 979.758)"/>
+  </g>
+</svg>

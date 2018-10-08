@@ -13,8 +13,6 @@ namespace Mystivate.Code.Logic
         int GetUserId();
         string GetEmail();
         void ChangePassword(string oldPass, string newPass);
-        void FindUserById(int userId);
-        void HashPassword(string password);
     }
 
 }

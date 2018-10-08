@@ -2,9 +2,7 @@
 for details on configuring this project to bundle and minify static web assets. */
 body {
     padding-top: 50px;
-    padding-bottom: 20px;
     background-color: #0F9AAA;
-    padding: 0;
     font-family: Roboto, sans-serif;
 }
 
@@ -79,6 +77,12 @@ a:hover {
 
 
 /*Info page*/
+.info-home {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 .info-top {
     display: flex;
 }
@@ -98,20 +102,69 @@ a:hover {
     display: flex;
     justify-content: center;
     margin-top: 60px;
-    height: 100%;
 }
 
 .info-main-content {
-    width:50%;
+    width: 50%;
 }
 
+.info-main-infoblock {
+    text-align: center;
+    margin-right: 70px;
+}
+
+.info-moreinfo {
+    align-self: center;
+    margin-top: 60px;
+}
+
+.info-bottom {
+    background-image: url(/images/InfoBG.svg);
+    display: flex;
+    flex-direction: column;
+    background-size: cover;
+    align-items: center;
+}
+
+.info-bottom-infoblock{
+    margin-top: 500px;
+    text-align: center;
+    width: 40%;
+}
+
+.info-bottom-flow {
+    display: flex;
+    align-items: flex-end;
+    margin: 40px 0;
+}
+
+.info-bottom-flow-content {
+    display: flex;
+    flex-direction: column;
+    margin: 0 50px;
+}
+
+.info-bottom-flow-arrow{
+    width: 60px;
+    margin-bottom: 130px;
+}
+
+.info-footer {
+    background-image: url(/images/InfoBottom.svg);
+    background-size: cover;
+    width: 100%;
+    text-align: center;
+}
+
+
+/*login / register block*/
 .account-block {
     background-color: rgba(255, 255, 255, 0.3);
     display: block;
     height: 600px;
     width: 500px;
     text-align: center;
-    margin-left: 30px;
+    margin-left: 70px;
     padding: 40px;
 }
 

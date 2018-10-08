@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 267.1 232.745">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fd0;
+      }
+
+      .cls-2, .cls-3, .cls-4 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        font-size: 25px;
+      }
+
+      .cls-2, .cls-3 {
+        font-family: Roboto-Medium, Roboto;
+        font-weight: 500;
+      }
+
+      .cls-3, .cls-4 {
+        font-size: 29px;
+      }
+
+      .cls-4 {
+        font-family: Roboto-Regular, Roboto;
+      }
+
+      .cls-5 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-6 {
+        fill: rgba(63,174,187,0.28);
+      }
+
+      .cls-7 {
+        fill: none;
+        stroke: #f2e366;
+        stroke-linecap: round;
+        stroke-width: 10px;
+      }
+
+      .cls-10, .cls-8 {
+        fill: #ebd651;
+      }
+
+      .cls-8 {
+        opacity: 0.84;
+      }
+
+      .cls-9 {
+        opacity: 0.54;
+      }
+
+      .cls-11 {
+        opacity: 0.31;
+      }
+
+      .cls-12 {
+        opacity: 0.94;
+      }
+
+      .cls-13 {
+        opacity: 0.69;
+      }
+
+      .cls-14 {
+        opacity: 0.85;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#3faebb" stop-opacity="0"/>
+      <stop offset="0.301" stop-color="#3faebb"/>
+      <stop offset="1" stop-color="#3faebb"/>
+    </linearGradient>
+  </defs>
+  <g id="InfoStars" transform="translate(-821 -2066)">
+    <g id="Money" transform="translate(553 1820)">
+      <g id="Coin" transform="translate(-18 7)">
+        <circle id="Ellipse_1" data-name="Ellipse 1" class="cls-1" cx="17.5" cy="17.5" r="17.5" transform="translate(350 346)"/>
+        <text id="_" data-name="€" class="cls-2" transform="translate(366 373)"><tspan x="-7.104" y="0">€</tspan></text>
+      </g>
+      <text id="_2" data-name="2" class="cls-3" transform="translate(379 381)"><tspan x="-8.241" y="0">2</tspan></text>
+      <text id="_1" data-name="1" class="cls-3" transform="translate(396 381)"><tspan x="-8.241" y="0">1</tspan></text>
+      <text id="_4" data-name="4" class="cls-3" transform="translate(413 385)"><tspan x="-8.241" y="0">4</tspan></text>
+      <text id="_3" data-name="3" class="cls-3" transform="translate(413 359)"><tspan x="-8.241" y="0">3</tspan></text>
+      <text id="_9" data-name="9" class="cls-4" transform="translate(422 383)"><tspan x="0" y="0">9</tspan></text>
+      <text id="_7" data-name="7" class="cls-4" transform="translate(439 366)"><tspan x="0" y="0">7</tspan></text>
+      <text id="_8" data-name="8" class="cls-4" transform="translate(439 388)"><tspan x="0" y="0">8</tspan></text>
+      <text id="_3-2" data-name="3" class="cls-4" transform="translate(456 377)"><tspan x="0" y="0">3</tspan></text>
+      <text id="_4-2" data-name="4" class="cls-4" transform="translate(456 394)"><tspan x="0" y="0">4</tspan></text>
+      <text id="_8-2" data-name="8" class="cls-4" transform="translate(422 358)"><tspan x="0" y="0">8</tspan></text>
+      <text id="_2-2" data-name="2" class="cls-4" transform="translate(456 360)"><tspan x="0" y="0">2</tspan></text>
+      <text id="_0" data-name="0" class="cls-4" transform="translate(422 408)"><tspan x="0" y="0">0</tspan></text>
+      <text id="_9-2" data-name="9" class="cls-4" transform="translate(439 419)"><tspan x="0" y="0">9</tspan></text>
+      <text id="_5" data-name="5" class="cls-4" transform="translate(456 412)"><tspan x="0" y="0">5</tspan></text>
+      <rect id="Rectangle_22" data-name="Rectangle 22" class="cls-5" width="113.348" height="45.009" transform="translate(482.909 369.407) rotate(180)"/>
+      <rect id="Rectangle_23" data-name="Rectangle 23" class="cls-5" width="113.348" height="48.009" transform="translate(369.561 375.235)"/>
+      <rect id="Rectangle_24" data-name="Rectangle 24" class="cls-6" width="21.348" height="48.009" transform="translate(455.561 348.235)"/>
+    </g>
+    <path id="Path_24" data-name="Path 24" class="cls-7" d="M0,0" transform="translate(940.5 2117.747)"/>
+    <g id="star" transform="translate(986.834 2022.549)">
+      <path id="path12" class="cls-8" d="M77.216,85.451l7.432,15.058,16.618,2.415L89.24,114.645,92.079,131.2l-14.863-7.814L62.352,131.2l2.839-16.551L53.166,102.924l16.618-2.415Z"/>
+    </g>
+    <g id="star-2" data-name="star" class="cls-9" transform="translate(899.834 1980.549)">
+      <path id="path12-2" data-name="path12" class="cls-10" d="M77.216,85.451l7.432,15.058,16.618,2.415L89.24,114.645,92.079,131.2l-14.863-7.814L62.352,131.2l2.839-16.551L53.166,102.924l16.618-2.415Z"/>
+    </g>
+    <g id="star-3" data-name="star" class="cls-11" transform="translate(838.834 2022.549)">
+      <path id="path12-3" data-name="path12" class="cls-10" d="M77.216,85.451l7.432,15.058,16.618,2.415L89.24,114.645,92.079,131.2l-14.863-7.814L62.352,131.2l2.839-16.551L53.166,102.924l16.618-2.415Z"/>
+    </g>
+    <g id="star-4" data-name="star" class="cls-12" transform="translate(767.834 1999.549)">
+      <path id="path12-4" data-name="path12" class="cls-10" d="M77.216,85.451l7.432,15.058,16.618,2.415L89.24,114.645,92.079,131.2l-14.863-7.814L62.352,131.2l2.839-16.551L53.166,102.924l16.618-2.415Z"/>
+    </g>
+    <g id="star-5" data-name="star" class="cls-13" transform="translate(772.834 2121.549)">
+      <path id="path12-5" data-name="path12" class="cls-10" d="M77.216,85.451l7.432,15.058,16.618,2.415L89.24,114.645,92.079,131.2l-14.863-7.814L62.352,131.2l2.839-16.551L53.166,102.924l16.618-2.415Z"/>
+    </g>
+    <g id="star-6" data-name="star" transform="translate(846.834 2167.549)">
+      <path id="path12-6" data-name="path12" class="cls-10" d="M77.216,85.451l7.432,15.058,16.618,2.415L89.24,114.645,92.079,131.2l-14.863-7.814L62.352,131.2l2.839-16.551L53.166,102.924l16.618-2.415Z"/>
+    </g>
+    <g id="star-7" data-name="star" class="cls-14" transform="translate(947.834 2137.549)">
+      <path id="path12-7" data-name="path12" class="cls-10" d="M77.216,85.451l7.432,15.058,16.618,2.415L89.24,114.645,92.079,131.2l-14.863-7.814L62.352,131.2l2.839-16.551L53.166,102.924l16.618-2.415Z"/>
+    </g>
+  </g>
+</svg>

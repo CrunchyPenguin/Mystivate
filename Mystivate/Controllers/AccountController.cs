@@ -20,11 +20,11 @@ namespace Mystivate.Controllers
             _signInService = signInService;
         }
 
-        [Authorize]
-        public IActionResult Index()
-        {
-            return View();
-        }
+        //[Authorize]
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
 
         public IActionResult Login()
         {
@@ -36,7 +36,7 @@ namespace Mystivate.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _signInService.SignIn(model.Email, model.Password);
+                Code.Logic.SignInResult result = await _signInService.SignIn(model.Email, model.Password);
                 
                 return RedirectToAction("Index", "Home");
             }
@@ -46,6 +46,24 @@ namespace Mystivate.Controllers
         public IActionResult Register()
         {
             return RedirectToAction("Info", "Home", new { register = true });
+        }
+
+        [HttpPost]
+        public IActionResult Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                RegisterModel register = new RegisterModel
+                {
+                    Email = model.Email,
+                    Username = model.Username,
+                    Password = model.Password
+                };
+                RegisterResult result = _signInService.RegisterUser(register);
+
+                return RedirectToAction("Index", "Home");
+            }
+            return RedirectToAction("Info", "Home");
         }
 
         public async Task<IActionResult> Logout()
