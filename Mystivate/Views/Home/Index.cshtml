@@ -42,13 +42,18 @@
             @for (int i = 0; i < Model.Habits.Count; i++)
             {
                 <div class="task" id="habit@(Model.Habits[i].Id)">
-                    <button class="habit-positive-button">
-                        <div class="positive-plus-box">
-                            <div class="positive-vert"></div>
-                            <div class="positive-hori"></div>
+                    <button class="habit-button">
+                        <div class="habit-button-box">
+                            <div class="habit-vert"></div>
+                            <div class="habit-hori"></div>
                         </div>
                     </button>
                     <p>@Model.Habits[i].Name</p>
+                    <button class="habit-button habit-button-negative">
+                        <div class="habit-button-box">
+                            <div class="habit-hori"></div>
+                        </div>
+                    </button>
                 </div>
             }
         </div>

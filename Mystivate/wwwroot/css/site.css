@@ -34,6 +34,26 @@ li a {
     display: block;
 }
 
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #cecece;
+}
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #868686;
+    }
+
 /*custom navbar*/
 .c-navbar {
     background-color: #152D48;
@@ -337,6 +357,7 @@ li a {
     width: 51px;
     height: 50px;
     border-radius: 10px;
+    position: relative;
 }
 
     .add-task-button:focus {
@@ -344,23 +365,25 @@ li a {
     }
 
     .add-task-button .rect-vert {
+        background-color: white;
+        position: absolute;
         width: 7px;
         height: 35px;
         border-radius: 4px;
-        margin: 0 auto;
-        position: relative;
-        top: 4px;
-        background-color: white;
+        top: 50%;
+        left: 50%;
+        margin: -17.5px 0 0 -3.5px;
     }
 
     .add-task-button .rect-hori {
+        background-color: white;
+        position: absolute;
         width: 35px;
         height: 7px;
         border-radius: 4px;
-        margin: 0 auto;
-        position: relative;
-        top: -17px;
-        background-color: white;
+        top: 50%;
+        left: 50%;
+        margin: -3.5px 0 0 -17.5px;
     }
 
 #add-daily {
@@ -378,8 +401,9 @@ li a {
 .task-container {
     margin-top: 20px;
     overflow: scroll;
-    max-height: 367px;
+    height: 367px;
     overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .task {
@@ -401,8 +425,6 @@ li a {
 .task-tick-button {
     background-color: #EEB902;
     border: none;
-    font-size: 20px;
-    color: white;
     width: 56px;
     height: 56px;
     border-radius: 10px 0 0 10px;
@@ -439,3 +461,52 @@ li a {
         top: 11px;
         left: 16px;
     }
+
+.habit-button {
+    background-color: #0FC978;
+    border: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 10px 0 0 10px;
+}
+
+    .habit-button:focus {
+        outline: none;
+    }
+
+.habit-button-box {
+    position: relative;
+    width: 41px;
+    height: 42px;
+    margin: auto auto;
+    border-radius: 50%;
+    background-color: white;
+}
+
+    .habit-button-box .habit-vert {
+        position: absolute;
+        width: 5px;
+        height: 24px;
+        border-radius: 4px;
+        background-color: #dadada;
+        top: 50%;
+        left: 50%;
+        margin: -12px 0 0 -2.5px;
+    }
+
+    .habit-button-box .habit-hori {
+        position: absolute;
+        width: 24px;
+        height: 5px;
+        border-radius: 4px;
+        background-color: #dadada;
+        top: 50%;
+        left: 50%;
+        margin: -2.5px 0 0 -12px;
+    }
+
+.habit-button-negative {
+    background-color: #F66C6C;
+    margin-left: auto;
+    border-radius: 0 10px 10px 0;
+}
