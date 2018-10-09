@@ -1,9 +1,14 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
 for details on configuring this project to bundle and minify static web assets. */
+html {
+    height: 100%;
+}
+
 body {
-    padding-top: 50px;
+    padding-top: 80px;
     background-color: #0F9AAA;
     font-family: Roboto, sans-serif;
+    height: 100%;
 }
 
 p {
@@ -60,6 +65,7 @@ li a {
         border: none;
         padding: 20px;
         font-size: 20px;
+        font-family: 'Berlin Sans FB', sans-serif;
         color: white;
     }
 
@@ -78,16 +84,20 @@ li a {
             margin: 0;
         }
 
-    .c-navbar .item-brand a {
-        display: flex;
-        width: 200px;
-        align-items: center;
-        justify-content: space-between;
+    .c-navbar .item-brand {
+        margin-right: 20px;
     }
 
-    .c-navbar .item-brand h1 {
-        font-size: 30px !important;
-    }
+        .c-navbar .item-brand a {
+            display: flex;
+            width: 220px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .c-navbar .item-brand h1 {
+            font-size: 30px !important;
+        }
 
     .c-navbar li a {
         padding: 20px;
@@ -99,6 +109,7 @@ li a {
 
     .c-navbar .item-right {
         margin-left: auto;
+        margin-right: 10px;
     }
 
 /* Wrapping element */
@@ -106,6 +117,7 @@ li a {
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    height: 100%;
 }
 
 /* Carousel */
@@ -282,3 +294,148 @@ li a {
     margin: 0 auto;
     font-size: 16px;
 }
+
+
+/*index*/
+
+.character-box {
+    width: 90%;
+    height: 40%;
+    margin: 0 auto;
+}
+
+.tasks {
+    height: 60%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.tasks-box {
+    width: 30%;
+    background-color: white;
+    height: 93%;
+    padding: 30px;
+}
+
+.tasks-box-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .tasks-box-top p {
+        font-size: 30px;
+        color: black;
+        margin: 0;
+    }
+
+.add-task-button {
+    background-color: #EEB902;
+    border: none;
+    font-size: 20px;
+    color: white;
+    width: 51px;
+    height: 50px;
+    border-radius: 10px;
+}
+
+    .add-task-button:focus {
+        outline: none;
+    }
+
+    .add-task-button .rect-vert {
+        width: 7px;
+        height: 35px;
+        border-radius: 4px;
+        margin: 0 auto;
+        position: relative;
+        top: 4px;
+        background-color: white;
+    }
+
+    .add-task-button .rect-hori {
+        width: 35px;
+        height: 7px;
+        border-radius: 4px;
+        margin: 0 auto;
+        position: relative;
+        top: -17px;
+        background-color: white;
+    }
+
+#add-daily {
+    background-color: #EEB902;
+}
+
+#add-habit {
+    background-color: #0FC978;
+}
+
+#add-todo {
+    background-color: #EC5A5A;
+}
+
+.task-container {
+    margin-top: 20px;
+    overflow: scroll;
+    max-height: 367px;
+    overflow-x: hidden;
+}
+
+.task {
+    width: 100%;
+    height: 60px;
+    border-radius: 12px;
+    border: 2px solid gray;
+    display: flex;
+    align-items: center;
+    margin-top: 3px;
+}
+
+    .task p {
+        color: black;
+        font-size: 18px;
+        margin: 0 0 0 14px;
+    }
+
+.task-tick-button {
+    background-color: #EEB902;
+    border: none;
+    font-size: 20px;
+    color: white;
+    width: 56px;
+    height: 56px;
+    border-radius: 10px 0 0 10px;
+}
+
+    .task-tick-button:focus {
+        outline: none;
+    }
+
+.tick-box {
+    width: 41px;
+    height: 42px;
+    margin: auto auto;
+    border-radius: 10px;
+    background-color: white;
+}
+
+    .tick-box .tick-left {
+        position: relative;
+        background-color: #dadada;
+        width: 12px;
+        height: 6px;
+        transform: rotate(38deg);
+        top: 23px;
+        left: 10px;
+    }
+
+    .tick-box .tick-right {
+        position: relative;
+        background-color: #dadada;
+        width: 17px;
+        height: 6px;
+        transform: rotate(128deg);
+        top: 11px;
+        left: 16px;
+    }

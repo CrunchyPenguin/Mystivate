@@ -44,7 +44,8 @@ namespace Mystivate
             services.AddScoped<ISignInService, SignInService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAccountAccess, AccountAccess>();
-            
+            services.AddScoped<ITaskAccess, TaskAccess>();
+
             services.AddDbContext<Mystivate_dbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 

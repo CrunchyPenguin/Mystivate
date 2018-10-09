@@ -1,4 +1,67 @@
-﻿@{
+﻿@model Mystivate.Models.AllTasksViewModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
+<div class="character-box"></div>
+
+<div class="tasks">
+    <div class="tasks-box">
+        <div class="tasks-box-top">
+            <p>Daily Tasks</p>
+            <button class="add-task-button" id="add-daily">
+                <div class="rect-vert"></div>
+                <div class="rect-hori"></div>
+            </button>
+        </div>
+        <div class="task-container">
+            @for (int i = 0; i < Model.DailyTasks.Count; i++)
+            {
+                <div class="task @(Model.DailyTasks[i].Done.Value ? "done" : "")" id="daily@(Model.DailyTasks[i].Id)">
+                    <button class="task-tick-button" @(Model.DailyTasks[i].Done.Value ? "disabled" : "")>
+                        <div class="tick-box">
+                            <div class="tick-left"></div>
+                            <div class="tick-right"></div>
+                        </div>
+                    </button>
+                    <p>@Model.DailyTasks[i].Name</p>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="tasks-box">
+        <div class="tasks-box-top">
+            <p>Habits</p>
+            <button class="add-task-button" id="add-habit">
+                <div class="rect-vert"></div>
+                <div class="rect-hori"></div>
+            </button>
+        </div>
+        <div class="task-container">
+            @for (int i = 0; i < Model.Habits.Count; i++)
+            {
+                <div class="task" id="habit@(Model.Habits[i].Id)">
+                    <button class="habit-positive-button">
+                        <div class="positive-plus-box">
+                            <div class="positive-vert"></div>
+                            <div class="positive-hori"></div>
+                        </div>
+                    </button>
+                    <p>@Model.Habits[i].Name</p>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="tasks-box">
+        <div class="tasks-box-top">
+            <p>To-Do's</p>
+            <button class="add-task-button" id="add-todo">
+                <div class="rect-vert"></div>
+                <div class="rect-hori"></div>
+            </button>
+        </div>
+        <div class="task-container">
+        </div>
+    </div>
+</div>

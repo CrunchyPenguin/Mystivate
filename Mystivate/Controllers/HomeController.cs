@@ -6,18 +6,34 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Mystivate.Code.Database;
+using Mystivate.Code.Logic;
 using Mystivate.Models;
 
 namespace Mystivate.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ITaskAccess _taskAccess;
+        private readonly IUserService _userService;
+
+        public HomeController(ITaskAccess taskAccess, IUserService userService)
+        {
+            _taskAccess = taskAccess;
+            _userService = userService;
+        }
+
         [Authorize]
         public IActionResult Index()
         {
-            return View();
+            AllTasksViewModel tasks = new AllTasksViewModel
+            {
+                DailyTasks = _taskAccess.GetDailyTasks(_userService.GetUserId()),
+                Habits = _taskAccess.GetHabits(_userService.GetUserId()),
+                ToDos = _taskAccess.GetTodos(_userService.GetUserId())
+            };
+            return View(tasks);
         }
-        
         
         public IActionResult Info(bool register = false)
         {
