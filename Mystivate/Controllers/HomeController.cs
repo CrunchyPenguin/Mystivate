@@ -14,24 +14,19 @@ namespace Mystivate.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ITaskAccess _taskAccess;
+        private readonly ITaskLogic _taskLogic;
         private readonly IUserService _userService;
 
-        public HomeController(ITaskAccess taskAccess, IUserService userService)
+        public HomeController(ITaskLogic taskLogic, IUserService userService)
         {
-            _taskAccess = taskAccess;
+            _taskLogic = taskLogic;
             _userService = userService;
         }
 
         [Authorize]
         public IActionResult Index()
         {
-            AllTasksViewModel tasks = new AllTasksViewModel
-            {
-                DailyTasks = _taskAccess.GetDailyTasks(_userService.GetUserId()),
-                Habits = _taskAccess.GetHabits(_userService.GetUserId()),
-                ToDos = _taskAccess.GetTodos(_userService.GetUserId())
-            };
+            AllTasksViewModel tasks = _taskLogic.GetAllTasks();
             return View(tasks);
         }
         

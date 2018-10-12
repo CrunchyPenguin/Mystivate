@@ -41,10 +41,13 @@ namespace Mystivate
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
             services.AddHttpContextAccessor();
 
-            services.AddScoped<ISignInService, SignInService>();
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IAccountAccess, AccountAccess>();
-            services.AddScoped<ITaskAccess, TaskAccess>();
+            services.AddTransient<ISignInService, SignInService>();
+            services.AddTransient<IUserService, UserService>();
+
+            services.AddTransient<ITaskLogic, TaskLogic>();
+
+            services.AddTransient<IAccountAccess, AccountAccess>();
+            services.AddTransient<ITaskAccess, TaskAccess>();
 
             services.AddDbContext<Mystivate_dbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }

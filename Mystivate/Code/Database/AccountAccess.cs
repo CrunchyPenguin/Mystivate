@@ -12,15 +12,15 @@ namespace Mystivate.Code.Database
 {
     public class AccountAccess : IAccountAccess
     {
-        private readonly Mystivate_dbContext _db;
+        private readonly Mystivate_dbContext _dbContext;
         public AccountAccess(Mystivate_dbContext db)
         {
-            _db = db;
+            _dbContext = db;
         }
 
         public void CreateUserAccount(string username, string email, string passKey, string passSalt)
         {
-            using (var connection = _db.Database.GetDbConnection())
+            using (var connection = _dbContext.Database.GetDbConnection())
             {
                 try
                 {
@@ -56,7 +56,7 @@ namespace Mystivate.Code.Database
 
         public EncryptedPassword GetEncryptedPassword(int userId)
         {
-            User user = _db.Users.Where(u => u.Id == userId).First();
+            User user = _dbContext.Users.Where(u => u.Id == userId).First();
             return new EncryptedPassword
             {
                 PasswordKey = user.PasswordKey,
@@ -71,41 +71,41 @@ namespace Mystivate.Code.Database
 
         public int GetUserId(string email)
         {
-            return _db.Users.Where(u => u.Email == email).First().Id;
+            return _dbContext.Users.Where(u => u.Email == email).First().Id;
         }
 
         public string GetUsername(int userId)
         {
-            return _db.Users.Where(u => u.Id == userId).First().Username;
+            return _dbContext.Users.Where(u => u.Id == userId).First().Username;
         }
 
         public void SetPassword(int userId, string newPassKey, string newPassSalt)
         {
-            User user = _db.Users.Where(u => u.Id == userId).First();
+            User user = _dbContext.Users.Where(u => u.Id == userId).First();
             user.PasswordKey = newPassKey;
             user.PasswordSalt = newPassSalt;
-            _db.Users.Update(user);
+            _dbContext.Users.Update(user);
         }
 
         public bool UserExists(string email = "", string username = "")
         {
             if (email != "" && username == "")
             {
-                if (_db.Users.Where(u => u.Email == email).Count() != 0)
+                if (_dbContext.Users.Where(u => u.Email == email).Count() != 0)
                 {
                     return true;
                 }
             }
             else if (username != "" && email == "")
             {
-                if (_db.Users.Where(u => u.Username == username).Count() != 0)
+                if (_dbContext.Users.Where(u => u.Username == username).Count() != 0)
                 {
                     return true;
                 }
             }
             else if(username != "" && email != "")
             {
-                if (_db.Users.Where(u => (u.Email == email) && (u.Username == username)).Count() != 0)
+                if (_dbContext.Users.Where(u => (u.Email == email) && (u.Username == username)).Count() != 0)
                 {
                     return true;
                 }

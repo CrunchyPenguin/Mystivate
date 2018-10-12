@@ -4,22 +4,26 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="character-box"></div>
+<div class="character-box">
+    <div class="xp-notify">
+
+    </div>
+</div>
 
 <div class="tasks">
     <div class="tasks-box">
         <div class="tasks-box-top">
             <p>Daily Tasks</p>
-            <button class="add-task-button" id="add-daily">
+            <button onClick="AddTask(this.id)" class="add-task-button" id="add-daily">
                 <div class="rect-vert"></div>
                 <div class="rect-hori"></div>
             </button>
         </div>
-        <div class="task-container">
+        <div class="task-container" id="daily-container">
             @for (int i = 0; i < Model.DailyTasks.Count; i++)
             {
-                <div class="task @(Model.DailyTasks[i].Done.Value ? "done" : "")" id="daily@(Model.DailyTasks[i].Id)">
-                    <button class="task-tick-button" @(Model.DailyTasks[i].Done.Value ? "disabled" : "")>
+                <div class="task @(Model.DailyTasks[i].Done.Value ? "done" : "")">
+                    <button onClick="DailyCheck(this.id)" class="task-tick-button" @(Model.DailyTasks[i].Done.Value ? "disabled" : "") id="d@(Model.DailyTasks[i].Id)">
                         <div class="tick-box">
                             <div class="tick-left"></div>
                             <div class="tick-right"></div>
@@ -33,23 +37,23 @@
     <div class="tasks-box">
         <div class="tasks-box-top">
             <p>Habits</p>
-            <button class="add-task-button" id="add-habit">
+            <button onClick="AddTask(this.id)" class="add-task-button" id="add-habit">
                 <div class="rect-vert"></div>
                 <div class="rect-hori"></div>
             </button>
         </div>
-        <div class="task-container">
+        <div class="task-container" id="habit-container">
             @for (int i = 0; i < Model.Habits.Count; i++)
             {
-                <div class="task" id="habit@(Model.Habits[i].Id)">
-                    <button class="habit-button">
+                <div class="task">
+                    <button onClick="HabitPositive(this.id)" class="habit-button" id="h@(Model.Habits[i].Id)">
                         <div class="habit-button-box">
                             <div class="habit-vert"></div>
                             <div class="habit-hori"></div>
                         </div>
                     </button>
                     <p>@Model.Habits[i].Name</p>
-                    <button class="habit-button habit-button-negative">
+                    <button onClick="HabitNegative(this.id)" class="habit-button habit-button-negative" id="h@(Model.Habits[i].Id)">
                         <div class="habit-button-box">
                             <div class="habit-hori"></div>
                         </div>
@@ -61,12 +65,203 @@
     <div class="tasks-box">
         <div class="tasks-box-top">
             <p>To-Do's</p>
-            <button class="add-task-button" id="add-todo">
+            <button onClick="AddTask(this.id)" class="add-task-button" id="add-todo">
                 <div class="rect-vert"></div>
                 <div class="rect-hori"></div>
             </button>
         </div>
-        <div class="task-container">
+        <div class="task-container" id="todo-container">
+            @for (int i = 0; i < Model.ToDos.Count; i++)
+            {
+                <div class="task">
+                    <button onClick="TodoCheck(this.id)" class="task-tick-button todo-button" id="t@(Model.ToDos[i].Id)">
+                        <div class="tick-box">
+                            <div class="tick-left"></div>
+                            <div class="tick-right"></div>
+                        </div>
+                    </button>
+                    <p>@Model.ToDos[i].Name</p>
+                </div>
+            }
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script id="addtask" type="text/html">
+        <div class="task" id="new-task">
+            <input type="text" name="taskname" class="add-task-input" id="new-task-input" />
+            <button onClick="AddNewTask(this.id)" class="new-task-button" id="newtask">
+                <div class="tick-box">
+                    <div class="new-task-vert"></div>
+                    <div class="new-task-hori"></div>
+                </div>
+            </button>
+        </div>
+    </script>
+
+    <script>
+        function DailyCheck(id) {
+            var taskId = id.substr(1);
+            $.post("@Url.Action("CheckDaily","Task")", { id: taskId });
+            $("#" + id).children().children().first().css("transition", "background-color 1s ease");
+            $("#" + id).children().children().last().css("transition", "background-color 1s ease");
+            $("#" + id).parent().addClass("done");
+        }
+
+        function TodoCheck(id) {
+            var taskId = id.substr(1);
+            $.post("@Url.Action("CheckTodo","Task")", { id: taskId });
+            $("#" + id).children().children().first().css("transition", "background-color 1s ease");
+            $("#" + id).children().children().last().css("transition", "background-color 1s ease");
+            $("#" + id).parent().fadeOut("normal", function () {
+                $(this).remove();
+            });
+        }
+
+        function HabitPositive(id) {
+
+        }
+        
+        function AddTask(id) {
+            $("#" + id).hide();
+            if (id == "add-daily") {
+                newTaskType = 'daily';
+                var newdiv = document.getElementById('addtask').innerHTML;
+                $("#daily-container").append(newdiv);
+                var topPos = document.getElementById('new-task').offsetTop;
+                document.getElementById('daily-container').scrollTop = topPos;
+                $("#newtask").attr("id", "newdaily");
+            }
+            if (id == "add-habit") {
+                newTaskType = 'habit';
+                var newdiv = document.getElementById('addtask').innerHTML;
+                $("#habit-container").append(newdiv);
+                var topPos = document.getElementById('new-task').offsetTop;
+                document.getElementById('habit-container').scrollTop = topPos;
+                $("#newtask").attr("id", "newhabit");
+            }
+            if (id == "add-todo") {
+                newTaskType = 'todo';
+                var newdiv = document.getElementById('addtask').innerHTML;
+                $("#todo-container").append(newdiv);
+                var topPos = document.getElementById('new-task').offsetTop;
+                document.getElementById('todo-container').scrollTop = topPos;
+                $("#newtask").attr("id", "newtodo");
+            }
+            $("#new-task-input").focus();
+            document.getElementById("new-task-input").addEventListener("keyup", function (event) {
+                // Number 13 is the "Enter" key on the keyboard
+                if (event.keyCode === 13) {
+                    // Trigger the button element with a click
+                    AddNewTask($(".new-task-button").attr("id"));
+                }
+            });
+        }
+
+        function AddNewTask(newid) {
+            if (document.getElementById('new-task-input').value != "") {
+                if (newid == "newdaily") {
+                    $.post("@Url.Action("AddDaily","Task")", { name: document.getElementById('new-task-input').value }, function (id) {
+                        var task = $(document.createElement('div'));
+                        task.addClass("task");
+                        var button = task.append(document.createElement('button')).children().last();
+                        button.addClass("task-tick-button");
+                        button.attr("onclick", 'DailyCheck(this.id)');
+                        button.attr("id", "d" + id);
+                        var tickbox = button.append(document.createElement('div')).children().last();
+                        tickbox.addClass("tick-box");
+                        var tickl = tickbox.append(document.createElement('div')).children().last();
+                        tickl.addClass("tick-left");
+                        var tickr = tickbox.append(document.createElement('div')).children().last();
+                        tickr.addClass("tick-right");
+                        var name = task.append(document.createElement('p')).children().last();
+                        name.text(document.getElementById('new-task-input').value);
+                        $(document.getElementById('daily-container')).append(task);
+                        
+                        $("#new-task").remove();
+                        $(".add-task-button").show();
+                    });
+                }
+
+                if (newid == "newhabit") {
+                    $.post("@Url.Action("AddHabit","Task")", { name: document.getElementById('new-task-input').value }, function (id) {
+                        var task = $(document.createElement('div'));
+                        task.addClass("task");
+                        var button1 = task.append(document.createElement('button')).children().last();
+                        button1.addClass("habit-button");
+                        button1.attr("onclick", 'HabitPositive(this.id)');
+                        button1.attr("id", "h" + id);
+                        var buttonbox1 = button1.append(document.createElement('div')).children().last();
+                        buttonbox1.addClass("habit-button-box");
+                        var vert1 = buttonbox1.append(document.createElement('div')).children().last();
+                        vert1.addClass("habit-vert");
+                        var hori1 = buttonbox1.append(document.createElement('div')).children().last();
+                        hori1.addClass("habit-hori");
+                        var name = task.append(document.createElement('p')).children().last();
+                        name.text(document.getElementById('new-task-input').value);
+                        var button2 = task.append(document.createElement('button')).children().last();
+                        button2.addClass("habit-button");
+                        button2.addClass("habit-button-negative");
+                        button2.attr("onclick", 'HabitNegative(this.id)');
+                        button2.attr("id", id);
+                        var buttonbox2 = button2.append(document.createElement('div')).children().last();
+                        buttonbox2.addClass("habit-button-box");
+                        var hori2 = buttonbox2.append(document.createElement('div')).children().last();
+                        hori2.addClass("habit-hori");
+                        $(document.getElementById('habit-container')).append(task);
+                        
+                        $("#new-task").remove();
+                        $(".add-task-button").show();
+                    });
+                }
+                if (newid == "newtodo") {
+                    $.post("@Url.Action("AddTodo","Task")", { name: document.getElementById('new-task-input').value }, function (id) {
+                        var task = $(document.createElement('div'));
+                        task.addClass("task");
+                        var button = task.append(document.createElement('button')).children().last();
+                        button.addClass("task-tick-button");
+                        button.addClass("todo-button");
+                        button.attr("onclick", 'TodoCheck(this.id)');
+                        button.attr("id", "t" + id);
+                        var tickbox = button.append(document.createElement('div')).children().last();
+                        tickbox.addClass("tick-box");
+                        var tickl = tickbox.append(document.createElement('div')).children().last();
+                        tickl.addClass("tick-left");
+                        var tickr = tickbox.append(document.createElement('div')).children().last();
+                        tickr.addClass("tick-right");
+                        var name = task.append(document.createElement('p')).children().last();
+                        name.text(document.getElementById('new-task-input').value);
+                        $(document.getElementById('todo-container')).append(task);
+                        
+                        $("#new-task").remove();
+                        $(".add-task-button").show();
+                    });
+                }
+            }
+        }
+
+        $(document).mouseup(function (e) {
+            if ($("#new-task").length != 0) {
+                var container = $("#new-task");
+
+                // if the target of the click isn't the container nor a descendant of the container
+                if (!container.is(e.target) && container.has(e.target).length === 0) {
+                    if (!$("#new-task-input").is(':focus')) {
+                        $("#new-task").remove();
+                        $(".add-task-button").show();
+                    }
+                }
+            }
+        });
+
+        $(function () {
+            $(".task-tick-button").hover(function () {
+                $('#b').css('background-color', 'yellow');
+            }, function () {
+                // on mouseout, reset the background colour
+                $('#b').css('background-color', '');
+            });
+        });
+    </script>
+}

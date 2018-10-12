@@ -7,7 +7,7 @@ namespace Mystivate.Models
     {
         public int Id { get; set; }
         public int UsersId { get; set; }
-        public int? Name { get; set; }
+        public string Name { get; set; }
 
         public User Users { get; set; }
     }

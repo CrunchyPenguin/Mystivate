@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 33">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ebd651;
+      }
+
+      .cls-2, .cls-4 {
+        fill: none;
+      }
+
+      .cls-2 {
+        stroke: #ebd651;
+        stroke-width: 3px;
+      }
+
+      .cls-3 {
+        stroke: none;
+      }
+    </style>
+  </defs>
+  <g id="Exp_icon" data-name="Exp icon" transform="translate(-1816 -180)">
+    <g id="star" transform="translate(1769.833 101.549)">
+      <path id="path12" class="cls-1" d="M62.666,85.451,65.6,91.4l6.564.954-4.75,4.63,1.121,6.538-5.871-3.087L56.8,103.521l1.121-6.538-4.75-4.63,6.564-.954Z"/>
+    </g>
+    <g id="Ellipse_8" data-name="Ellipse 8" class="cls-2" transform="translate(1816 180)">
+      <circle class="cls-3" cx="16.5" cy="16.5" r="16.5"/>
+      <circle class="cls-4" cx="16.5" cy="16.5" r="15"/>
+    </g>
+  </g>
+</svg>

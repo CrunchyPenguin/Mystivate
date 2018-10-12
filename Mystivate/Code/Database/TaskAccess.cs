@@ -8,40 +8,86 @@ namespace Mystivate.Code.Database
 {
     public class TaskAccess : ITaskAccess
     {
-        private readonly Mystivate_dbContext _db;
+        private readonly Mystivate_dbContext _dbContext;
         public TaskAccess(Mystivate_dbContext db)
         {
-            _db = db;
+            _dbContext = db;
         }
 
-        public void AddDailyTask(int userid, DailyTask task)
+        public int AddDailyTask(int userId, string task)
         {
-            throw new NotImplementedException();
+            _dbContext.DailyTasks.Add(new DailyTask
+            {
+                Name = task,
+                UsersId = userId
+            });
+            _dbContext.SaveChanges();
+            return _dbContext.DailyTasks.Where(d => d.UsersId == userId).Last().Id;
         }
 
-        public void AddHabit(int userId, DailyTask habit)
+        public int AddHabit(int userId, string habit)
         {
-            throw new NotImplementedException();
+            _dbContext.Habits.Add(new Habit
+            {
+                Name = habit,
+                UsersId = userId
+            });
+            _dbContext.SaveChanges();
+            return _dbContext.Habits.Where(d => d.UsersId == userId).Last().Id;
         }
 
-        public void AddTodo(int userId, DailyTask todo)
+        public int AddTodo(int userId, string todo)
         {
-            throw new NotImplementedException();
+            _dbContext.ToDos.Add(new ToDo
+            {
+                Name = todo,
+                UsersId = userId
+            });
+            _dbContext.SaveChanges();
+            return _dbContext.ToDos.Where(d => d.UsersId == userId).Last().Id;
+        }
+
+        public void CheckDaily(int dailyId)
+        {
+            if (_dbContext.DailyTasks.Any(d => d.Id == dailyId))
+            {
+                _dbContext.DailyTasks.Where(d => d.Id == dailyId).First().Done = true;
+                _dbContext.SaveChanges();
+            }
+        }
+
+        public void CheckTodo(int todoId)
+        {
+            if (_dbContext.ToDos.Any(t => t.Id == todoId))
+            {
+                _dbContext.ToDos.Remove(_dbContext.ToDos.Where(t => t.Id == todoId).First());
+                _dbContext.SaveChanges();
+            }
         }
 
         public List<DailyTask> GetDailyTasks(int userId)
         {
-            return _db.DailyTasks.Where(t => t.UsersId == userId).ToList();
+            return _dbContext.DailyTasks.Where(t => t.UsersId == userId).ToList();
         }
 
         public List<Habit> GetHabits(int userId)
         {
-            return _db.Habits.Where(t => t.UsersId == userId).ToList();
+            return _dbContext.Habits.Where(t => t.UsersId == userId).ToList();
         }
 
         public List<ToDo> GetTodos(int userId)
         {
-            return _db.ToDos.Where(t => t.UsersId == userId).ToList();
+            return _dbContext.ToDos.Where(t => t.UsersId == userId).ToList();
+        }
+
+        public void NegativeHabit(int negativeId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void PositiveHabit(int habitId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

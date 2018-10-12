@@ -11,8 +11,12 @@ namespace Mystivate.Code.Database
         List<DailyTask> GetDailyTasks(int userId);
         List<Habit> GetHabits(int userId);
         List<ToDo> GetTodos(int userId);
-        void AddDailyTask(int userid, DailyTask task);
-        void AddHabit(int userId, DailyTask habit);
-        void AddTodo(int userId, DailyTask todo);
+        int AddDailyTask(int userId, string task);
+        int AddHabit(int userId, string habit);
+        int AddTodo(int userId, string todo);
+        void CheckDaily(int dailyId);
+        void PositiveHabit(int habitId);
+        void NegativeHabit(int negativeId);
+        void CheckTodo(int todoId);
     }
 }
