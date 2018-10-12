@@ -4,10 +4,9 @@
     ViewData["Title"] = "Home Page";
 }
 
+<div id="xp-notify-box">
+</div>
 <div class="character-box">
-    <div class="xp-notify">
-
-    </div>
 </div>
 
 <div class="tasks">
@@ -103,26 +102,68 @@
     <script>
         function DailyCheck(id) {
             var taskId = id.substr(1);
-            $.post("@Url.Action("CheckDaily","Task")", { id: taskId });
-            $("#" + id).children().children().first().css("transition", "background-color 1s ease");
-            $("#" + id).children().children().last().css("transition", "background-color 1s ease");
-            $("#" + id).parent().addClass("done");
+            $.post("@Url.Action("CheckDaily", "Task")", { id: taskId }, function (xp) {
+                AddExp(xp);
+                $("#" + id).children().children().first().css("transition", "background-color 1s ease");
+                $("#" + id).children().children().last().css("transition", "background-color 1s ease");
+                $("#" + id).attr("disabled", true);
+                $("#" + id).parent().addClass("done");
+            });
         }
 
         function TodoCheck(id) {
             var taskId = id.substr(1);
-            $.post("@Url.Action("CheckTodo","Task")", { id: taskId });
-            $("#" + id).children().children().first().css("transition", "background-color 1s ease");
-            $("#" + id).children().children().last().css("transition", "background-color 1s ease");
-            $("#" + id).parent().fadeOut("normal", function () {
-                $(this).remove();
+            $.post("@Url.Action("CheckTodo", "Task")", { id: taskId }, function (xp) {
+                AddExp(xp);
+                $("#" + id).children().children().first().css("transition", "background-color 1s ease");
+                $("#" + id).children().children().last().css("transition", "background-color 1s ease");
+                $("#" + id).parent().fadeOut("normal", function () {
+                    $(this).remove();
+                });
             });
         }
 
         function HabitPositive(id) {
+            var taskId = id.substr(1);
+            $.post("@Url.Action("PositiveHabit", "Task")", { id: taskId }, function (xp) {
+                AddExp(xp);
+                $("#" + id).parent().removeClass("negative");
+                $("#" + id).parent().addClass("positive");
+            });
+        }
+
+        function HabitNegative(id) {
+            var taskId = id.substr(1);
+            $.post("@Url.Action("NegativeHabit", "Task")", { id: taskId }, function (xp) {
+                AddExp(xp);
+                $("#" + id).parent().removeClass("positive");
+                $("#" + id).parent().addClass("negative");
+            });
 
         }
-        
+
+        function AddExp(amount) {
+            var expblock = $(document.createElement('div'));
+            expblock.addClass("xp-notify");
+            var exptext = expblock.append(document.createElement('p')).children().last();
+            if (amount < 0) {
+                exptext.text("- " + Math.abs(amount) + " exp.");
+            }
+            else {
+                exptext.text("+ " + amount + " exp.");
+            }
+            var expimg = expblock.append(document.createElement('img')).children().last();
+            expimg.attr("src", "/images/ExpIcon.svg");
+            expblock.hide();
+            expblock.fadeIn(400, function () {
+                $(this).delay(2500).fadeOut(400, function () {
+                    $(this).remove();
+                });
+            });
+            $("#xp-notify-box").append(expblock);
+
+        }
+
         function AddTask(id) {
             $("#" + id).hide();
             if (id == "add-daily") {
@@ -178,7 +219,7 @@
                         var name = task.append(document.createElement('p')).children().last();
                         name.text(document.getElementById('new-task-input').value);
                         $(document.getElementById('daily-container')).append(task);
-                        
+
                         $("#new-task").remove();
                         $(".add-task-button").show();
                     });
@@ -210,7 +251,7 @@
                         var hori2 = buttonbox2.append(document.createElement('div')).children().last();
                         hori2.addClass("habit-hori");
                         $(document.getElementById('habit-container')).append(task);
-                        
+
                         $("#new-task").remove();
                         $(".add-task-button").show();
                     });
@@ -233,7 +274,7 @@
                         var name = task.append(document.createElement('p')).children().last();
                         name.text(document.getElementById('new-task-input').value);
                         $(document.getElementById('todo-container')).append(task);
-                        
+
                         $("#new-task").remove();
                         $(".add-task-button").show();
                     });

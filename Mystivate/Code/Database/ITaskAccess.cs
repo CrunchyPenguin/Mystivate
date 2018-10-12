@@ -16,7 +16,7 @@ namespace Mystivate.Code.Database
         int AddTodo(int userId, string todo);
         void CheckDaily(int dailyId);
         void PositiveHabit(int habitId);
-        void NegativeHabit(int negativeId);
+        void NegativeHabit(int habitId);
         void CheckTodo(int todoId);
     }
 }

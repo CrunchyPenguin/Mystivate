@@ -21,27 +21,50 @@ namespace Mystivate.Code.Logic
 
         public int AddDailyTask(string taskname)
         {
-            return _taskAccess.AddDailyTask(_userService.GetUserId(), taskname);
+            if (taskname != null && taskname != "")
+            {
+                return _taskAccess.AddDailyTask(_userService.GetUserId(), taskname);
+            }
+            else
+            {
+                return -1;
+            }
         }
 
         public int AddHabit(string habitname)
         {
-            return _taskAccess.AddHabit(_userService.GetUserId(), habitname);
+            if (habitname != null && habitname != "")
+            {
+                return _taskAccess.AddHabit(_userService.GetUserId(), habitname);
+            }
+            else
+            {
+                return -1;
+            }
         }
 
         public int AddTodo(string todoname)
         {
-            return _taskAccess.AddTodo(_userService.GetUserId(), todoname);
+            if (todoname != null && todoname != "")
+            {
+                return _taskAccess.AddTodo(_userService.GetUserId(), todoname);
+            }
+            else
+            {
+                return -1;
+            }
         }
 
-        public void CheckDaily(int dailyId)
+        public int CheckDaily(int dailyId)
         {
             _taskAccess.CheckDaily(dailyId);
+            return 40;
         }
 
-        public void CheckTodo(int todoId)
+        public int CheckTodo(int todoId)
         {
             _taskAccess.CheckTodo(todoId);
+            return 50;
         }
 
         public AllTasksViewModel GetAllTasks()
@@ -70,14 +93,16 @@ namespace Mystivate.Code.Logic
             throw new NotImplementedException();
         }
 
-        public void NegativeHabit(int negativeId)
+        public int NegativeHabit(int habitId)
         {
-            throw new NotImplementedException();
+            _taskAccess.NegativeHabit(habitId);
+            return -10;
         }
 
-        public void PositiveHabit(int habitId)
+        public int PositiveHabit(int habitId)
         {
-            throw new NotImplementedException();
+            _taskAccess.PositiveHabit(habitId);
+            return 10;
         }
     }
 }

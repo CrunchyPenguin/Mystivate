@@ -15,9 +15,9 @@ namespace Mystivate.Code.Logic
         int AddDailyTask(string taskname);
         int AddHabit(string habitname);
         int AddTodo(string todoname);
-        void CheckDaily(int dailyId);
-        void PositiveHabit(int habitId);
-        void NegativeHabit(int negativeId);
-        void CheckTodo(int todoId);
+        int CheckDaily(int dailyId);
+        int PositiveHabit(int habitId);
+        int NegativeHabit(int habitId);
+        int CheckTodo(int todoId);
     }
 }

@@ -80,14 +80,22 @@ namespace Mystivate.Code.Database
             return _dbContext.ToDos.Where(t => t.UsersId == userId).ToList();
         }
 
-        public void NegativeHabit(int negativeId)
-        {
-            throw new NotImplementedException();
-        }
-
         public void PositiveHabit(int habitId)
         {
-            throw new NotImplementedException();
+            if (_dbContext.Habits.Any(h => h.Id == habitId))
+            {
+                _dbContext.Habits.Where(h => h.Id == habitId).First().Positive++;
+                _dbContext.SaveChanges();
+            }
+        }
+
+        public void NegativeHabit(int habitId)
+        {
+            if (_dbContext.Habits.Any(h => h.Id == habitId))
+            {
+                _dbContext.Habits.Where(h => h.Id == habitId).First().Negative++;
+                _dbContext.SaveChanges();
+            }
         }
     }
 }
