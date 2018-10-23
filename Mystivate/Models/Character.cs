@@ -19,7 +19,6 @@ namespace Mystivate.Models
         public int? LeftWeaponId { get; set; }
         public string Name { get; set; }
         public int? Coins { get; set; }
-        public int? Level { get; set; }
         public int? Experience { get; set; }
         public int Lives { get; set; }
 

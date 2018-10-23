@@ -44,10 +44,12 @@ namespace Mystivate
             services.AddTransient<ISignInService, SignInService>();
             services.AddTransient<IUserService, UserService>();
 
+            services.AddTransient<ICharacterLogic, CharacterLogic>();
             services.AddTransient<ITaskLogic, TaskLogic>();
 
             services.AddTransient<IAccountAccess, AccountAccess>();
             services.AddTransient<ITaskAccess, TaskAccess>();
+            services.AddTransient<ICharacterAccess, CharacterAccess>();
 
             services.AddDbContext<Mystivate_dbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }

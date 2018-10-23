@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace Mystivate.Code.Logic
 {
-    interface ICharacterLogic
+    public interface ICharacterLogic
     {
         int GetLives();
         int GetLevel();
         int GetExperience();
         int GetCoins();
         CharacterModel GetCharacterInfo();
+        void AddExperience(int amount);
+        int GetExperienceNextLevel();
     }
 }

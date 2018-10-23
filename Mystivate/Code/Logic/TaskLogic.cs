@@ -11,11 +11,13 @@ namespace Mystivate.Code.Logic
     {
         private readonly ITaskAccess _taskAccess;
         private readonly IUserService _userService;
+        private readonly ICharacterLogic _characterLogic;
 
-        public TaskLogic(ITaskAccess taskAccess, IUserService userService)
+        public TaskLogic(ITaskAccess taskAccess, IUserService userService, ICharacterLogic characterLogic)
         {
             _taskAccess = taskAccess;
             _userService = userService;
+            _characterLogic = characterLogic;
         }
 
 
@@ -58,13 +60,18 @@ namespace Mystivate.Code.Logic
         public int CheckDaily(int dailyId)
         {
             _taskAccess.CheckDaily(dailyId);
-            return 40;
+            int xp = 40;
+            _characterLogic.AddExperience(xp);
+            return xp;
+
         }
 
         public int CheckTodo(int todoId)
         {
             _taskAccess.CheckTodo(todoId);
-            return 50;
+            int xp = 60;
+            _characterLogic.AddExperience(xp);
+            return xp;
         }
 
         public AllTasksViewModel GetAllTasks()
@@ -96,13 +103,17 @@ namespace Mystivate.Code.Logic
         public int NegativeHabit(int habitId)
         {
             _taskAccess.NegativeHabit(habitId);
-            return -10;
+            int xp = -10;
+            _characterLogic.AddExperience(xp);
+            return xp;
         }
 
         public int PositiveHabit(int habitId)
         {
             _taskAccess.PositiveHabit(habitId);
-            return 10;
+            int xp = 10;
+            _characterLogic.AddExperience(xp);
+            return xp;
         }
     }
 }

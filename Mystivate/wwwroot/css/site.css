@@ -315,14 +315,33 @@ li a {
     font-size: 16px;
 }
 
-
-/*index*/
+/* Character */
 
 .character-box {
     width: 90%;
     height: 40%;
     margin: 0 auto;
 }
+
+#xp-bar[value] {
+    -webkit-appearance: none;
+    width: 300px;
+    height: 20px;
+}
+
+    #xp-bar[value]::-webkit-progress-bar {
+        background-color: #eee;
+        border-radius: 2px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+    }
+
+    #xp-bar[value]::-webkit-progress-value {
+        background-color: #EBD651;
+        border-radius: 2px;
+        transition: width 2s ease;
+    }
+
+/* Tasks*/
 
 .tasks {
     height: 60%;
@@ -684,6 +703,6 @@ li a {
         margin: 0 auto;
     }
 
-.xp-notify img {
-    width: 26px;
-}
+    .xp-notify img {
+        width: 26px;
+    }

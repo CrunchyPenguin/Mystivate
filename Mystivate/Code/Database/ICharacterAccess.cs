@@ -1,0 +1,23 @@
+﻿using Mystivate.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Mystivate.Code.Database
+{
+    public interface ICharacterAccess
+    {
+        /// <summary>
+        /// Returns total experience.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        int AddExperience(int userId, int amount);
+        int GetLives(int userId);
+        int GetExperience(int userId);
+        int GetCoins(int userId);
+        Character GetCharacter();
+    }
+}

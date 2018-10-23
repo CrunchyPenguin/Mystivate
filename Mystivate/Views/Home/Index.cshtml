@@ -7,6 +7,7 @@
 <div id="xp-notify-box">
 </div>
 <div class="character-box">
+    <progress id="xp-bar" max="100" value="0"></progress>
 </div>
 
 <div class="tasks">
@@ -100,10 +101,21 @@
     </script>
 
     <script>
+        UpdateExpBar();
+
+        function UpdateExpBar() {
+            $.post("@Url.Action("GetNextLvlExp", "Character")", function (maxXp) {
+                document.getElementById("xp-bar").max = maxXp;
+                $.post("@Url.Action("GetCurrentExperience", "Character")", function (currentXp) {
+                    document.getElementById("xp-bar").value = currentXp;
+                });
+            });
+        }
         function DailyCheck(id) {
             var taskId = id.substr(1);
             $.post("@Url.Action("CheckDaily", "Task")", { id: taskId }, function (xp) {
                 AddExp(xp);
+                UpdateExpBar();
                 $("#" + id).children().children().first().css("transition", "background-color 1s ease");
                 $("#" + id).children().children().last().css("transition", "background-color 1s ease");
                 $("#" + id).attr("disabled", true);
@@ -115,6 +127,7 @@
             var taskId = id.substr(1);
             $.post("@Url.Action("CheckTodo", "Task")", { id: taskId }, function (xp) {
                 AddExp(xp);
+                UpdateExpBar();
                 $("#" + id).children().children().first().css("transition", "background-color 1s ease");
                 $("#" + id).children().children().last().css("transition", "background-color 1s ease");
                 $("#" + id).parent().fadeOut("normal", function () {
@@ -127,6 +140,7 @@
             var taskId = id.substr(1);
             $.post("@Url.Action("PositiveHabit", "Task")", { id: taskId }, function (xp) {
                 AddExp(xp);
+                UpdateExpBar();
                 $("#" + id).parent().removeClass("negative");
                 $("#" + id).parent().addClass("positive");
             });
