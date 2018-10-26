@@ -11,7 +11,6 @@ namespace Mystivate.Code.Logic
         Task<SignInResult> SignIn(string email, string password);
         RegisterResult RegisterUser(RegisterModel user);
         Task SignOut();
-        bool IsSignedIn();
 
     }
 

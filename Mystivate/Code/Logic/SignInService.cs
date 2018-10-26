@@ -34,11 +34,6 @@ namespace Mystivate.Code.Logic
             return RegisterResult.EmailExists;
         }
 
-        public bool IsSignedIn()
-        {
-            return _httpContextAccessor.HttpContext.User.Identity.IsAuthenticated;
-        }
-
         public async Task<SignInResult> SignIn(string email, string password)
         {
             if (_accountAccess.UserExists(email))

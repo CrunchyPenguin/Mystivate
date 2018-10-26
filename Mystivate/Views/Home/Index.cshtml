@@ -7,6 +7,7 @@
 <div id="xp-notify-box">
 </div>
 <div class="character-box">
+    <h3 id="level">Level</h3>
     <progress id="xp-bar" max="100" value="0"></progress>
 </div>
 
@@ -102,20 +103,27 @@
 
     <script>
         UpdateExpBar();
+        UpdateLevel();
 
         function UpdateExpBar() {
             $.post("@Url.Action("GetNextLvlExp", "Character")", function (maxXp) {
                 document.getElementById("xp-bar").max = maxXp;
-                $.post("@Url.Action("GetCurrentExperience", "Character")", function (currentXp) {
+                $.post("@Url.Action("GetCurrentExp", "Character")", function (currentXp) {
                     document.getElementById("xp-bar").value = currentXp;
                 });
             });
         }
+
+        function UpdateLevel() {
+            $.post("@Url.Action("GetCurrentLevel", "Character")", function (level) {
+                document.getElementById("level").innerHTML = "Level " + level;
+            });
+        }
+
         function DailyCheck(id) {
             var taskId = id.substr(1);
             $.post("@Url.Action("CheckDaily", "Task")", { id: taskId }, function (xp) {
                 AddExp(xp);
-                UpdateExpBar();
                 $("#" + id).children().children().first().css("transition", "background-color 1s ease");
                 $("#" + id).children().children().last().css("transition", "background-color 1s ease");
                 $("#" + id).attr("disabled", true);
@@ -127,7 +135,6 @@
             var taskId = id.substr(1);
             $.post("@Url.Action("CheckTodo", "Task")", { id: taskId }, function (xp) {
                 AddExp(xp);
-                UpdateExpBar();
                 $("#" + id).children().children().first().css("transition", "background-color 1s ease");
                 $("#" + id).children().children().last().css("transition", "background-color 1s ease");
                 $("#" + id).parent().fadeOut("normal", function () {
@@ -140,7 +147,6 @@
             var taskId = id.substr(1);
             $.post("@Url.Action("PositiveHabit", "Task")", { id: taskId }, function (xp) {
                 AddExp(xp);
-                UpdateExpBar();
                 $("#" + id).parent().removeClass("negative");
                 $("#" + id).parent().addClass("positive");
             });
@@ -176,6 +182,8 @@
             });
             $("#xp-notify-box").append(expblock);
 
+            UpdateExpBar();
+            UpdateLevel();
         }
 
         function AddTask(id) {

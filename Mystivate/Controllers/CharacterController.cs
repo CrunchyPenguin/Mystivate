@@ -18,7 +18,7 @@ namespace Mystivate.Controllers
             _characterLogic = characterLogic;
         }
 
-        public int GetCurrentExperience()
+        public int GetCurrentExp()
         {
             return _characterLogic.GetExperience();
         }
@@ -26,6 +26,11 @@ namespace Mystivate.Controllers
         public int GetNextLvlExp()
         {
             return _characterLogic.GetExperienceNextLevel();
+        }
+
+        public int GetCurrentLevel()
+        {
+            return _characterLogic.GetLevel();
         }
     }
 }

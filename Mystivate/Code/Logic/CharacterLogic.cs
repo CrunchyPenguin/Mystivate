@@ -67,8 +67,7 @@ namespace Mystivate.Code.Logic
 
         private int CalculateCurrentExp(int experience)
         {
-            double levelDecimal = Math.Truncate(Math.Sqrt(experience / 80.9));
-            return (int)((levelDecimal * 50) * (levelDecimal * 1.618));
+            return experience - CalculateExperience(CalculateLevel(experience));
 
         }
 
