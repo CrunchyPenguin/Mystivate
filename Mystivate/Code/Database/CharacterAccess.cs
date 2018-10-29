@@ -16,6 +16,7 @@ namespace Mystivate.Code.Database
 
         public int AddExperience(int userId, int amount)
         {
+            //Character c = (from s in _dbContext.Characters where s.UsersId == userId select s).FirstOrDefault();
             Character character = _dbContext.Characters.Where(c => c.UsersId == userId).First();
             if (character.Experience.HasValue)
             {

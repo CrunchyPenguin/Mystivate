@@ -8,6 +8,11 @@
 </div>
 <div class="character-box">
     <h3 id="level">Level</h3>
+    <div class="c-progress" id="xp-bar">
+        <div class="c-progress-val">
+            <p>0</p>
+        </div>
+    </div>
     <progress id="xp-bar" max="100" value="0"></progress>
 </div>
 
@@ -105,11 +110,24 @@
         UpdateExpBar();
         UpdateLevel();
 
+        var maxxp, currentxp, xppercent;
+
         function UpdateExpBar() {
-            $.post("@Url.Action("GetNextLvlExp", "Character")", function (maxXp) {
-                document.getElementById("xp-bar").max = maxXp;
-                $.post("@Url.Action("GetCurrentExp", "Character")", function (currentXp) {
-                    document.getElementById("xp-bar").value = currentXp;
+            $.post("@Url.Action("GetNextLvlExp", "Character")", function (xp) {
+                maxxp = xp;
+                $.post("@Url.Action("GetCurrentExp", "Character")", function (xp) {
+                    currentxp = xp;
+                    xppercent = currentxp / maxxp * 100;
+                    var valbox = $(document.getElementById("xp-bar")).children().first();
+                    valbox.width(xppercent + "%");
+                    var val = valbox.children().first();
+                    console.log(valbox.width());
+                    if (xppercent < 5) {
+                        val.css("margin-left", valbox.width() + 5 + "px");
+                    }
+                    else {
+                        val.css("margin-left", valbox.width() / 2 + "px");
+                    }
                 });
             });
         }

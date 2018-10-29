@@ -323,6 +323,31 @@ li a {
     margin: 0 auto;
 }
 
+.c-progress {
+    background-color: #00000017;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+    width: 300px;
+    height: 20px;
+}
+
+.c-progress-val {
+    background-color: #ffffff;
+    height: 100%;
+    width: 0%;
+    border-radius: 2px;
+    transition: width 2s ease;
+}
+
+    .c-progress-val p {
+        position: absolute;
+        margin-left: 4px;
+    }
+
+#xp-bar .c-progress-val {
+    background-color: #EBD651;
+}
+
 #xp-bar[value] {
     -webkit-appearance: none;
     width: 300px;
@@ -330,7 +355,7 @@ li a {
 }
 
     #xp-bar[value]::-webkit-progress-bar {
-        background-color: #eee;
+        background-color: #00000017;
         border-radius: 2px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
     }
@@ -341,13 +366,30 @@ li a {
         transition: width 2s ease;
     }
 
-#xp-bar:after {
-    content: attr(value)' / 'attr(max);
-    font-family: Roboto, sans-serif;
+#xp-bar::before {
+    content: attr(value);
     position: absolute;
-    margin-top: -19px;
     margin-left: 4px;
+    font-family: Roboto, sans-serif;
     font-weight: 500;
+    color: white;
+    font-size: 15px;
+}
+
+#xp-bar::after {
+    content: attr(max);
+    position: absolute;
+    margin-top: -20px;
+    margin-left: 312px;
+    font-family: Roboto, sans-serif;
+    font-weight: 500;
+    color: white;
+    font-size: 15px;
+}
+
+#level {
+    display: inline-block;
+    width: 100%;
 }
 
 /* Tasks*/
