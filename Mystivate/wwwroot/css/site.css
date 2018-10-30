@@ -367,8 +367,21 @@ li a {
     margin: 0 0 0 10px;
 }
 
-.c-progress-tooltip{
+.c-progress-tooltip {
+    visibility: hidden;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 8px);
+    opacity: 0;
+    transition: opacity 0.2s;
+    background: #00000061;
+    color: white;
+    padding: 3px;
+}
 
+.c-progress:hover .c-progress-tooltip{
+    visibility: visible;
+    opacity: 1;
 }
 
 #xp-bar .c-progress-val {
