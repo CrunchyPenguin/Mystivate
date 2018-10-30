@@ -11,8 +11,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Mystivate.Code.Database;
-using Mystivate.Code.Logic;
+using Mystivate.Data;
+using Mystivate.Logic;
 using Mystivate.Models;
 
 namespace Mystivate

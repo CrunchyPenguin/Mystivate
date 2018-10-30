@@ -6,8 +6,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Mystivate.Code.Database;
-using Mystivate.Code.Logic;
+using Mystivate.Data;
+using Mystivate.Logic;
 using Mystivate.Models;
 
 namespace Mystivate.Controllers

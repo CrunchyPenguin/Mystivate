@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Mystivate.Models;
 
-namespace Mystivate.Code.Database
+namespace Mystivate.Data
 {
     public class AccountAccess : IAccountAccess
     {

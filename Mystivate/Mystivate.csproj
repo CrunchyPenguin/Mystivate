@@ -10,4 +10,15 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Mystivate.Data\Mystivate.Data.csproj" />
+    <ProjectReference Include="..\Mystivate.Logic\Mystivate.Logic.csproj" />
+    <ProjectReference Include="..\Mystivate.Models\Mystivate.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Code\Database\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>

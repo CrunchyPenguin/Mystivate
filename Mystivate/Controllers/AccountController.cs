@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Mystivate.Code.Logic;
+using Mystivate.Logic;
 using Mystivate.Models;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
@@ -36,7 +36,7 @@ namespace Mystivate.Controllers
         {
             if (ModelState.IsValid)
             {
-                Code.Logic.SignInResult result = await _signInService.SignIn(model.Email, model.Password);
+                Logic.SignInResult result = await _signInService.SignIn(model.Email, model.Password);
                 
                 return RedirectToAction("Index", "Home");
             }

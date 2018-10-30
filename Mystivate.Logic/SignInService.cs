@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Mystivate.Code.Database;
+using Mystivate.Data;
 using System.Security.Cryptography;
 
-namespace Mystivate.Code.Logic
+namespace Mystivate.Logic
 {
     public class SignInService : ISignInService
     {

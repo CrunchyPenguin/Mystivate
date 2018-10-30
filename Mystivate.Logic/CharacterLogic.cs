@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Mystivate.Code.Database;
+using Mystivate.Data;
 using Mystivate.Models;
 
-namespace Mystivate.Code.Logic
+namespace Mystivate.Logic
 {
     public class CharacterLogic : ICharacterLogic
     {

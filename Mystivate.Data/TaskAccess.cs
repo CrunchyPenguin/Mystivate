@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Mystivate.Models;
 
-namespace Mystivate.Code.Database
+namespace Mystivate.Data
 {
     public class TaskAccess : ITaskAccess
     {

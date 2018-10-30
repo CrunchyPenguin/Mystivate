@@ -317,10 +317,25 @@ li a {
 
 /* Character */
 
-.character-box {
+.character-container {
     width: 90%;
     height: 40%;
     margin: 0 auto;
+    display: flex;
+}
+
+.character-box{
+    width: 200px;
+    height: 200px;
+    background-color: white;
+}
+
+.character-info{
+    margin-left: 20px;
+}
+
+.c-progress-box {
+    display: flex;
 }
 
 .c-progress {
@@ -329,6 +344,7 @@ li a {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
     width: 300px;
     height: 20px;
+    position: relative;
 }
 
 .c-progress-val {
@@ -337,12 +353,23 @@ li a {
     width: 0%;
     border-radius: 2px;
     transition: width 2s ease;
+    display: flex;
+    justify-content: center;
 }
 
     .c-progress-val p {
+        transition: margin 2s ease;
         position: absolute;
         margin-left: 4px;
     }
+
+.c-progress-max {
+    margin: 0 0 0 10px;
+}
+
+.c-progress-tooltip{
+
+}
 
 #xp-bar .c-progress-val {
     background-color: #EBD651;
@@ -386,6 +413,7 @@ li a {
     color: white;
     font-size: 15px;
 }
+
 
 #level {
     display: inline-block;
