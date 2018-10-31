@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Mystivate.Logic
 {
-    public interface ISignInService
+    public interface IRegisterService
     {
-        Task<SignInResult> SignIn(string email, string password);
-        Task SignOut();
+        RegisterResult RegisterUser(RegisterModel user);
+
     }
 
 }

@@ -42,10 +42,13 @@ namespace Mystivate
             services.AddHttpContextAccessor();
 
             services.AddTransient<ISignInService, SignInService>();
-            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IRegisterService, SignInService>();
+            services.AddTransient<IUserInfo, UserService>();
 
-            services.AddTransient<ICharacterLogic, CharacterLogic>();
-            services.AddTransient<ITaskLogic, TaskLogic>();
+            services.AddTransient<ICharacterInfo, CharacterLogic>();
+            services.AddTransient<ICharacterManager, CharacterLogic>();
+            services.AddTransient<ITaskManager, TaskLogic>();
+            services.AddTransient<ITaskInfo, TaskLogic>();
 
             services.AddTransient<IAccountAccess, AccountAccess>();
             services.AddTransient<ITaskAccess, TaskAccess>();

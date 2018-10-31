@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace Mystivate.Logic
 {
-    public interface ITaskLogic
+    public interface ITaskManager
     {
-        List<DailyTask> GetDailyTaskList();
-        List<Habit> GetHabitList();
-        List<ToDo> GetTodoList();
-        AllTasksViewModel GetAllTasks();
         int AddDailyTask(string taskname);
         int AddHabit(string habitname);
         int AddTodo(string todoname);

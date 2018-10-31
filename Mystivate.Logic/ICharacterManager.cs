@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Mystivate.Logic
 {
-    public interface ISignInService
+    public interface ICharacterManager
     {
-        Task<SignInResult> SignIn(string email, string password);
-        Task SignOut();
+        void AddExperience(int amount);
     }
-
 }

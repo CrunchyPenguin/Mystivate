@@ -7,20 +7,20 @@ using Mystivate.Models;
 
 namespace Mystivate.Logic
 {
-    public class CharacterLogic : ICharacterLogic
+    public class CharacterLogic : ICharacterInfo, ICharacterManager
     {
         private readonly ICharacterAccess _characterAccess;
-        private readonly IUserService _userService;
+        private readonly IUserInfo _userInfo;
 
-        public CharacterLogic(ICharacterAccess characterAccess, IUserService userService)
+        public CharacterLogic(ICharacterAccess characterAccess, IUserInfo userInfo)
         {
             _characterAccess = characterAccess;
-            _userService = userService;
+            _userInfo = userInfo;
         }
 
         public void AddExperience(int amount)
         {
-            _characterAccess.AddExperience(_userService.GetUserId(), amount);
+            _characterAccess.AddExperience(_userInfo.GetUserId(), amount);
         }
 
         public CharacterModel GetCharacterInfo()
@@ -35,17 +35,17 @@ namespace Mystivate.Logic
 
         public int GetExperience()
         {
-            return CalculateCurrentExp(_characterAccess.GetExperience(_userService.GetUserId()));
+            return CalculateCurrentExp(_characterAccess.GetExperience(_userInfo.GetUserId()));
         }
 
         public int GetExperienceNextLevel()
         {
-            return CalculateNextLevelExp(_characterAccess.GetExperience(_userService.GetUserId()));
+            return CalculateNextLevelExp(_characterAccess.GetExperience(_userInfo.GetUserId()));
         }
 
         public int GetLevel()
         {
-            return CalculateLevel(_characterAccess.GetExperience(_userService.GetUserId()));
+            return CalculateLevel(_characterAccess.GetExperience(_userInfo.GetUserId()));
         }
 
         public int GetLives()

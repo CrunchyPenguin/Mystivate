@@ -9,54 +9,54 @@ namespace Mystivate.Controllers
 {
     public class TaskController : ControllerBase
     {
-        private readonly ITaskLogic _taskLogic;
+        private readonly ITaskManager _taskManager;
 
-        public TaskController(ITaskLogic taskLogic)
+        public TaskController(ITaskManager taskManager)
         {
-            _taskLogic = taskLogic;
+            _taskManager = taskManager;
         }
 
         [HttpPost]
         public int CheckDaily(int id)
         {
-            return _taskLogic.CheckDaily(id);
+            return _taskManager.CheckDaily(id);
         }
 
         [HttpPost]
         public int CheckTodo(int id)
         {
-            return _taskLogic.CheckTodo(id);
+            return _taskManager.CheckTodo(id);
         }
 
         [HttpPost]
         public int PositiveHabit(int id)
         {
-            return _taskLogic.PositiveHabit(id);
+            return _taskManager.PositiveHabit(id);
         }
 
 
         [HttpPost]
         public int NegativeHabit(int id)
         {
-            return _taskLogic.NegativeHabit(id);
+            return _taskManager.NegativeHabit(id);
         }
 
         [HttpPost]
         public int AddDaily(string name)
         {
-            return _taskLogic.AddDailyTask(name);
+            return _taskManager.AddDailyTask(name);
         }
 
         [HttpPost]
         public int AddHabit(string name)
         {
-            return _taskLogic.AddHabit(name);
+            return _taskManager.AddHabit(name);
         }
 
         [HttpPost]
         public int AddTodo(string name)
         {
-            return _taskLogic.AddTodo(name);
+            return _taskManager.AddTodo(name);
         }
     }
 }

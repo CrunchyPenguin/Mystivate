@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace Mystivate.Logic
 {
-    public interface IUserService
+    public interface IUserSettings
     {
-        UserModel GetUser();
-        string GetUserName();
-        int GetUserId();
-        string GetEmail();
         void ChangePassword(string oldPass, string newPass);
+        void ChangeEmail(string email);
     }
 
 }

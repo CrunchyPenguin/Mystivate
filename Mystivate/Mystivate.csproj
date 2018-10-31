@@ -16,9 +16,4 @@
     <ProjectReference Include="..\Mystivate.Models\Mystivate.Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Code\Database\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
-
 </Project>

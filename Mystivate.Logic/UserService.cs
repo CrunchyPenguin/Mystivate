@@ -9,7 +9,7 @@ using Mystivate.Models;
 
 namespace Mystivate.Logic
 {
-    public class UserService : IUserService
+    public class UserService : IUserInfo, IUserSettings
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IAccountAccess _accountAccess;
@@ -45,6 +45,11 @@ namespace Mystivate.Logic
         public string GetUserName()
         {
             return _accountAccess.GetUsername(GetUserId());
+        }
+
+        public void ChangeEmail(string email)
+        {
+            throw new NotImplementedException();
         }
     }
 }

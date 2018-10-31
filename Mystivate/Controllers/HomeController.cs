@@ -14,19 +14,19 @@ namespace Mystivate.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ITaskLogic _taskLogic;
-        private readonly IUserService _userService;
+        private readonly ITaskInfo _taskInfo;
+        private readonly IUserInfo _userInfo;
 
-        public HomeController(ITaskLogic taskLogic, IUserService userService)
+        public HomeController(ITaskInfo taskInfo, IUserInfo userInfo)
         {
-            _taskLogic = taskLogic;
-            _userService = userService;
+            _taskInfo = taskInfo;
+            _userInfo = userInfo;
         }
 
         [Authorize]
         public IActionResult Index()
         {
-            AllTasksViewModel tasks = _taskLogic.GetAllTasks();
+            AllTasksViewModel tasks = _taskInfo.GetAllTasks();
             return View(tasks);
         }
         

@@ -15,9 +15,11 @@ namespace Mystivate.Controllers
     public class AccountController : Controller
     {
         private ISignInService _signInService;
-        public AccountController(ISignInService signInService)
+        private IRegisterService _registerService;
+        public AccountController(ISignInService signInService, IRegisterService registerService)
         {
             _signInService = signInService;
+            _registerService = registerService;
         }
 
         //[Authorize]
@@ -59,7 +61,7 @@ namespace Mystivate.Controllers
                     Username = model.Username,
                     Password = model.Password
                 };
-                RegisterResult result = _signInService.RegisterUser(register);
+                RegisterResult result = _registerService.RegisterUser(register);
 
                 return RedirectToAction("Index", "Home");
             }

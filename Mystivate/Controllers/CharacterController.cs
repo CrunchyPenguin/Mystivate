@@ -9,28 +9,28 @@ namespace Mystivate.Controllers
 {
     public class CharacterController : ControllerBase
     {
-        private readonly IUserService _userService;
-        private readonly ICharacterLogic _characterLogic;
+        private readonly ICharacterInfo _characterInfo;
+        private readonly ICharacterManager _characterManager;
 
-        public CharacterController(IUserService userService, ICharacterLogic characterLogic)
+        public CharacterController(ICharacterInfo characterInfo, ICharacterManager characterManager)
         {
-            _userService = userService;
-            _characterLogic = characterLogic;
+            _characterInfo = characterInfo;
+            _characterManager = characterManager;
         }
 
         public int GetCurrentExp()
         {
-            return _characterLogic.GetExperience();
+            return _characterInfo.GetExperience();
         }
 
         public int GetNextLvlExp()
         {
-            return _characterLogic.GetExperienceNextLevel();
+            return _characterInfo.GetExperienceNextLevel();
         }
 
         public int GetCurrentLevel()
         {
-            return _characterLogic.GetLevel();
+            return _characterInfo.GetLevel();
         }
     }
 }

@@ -7,17 +7,17 @@ using Mystivate.Models;
 
 namespace Mystivate.Logic
 {
-    public class TaskLogic : ITaskLogic
+    public class TaskLogic : ITaskManager, ITaskInfo
     {
         private readonly ITaskAccess _taskAccess;
-        private readonly IUserService _userService;
-        private readonly ICharacterLogic _characterLogic;
+        private readonly IUserInfo _userInfo;
+        private readonly ICharacterManager _characterManager;
 
-        public TaskLogic(ITaskAccess taskAccess, IUserService userService, ICharacterLogic characterLogic)
+        public TaskLogic(ITaskAccess taskAccess, IUserInfo userInfo, ICharacterManager characterManager)
         {
             _taskAccess = taskAccess;
-            _userService = userService;
-            _characterLogic = characterLogic;
+            _userInfo = userInfo;
+            _characterManager = characterManager;
         }
 
 
@@ -25,7 +25,7 @@ namespace Mystivate.Logic
         {
             if (taskname != null && taskname != "")
             {
-                return _taskAccess.AddDailyTask(_userService.GetUserId(), taskname);
+                return _taskAccess.AddDailyTask(_userInfo.GetUserId(), taskname);
             }
             else
             {
@@ -37,7 +37,7 @@ namespace Mystivate.Logic
         {
             if (habitname != null && habitname != "")
             {
-                return _taskAccess.AddHabit(_userService.GetUserId(), habitname);
+                return _taskAccess.AddHabit(_userInfo.GetUserId(), habitname);
             }
             else
             {
@@ -49,7 +49,7 @@ namespace Mystivate.Logic
         {
             if (todoname != null && todoname != "")
             {
-                return _taskAccess.AddTodo(_userService.GetUserId(), todoname);
+                return _taskAccess.AddTodo(_userInfo.GetUserId(), todoname);
             }
             else
             {
@@ -61,7 +61,7 @@ namespace Mystivate.Logic
         {
             _taskAccess.CheckDaily(dailyId);
             int xp = 40;
-            _characterLogic.AddExperience(xp);
+            _characterManager.AddExperience(xp);
             return xp;
 
         }
@@ -70,7 +70,7 @@ namespace Mystivate.Logic
         {
             _taskAccess.CheckTodo(todoId);
             int xp = 60;
-            _characterLogic.AddExperience(xp);
+            _characterManager.AddExperience(xp);
             return xp;
         }
 
@@ -78,16 +78,16 @@ namespace Mystivate.Logic
         {
             AllTasksViewModel tasks = new AllTasksViewModel
             {
-                DailyTasks = _taskAccess.GetDailyTasks(_userService.GetUserId()),
-                Habits = _taskAccess.GetHabits(_userService.GetUserId()),
-                ToDos = _taskAccess.GetTodos(_userService.GetUserId())
+                DailyTasks = _taskAccess.GetDailyTasks(_userInfo.GetUserId()),
+                Habits = _taskAccess.GetHabits(_userInfo.GetUserId()),
+                ToDos = _taskAccess.GetTodos(_userInfo.GetUserId())
             };
             return tasks;
         }
 
         public List<DailyTask> GetDailyTaskList()
         {
-            return _taskAccess.GetDailyTasks(_userService.GetUserId());
+            return _taskAccess.GetDailyTasks(_userInfo.GetUserId());
         }
 
         public List<Habit> GetHabitList()
@@ -104,7 +104,7 @@ namespace Mystivate.Logic
         {
             _taskAccess.NegativeHabit(habitId);
             int xp = -10;
-            _characterLogic.AddExperience(xp);
+            _characterManager.AddExperience(xp);
             return xp;
         }
 
@@ -112,7 +112,7 @@ namespace Mystivate.Logic
         {
             _taskAccess.PositiveHabit(habitId);
             int xp = 10;
-            _characterLogic.AddExperience(xp);
+            _characterManager.AddExperience(xp);
             return xp;
         }
     }

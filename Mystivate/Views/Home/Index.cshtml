@@ -13,11 +13,20 @@
         <div class="c-progress-box">
             <div class="c-progress" id="xp-bar">
                 <div class="c-progress-val">
-                    <p style="margin-left: 22px">0</p>
+                    <p>0</p>
                 </div>
                 <span class="c-progress-tooltip">Experience</span>
             </div>
             <p class="c-progress-max">0</p>
+        </div>
+        <div class="c-progress-box">
+            <div class="c-progress" id="health-bar">
+                <div class="c-progress-val">
+                    <p>100</p>
+                </div>
+                <span class="c-progress-tooltip">Health</span>
+            </div>
+            <p class="c-progress-max">100</p>
         </div>
     </div>
 </div>
@@ -131,7 +140,33 @@
                     var maxval = $(document.getElementById("xp-bar")).parent().children(".c-progress-max").first();
                     maxval.text(maxxp);
                     if (xppercent < 10) {
-                        val.css("margin-left", "22px");
+                        val.css("margin-left", val.width() + 8 + "px");
+                        valbox.css("justify-content", "flex-end");
+                    }
+                    else {
+                        valbox.css("justify-content", "center");
+                        val.css("margin-left", "0px");
+                    }
+                });
+            });
+        }
+
+        var maxhealth, currenthealth, healthpercent;
+
+        function UpdateHealthBar() {
+            $.post("@Url.Action("GetMaxHealth", "Character")", function (health) {
+                maxhealth = health;
+                $.post("@Url.Action("GetCurrentHealth", "Character")", function (health) {
+                    currenthealth = health;
+                    healthpercent = currenthealth / maxhealth * 100;
+                    var valbox = $(document.getElementById("health-bar")).children().first();
+                    valbox.width(healthpercent + "%");
+                    var val = valbox.children().first();
+                    val.text(currenthealth);
+                    var maxval = $(document.getElementById("health-bar")).parent().children(".c-progress-max").first();
+                    maxval.text(maxhealth);
+                    if (healthpercent < 10) {
+                        val.css("margin-left", val.width() + 8 + "px");
                         valbox.css("justify-content", "flex-end");
                     }
                     else {
@@ -242,9 +277,7 @@
             }
             $("#new-task-input").focus();
             document.getElementById("new-task-input").addEventListener("keyup", function (event) {
-                // Number 13 is the "Enter" key on the keyboard
                 if (event.keyCode === 13) {
-                    // Trigger the button element with a click
                     AddNewTask($(".new-task-button").attr("id"));
                 }
             });
