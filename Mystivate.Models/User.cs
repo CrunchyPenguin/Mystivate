@@ -7,10 +7,10 @@ namespace Mystivate.Models
     {
         public User()
         {
-            Characters = new HashSet<Character>();
-            Habits = new HashSet<Habit>();
-            Tasks = new HashSet<DailyTask>();
-            ToDos = new HashSet<ToDo>();
+            Character = new HashSet<Character>();
+            Habit = new HashSet<Habit>();
+            Task = new HashSet<DailyTask>();
+            ToDo = new HashSet<ToDo>();
         }
 
         public int Id { get; set; }
@@ -20,9 +20,9 @@ namespace Mystivate.Models
         public string PasswordSalt { get; set; }
         public DateTime? LastLogin { get; set; }
 
-        public ICollection<Character> Characters { get; set; }
-        public ICollection<Habit> Habits { get; set; }
-        public ICollection<DailyTask> Tasks { get; set; }
-        public ICollection<ToDo> ToDos { get; set; }
+        public ICollection<Character> Character { get; set; }
+        public ICollection<Habit> Habit { get; set; }
+        public ICollection<DailyTask> Task { get; set; }
+        public ICollection<ToDo> ToDo { get; set; }
     }
 }

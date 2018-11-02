@@ -10,6 +10,6 @@ namespace Mystivate.Logic
         List<DailyTask> GetDailyTaskList();
         List<Habit> GetHabitList();
         List<ToDo> GetTodoList();
-        AllTasksViewModel GetAllTasks();
+        //CharacterInfoViewModel GetAllTasks();
     }
 }

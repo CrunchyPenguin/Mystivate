@@ -17,22 +17,31 @@ namespace Mystivate.Data
         public int AddExperience(int userId, int amount)
         {
             //Character c = (from s in _dbContext.Characters where s.UsersId == userId select s).FirstOrDefault();
-            Character character = _dbContext.Characters.Where(c => c.UsersId == userId).First();
-            if (character.Experience.HasValue)
+            Character character = _dbContext.Characters.Where(c => c.UserId == userId).First();
+            character.Experience += amount;
+            if(character.Experience < 0)
             {
-                character.Experience += amount;
-            }
-            else
-            {
-                character.Experience = amount;
+                character.Experience = 0;
             }
             _dbContext.SaveChanges();
-            return character.Experience.Value;
+            return character.Experience;
         }
 
-        public Character GetCharacter()
+        public int AddHealth(int userId, int amount)
         {
-            throw new NotImplementedException();
+            Character character = _dbContext.Characters.Where(c => c.UserId == userId).First();
+            character.CurrentLives += amount;
+            if(character.CurrentLives < 0)
+            {
+                character.CurrentLives = 0;
+            }
+            _dbContext.SaveChanges();
+            return character.CurrentLives;
+        }
+
+        public Character GetCharacter(int userId)
+        {
+            return _dbContext.Characters.Where(c => c.UserId == userId).First();
         }
 
         public int GetCoins(int userId)
@@ -42,20 +51,18 @@ namespace Mystivate.Data
 
         public int GetExperience(int userId)
         {
-            Character character = _dbContext.Characters.Where(c => c.UsersId == userId).First();
-            if (character.Experience.HasValue)
-            {
-                return character.Experience.Value;
-            }
-            else
-            {
-                return 0;
-            }
+            Character character = _dbContext.Characters.Where(c => c.UserId == userId).First();
+            return character.Experience;
         }
 
-        public int GetLives(int userId)
+        public int GetCurrentHealth(int userId)
         {
-            throw new NotImplementedException();
+            return _dbContext.Characters.Where(c => c.UserId == userId).First().CurrentLives;
+        }
+
+        public int GetMaxHealth(int userId)
+        {
+            return _dbContext.Characters.Where(c => c.UserId == userId).First().MaxLives;
         }
     }
 }

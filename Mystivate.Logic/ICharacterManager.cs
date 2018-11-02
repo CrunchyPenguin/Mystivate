@@ -9,5 +9,6 @@ namespace Mystivate.Logic
     public interface ICharacterManager
     {
         void AddExperience(int amount);
+        void AddHealth(int amount);
     }
 }

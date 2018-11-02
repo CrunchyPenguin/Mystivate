@@ -8,11 +8,12 @@ namespace Mystivate.Logic
 {
     public interface ICharacterInfo
     {
-        int GetLives();
         int GetLevel();
         int GetExperience();
         int GetCoins();
         CharacterModel GetCharacterInfo();
         int GetExperienceNextLevel();
+        int GetMaxHealth();
+        int GetCurrentHealth();
     }
 }

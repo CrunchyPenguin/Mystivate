@@ -74,9 +74,9 @@ namespace Mystivate.Logic
             return xp;
         }
 
-        public AllTasksViewModel GetAllTasks()
+        public CharacterInfoViewModel GetAllTasks()
         {
-            AllTasksViewModel tasks = new AllTasksViewModel
+            CharacterInfoViewModel tasks = new CharacterInfoViewModel
             {
                 DailyTasks = _taskAccess.GetDailyTasks(_userInfo.GetUserId()),
                 Habits = _taskAccess.GetHabits(_userInfo.GetUserId()),
@@ -92,12 +92,12 @@ namespace Mystivate.Logic
 
         public List<Habit> GetHabitList()
         {
-            throw new NotImplementedException();
+            return _taskAccess.GetHabits(_userInfo.GetUserId());
         }
 
         public List<ToDo> GetTodoList()
         {
-            throw new NotImplementedException();
+            return _taskAccess.GetTodos(_userInfo.GetUserId());
         }
 
         public int NegativeHabit(int habitId)
@@ -105,6 +105,7 @@ namespace Mystivate.Logic
             _taskAccess.NegativeHabit(habitId);
             int xp = -10;
             _characterManager.AddExperience(xp);
+            _characterManager.AddHealth(-4);
             return xp;
         }
 

@@ -7,8 +7,9 @@ namespace Mystivate.Models
     {
         public Quest()
         {
+            GearQuestReward = new HashSet<GearQuestReward>();
             QuestInventory = new HashSet<QuestInventory>();
-            QuestRewards = new HashSet<QuestReward>();
+            WeaponQuestReward = new HashSet<WeaponQuestReward>();
         }
 
         public int Id { get; set; }
@@ -18,7 +19,8 @@ namespace Mystivate.Models
         public int CoinRewards { get; set; }
         public int? RecLevel { get; set; }
 
+        public ICollection<GearQuestReward> GearQuestReward { get; set; }
         public ICollection<QuestInventory> QuestInventory { get; set; }
-        public ICollection<QuestReward> QuestRewards { get; set; }
+        public ICollection<WeaponQuestReward> WeaponQuestReward { get; set; }
     }
 }

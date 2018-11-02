@@ -15,9 +15,11 @@ namespace Mystivate.Data
         /// <param name="amount"></param>
         /// <returns></returns>
         int AddExperience(int userId, int amount);
-        int GetLives(int userId);
+        int AddHealth(int userId, int amount);
+        int GetCurrentHealth(int userId);
+        int GetMaxHealth(int userId);
         int GetExperience(int userId);
         int GetCoins(int userId);
-        Character GetCharacter();
+        Character GetCharacter(int userId);
     }
 }

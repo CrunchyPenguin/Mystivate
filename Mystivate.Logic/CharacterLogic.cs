@@ -25,7 +25,17 @@ namespace Mystivate.Logic
 
         public CharacterModel GetCharacterInfo()
         {
-            throw new NotImplementedException();
+            Character character = _characterAccess.GetCharacter(_userInfo.GetUserId());
+            CharacterModel model = new CharacterModel()
+            {
+                Name = character.Name,
+                CurrentLives = character.CurrentLives,
+                MaxLives = character.MaxLives,
+                Level = GetLevel(),
+                Experience = GetExperience(),
+                Coins = character.Coins
+            };
+            return model;
         }
 
         public int GetCoins()
@@ -48,9 +58,15 @@ namespace Mystivate.Logic
             return CalculateLevel(_characterAccess.GetExperience(_userInfo.GetUserId()));
         }
 
-        public int GetLives()
+        public int GetCurrentHealth()
         {
-            throw new NotImplementedException();
+            return _characterAccess.GetCurrentHealth(_userInfo.GetUserId());
+            // if health is 0 do something
+        }
+
+        public int GetMaxHealth()
+        {
+            return _characterAccess.GetMaxHealth(_userInfo.GetUserId());
         }
 
         private int CalculateExperience(int level)
@@ -61,7 +77,7 @@ namespace Mystivate.Logic
         private int CalculateLevel(int experience)
         {
             //experience = (level x 50) x (level x 1.618(Phi))
-            return (int)Math.Sqrt(experience / 80.9); // 1.618(variable) x 50
+            return (int)Math.Sqrt((experience + 1) / 80.9); // 1.618(variable) x 50
         }
 
 
@@ -77,6 +93,11 @@ namespace Mystivate.Logic
             int nextLevel = currentLevel + 1;
             return CalculateExperience(nextLevel) - CalculateExperience(currentLevel);
 
+        }
+
+        public void AddHealth(int amount)
+        {
+            _characterAccess.AddHealth(_userInfo.GetUserId(), amount);
         }
     }
 }

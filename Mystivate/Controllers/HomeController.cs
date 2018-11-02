@@ -16,18 +16,26 @@ namespace Mystivate.Controllers
     {
         private readonly ITaskInfo _taskInfo;
         private readonly IUserInfo _userInfo;
+        private readonly ICharacterInfo _characterInfo;
 
-        public HomeController(ITaskInfo taskInfo, IUserInfo userInfo)
+        public HomeController(ITaskInfo taskInfo, IUserInfo userInfo, ICharacterInfo characterInfo)
         {
             _taskInfo = taskInfo;
             _userInfo = userInfo;
+            _characterInfo = characterInfo;
         }
 
         [Authorize]
         public IActionResult Index()
         {
-            AllTasksViewModel tasks = _taskInfo.GetAllTasks();
-            return View(tasks);
+            CharacterInfoViewModel model = new CharacterInfoViewModel()
+            {
+                DailyTasks = _taskInfo.GetDailyTaskList(),
+                Habits = _taskInfo.GetHabitList(),
+                ToDos = _taskInfo.GetTodoList(),
+                Character = _characterInfo.GetCharacterInfo()
+            };
+            return View(model);
         }
         
         public IActionResult Info(bool register = false)

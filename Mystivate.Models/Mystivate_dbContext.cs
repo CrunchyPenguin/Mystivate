@@ -6,6 +6,10 @@ namespace Mystivate.Models
 {
     public partial class Mystivate_dbContext : DbContext
     {
+        public Mystivate_dbContext()
+        {
+        }
+
         public Mystivate_dbContext(DbContextOptions<Mystivate_dbContext> options)
             : base(options)
         {
@@ -14,60 +18,54 @@ namespace Mystivate.Models
         public virtual DbSet<Character> Characters { get; set; }
         public virtual DbSet<Gear> Gear { get; set; }
         public virtual DbSet<GearInventory> GearInventory { get; set; }
+        public virtual DbSet<GearQuestReward> GearQuestRewards { get; set; }
         public virtual DbSet<GearType> GearTypes { get; set; }
         public virtual DbSet<Habit> Habits { get; set; }
-        public virtual DbSet<QuestInventory> QuestInventory { get; set; }
-        public virtual DbSet<QuestReward> QuestRewards { get; set; }
         public virtual DbSet<Quest> Quests { get; set; }
+        public virtual DbSet<QuestInventory> QuestInventory { get; set; }
         public virtual DbSet<QuestStatus> QuestStatus { get; set; }
         public virtual DbSet<DailyTask> DailyTasks { get; set; }
         public virtual DbSet<ToDo> ToDos { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Weapon> Weapons { get; set; }
+        public virtual DbSet<WeaponInventory> WeaponInventory { get; set; }
+        public virtual DbSet<WeaponQuestReward> WeaponQuestRewards { get; set; }
+        public virtual DbSet<WeaponType> WeaponTypes { get; set; }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    if (!optionsBuilder.IsConfigured)
-        //    {
-        //        optionsBuilder.UseSqlServer("Server=tcp:mystivate.database.windows.net,1433;Database=Mystivate_db;User ID=Mystivate;Password=Myst1vate01!;");
-        //    }
-        //}
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //Bind to correct tables
+            modelBuilder.Entity<Character>().ToTable("Character");
+            modelBuilder.Entity<GearQuestReward>().ToTable("GearQuestReward");
+            modelBuilder.Entity<GearType>().ToTable("GearType");
+            modelBuilder.Entity<Habit>().ToTable("Habit");
+            modelBuilder.Entity<Quest>().ToTable("Quest");
+            modelBuilder.Entity<Habit>().ToTable("Habit");
+            modelBuilder.Entity<DailyTask>().ToTable("DailyTask");
+            modelBuilder.Entity<ToDo>().ToTable("ToDo");
+            modelBuilder.Entity<User>().ToTable("User");
+            modelBuilder.Entity<Weapon>().ToTable("Weapon");
+            modelBuilder.Entity<WeaponQuestReward>().ToTable("WeaponQuestReward");
+            modelBuilder.Entity<WeaponType>().ToTable("WeaponType");
+
             modelBuilder.Entity<Character>(entity =>
             {
-                entity.Property(e => e.Lives).HasDefaultValueSql("((100))");
+                entity.Property(e => e.MaxLives).HasDefaultValueSql("((100))");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
+                    .HasMaxLength(255);
 
-                entity.HasOne(d => d.Armor)
-                    .WithMany(p => p.CharactersArmor)
-                    .HasForeignKey(d => d.ArmorId)
-                    .HasConstraintName("FKCharacters857777");
-
-                entity.HasOne(d => d.Headgear)
-                    .WithMany(p => p.CharactersHeadgear)
-                    .HasForeignKey(d => d.HeadgearId)
-                    .HasConstraintName("FKCharacters193974");
-
-                entity.HasOne(d => d.LeftWeapon)
-                    .WithMany(p => p.CharactersLeftWeapon)
-                    .HasForeignKey(d => d.LeftWeaponId)
-                    .HasConstraintName("FKCharacters282041");
-
-                entity.HasOne(d => d.RightWeapon)
-                    .WithMany(p => p.CharactersRightWeapon)
-                    .HasForeignKey(d => d.RightWeaponId)
-                    .HasConstraintName("FKCharacters509833");
-
-                entity.HasOne(d => d.Users)
-                    .WithMany(p => p.Characters)
-                    .HasForeignKey(d => d.UsersId)
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Character)
+                    .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FKCharacters489263");
+                    .HasConstraintName("FKCharacter650031");
             });
 
             modelBuilder.Entity<Gear>(entity =>
@@ -81,22 +79,41 @@ namespace Mystivate.Models
                     .WithMany(p => p.Gear)
                     .HasForeignKey(d => d.GearTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FKGear6632");
+                    .HasConstraintName("FKGear472184");
             });
 
             modelBuilder.Entity<GearInventory>(entity =>
             {
+                entity.Property(e => e.Wearing)
+                    .IsRequired()
+                    .HasDefaultValueSql("('0')");
+
                 entity.HasOne(d => d.Character)
                     .WithMany(p => p.GearInventory)
                     .HasForeignKey(d => d.CharacterId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FKGearInvent13747");
+                    .HasConstraintName("FKGearInvent738922");
 
                 entity.HasOne(d => d.Gear)
                     .WithMany(p => p.GearInventory)
                     .HasForeignKey(d => d.GearId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FKGearInvent84682");
+            });
+
+            modelBuilder.Entity<GearQuestReward>(entity =>
+            {
+                entity.HasOne(d => d.Gear)
+                    .WithMany(p => p.GearQuestReward)
+                    .HasForeignKey(d => d.GearId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FKGearQuestR658048");
+
+                entity.HasOne(d => d.Quest)
+                    .WithMany(p => p.GearQuestReward)
+                    .HasForeignKey(d => d.QuestId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FKGearQuestR648399");
             });
 
             modelBuilder.Entity<GearType>(entity =>
@@ -109,47 +126,15 @@ namespace Mystivate.Models
 
             modelBuilder.Entity<Habit>(entity =>
             {
-                entity.HasOne(d => d.Users)
-                    .WithMany(p => p.Habits)
-                    .HasForeignKey(d => d.UsersId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FKHabits496376");
-            });
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(255);
 
-            modelBuilder.Entity<QuestInventory>(entity =>
-            {
-                entity.HasOne(d => d.Character)
-                    .WithMany(p => p.QuestInventory)
-                    .HasForeignKey(d => d.CharacterId)
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Habit)
+                    .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FKQuestInven364059");
-
-                entity.HasOne(d => d.Quest)
-                    .WithMany(p => p.QuestInventory)
-                    .HasForeignKey(d => d.QuestId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FKQuestInven78349");
-
-                entity.HasOne(d => d.QuestStatus)
-                    .WithMany(p => p.QuestInventory)
-                    .HasForeignKey(d => d.QuestStatusId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FKQuestInven965621");
-            });
-
-            modelBuilder.Entity<QuestReward>(entity =>
-            {
-                entity.HasOne(d => d.Gear)
-                    .WithMany(p => p.QuestRewards)
-                    .HasForeignKey(d => d.GearId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FKQuestRewar938196");
-
-                entity.HasOne(d => d.Quest)
-                    .WithMany(p => p.QuestRewards)
-                    .HasForeignKey(d => d.QuestId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FKQuestRewar818618");
+                    .HasConstraintName("FKHabit36272");
             });
 
             modelBuilder.Entity<Quest>(entity =>
@@ -163,6 +148,27 @@ namespace Mystivate.Models
                     .IsRequired()
                     .HasMaxLength(255)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<QuestInventory>(entity =>
+            {
+                entity.HasOne(d => d.Character)
+                    .WithMany(p => p.QuestInventory)
+                    .HasForeignKey(d => d.CharacterId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FKQuestInven638883");
+
+                entity.HasOne(d => d.Quest)
+                    .WithMany(p => p.QuestInventory)
+                    .HasForeignKey(d => d.QuestId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FKQuestInven668817");
+
+                entity.HasOne(d => d.QuestStatus)
+                    .WithMany(p => p.QuestInventory)
+                    .HasForeignKey(d => d.QuestStatusId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FKQuestInven965621");
             });
 
             modelBuilder.Entity<QuestStatus>(entity =>
@@ -181,23 +187,26 @@ namespace Mystivate.Models
 
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
+                    .HasMaxLength(255);
 
-                entity.HasOne(d => d.Users)
-                    .WithMany(p => p.Tasks)
-                    .HasForeignKey(d => d.UsersId)
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Task)
+                    .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FKTasks148036");
+                    .HasConstraintName("FKTask917793");
             });
 
             modelBuilder.Entity<ToDo>(entity =>
             {
-                entity.HasOne(d => d.Users)
-                    .WithMany(p => p.ToDos)
-                    .HasForeignKey(d => d.UsersId)
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(255);
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.ToDo)
+                    .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FKToDos520067");
+                    .HasConstraintName("FKToDo905792");
             });
 
             modelBuilder.Entity<User>(entity =>
@@ -221,6 +230,66 @@ namespace Mystivate.Models
                 entity.Property(e => e.Username)
                     .IsRequired()
                     .HasMaxLength(255);
+            });
+
+            modelBuilder.Entity<Weapon>(entity =>
+            {
+                entity.Property(e => e.Image)
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.WeaponType)
+                    .WithMany(p => p.Weapon)
+                    .HasForeignKey(d => d.WeaponTypeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FKWeapon883775");
+            });
+
+            modelBuilder.Entity<WeaponInventory>(entity =>
+            {
+                entity.Property(e => e.WeaponLeft)
+                    .IsRequired()
+                    .HasDefaultValueSql("('0')");
+
+                entity.Property(e => e.WeaponRight)
+                    .IsRequired()
+                    .HasDefaultValueSql("('0')");
+
+                entity.HasOne(d => d.Character)
+                    .WithMany(p => p.WeaponInventory)
+                    .HasForeignKey(d => d.CharacterId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FKWeaponInve376071");
+
+                entity.HasOne(d => d.Weapon)
+                    .WithMany(p => p.WeaponInventory)
+                    .HasForeignKey(d => d.WeaponId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FKWeaponInve992366");
+            });
+
+            modelBuilder.Entity<WeaponQuestReward>(entity =>
+            {
+                entity.HasOne(d => d.Quest)
+                    .WithMany(p => p.WeaponQuestReward)
+                    .HasForeignKey(d => d.QuestId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FKWeaponQues292731");
+
+                entity.HasOne(d => d.Weapon)
+                    .WithMany(p => p.WeaponQuestReward)
+                    .HasForeignKey(d => d.WeaponId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FKWeaponQues754862");
+            });
+
+            modelBuilder.Entity<WeaponType>(entity =>
+            {
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
             });
         }
     }

@@ -32,5 +32,15 @@ namespace Mystivate.Controllers
         {
             return _characterInfo.GetLevel();
         }
+
+        public int GetMaxHealth()
+        {
+            return _characterInfo.GetMaxHealth();
+        }
+
+        public int GetCurrentHealth()
+        {
+            return _characterInfo.GetCurrentHealth();
+        }
     }
 }

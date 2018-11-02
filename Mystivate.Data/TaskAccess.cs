@@ -19,10 +19,10 @@ namespace Mystivate.Data
             _dbContext.DailyTasks.Add(new DailyTask
             {
                 Name = task,
-                UsersId = userId
+                UserId = userId
             });
             _dbContext.SaveChanges();
-            return _dbContext.DailyTasks.Where(d => d.UsersId == userId).Last().Id;
+            return _dbContext.DailyTasks.Where(d => d.UserId == userId).Last().Id;
         }
 
         public int AddHabit(int userId, string habit)
@@ -30,10 +30,10 @@ namespace Mystivate.Data
             _dbContext.Habits.Add(new Habit
             {
                 Name = habit,
-                UsersId = userId
+                UserId = userId
             });
             _dbContext.SaveChanges();
-            return _dbContext.Habits.Where(d => d.UsersId == userId).Last().Id;
+            return _dbContext.Habits.Where(d => d.UserId == userId).Last().Id;
         }
 
         public int AddTodo(int userId, string todo)
@@ -41,10 +41,10 @@ namespace Mystivate.Data
             _dbContext.ToDos.Add(new ToDo
             {
                 Name = todo,
-                UsersId = userId
+                UserId = userId
             });
             _dbContext.SaveChanges();
-            return _dbContext.ToDos.Where(d => d.UsersId == userId).Last().Id;
+            return _dbContext.ToDos.Where(d => d.UserId == userId).Last().Id;
         }
 
         public void CheckDaily(int dailyId)
@@ -67,17 +67,17 @@ namespace Mystivate.Data
 
         public List<DailyTask> GetDailyTasks(int userId)
         {
-            return _dbContext.DailyTasks.Where(t => t.UsersId == userId).ToList();
+            return _dbContext.DailyTasks.Where(t => t.UserId == userId).ToList();
         }
 
         public List<Habit> GetHabits(int userId)
         {
-            return _dbContext.Habits.Where(t => t.UsersId == userId).ToList();
+            return _dbContext.Habits.Where(t => t.UserId == userId).ToList();
         }
 
         public List<ToDo> GetTodos(int userId)
         {
-            return _dbContext.ToDos.Where(t => t.UsersId == userId).ToList();
+            return _dbContext.ToDos.Where(t => t.UserId == userId).ToList();
         }
 
         public void PositiveHabit(int habitId)
