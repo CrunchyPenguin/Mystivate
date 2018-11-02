@@ -15,6 +15,8 @@ namespace Mystivate.Data
         EncryptedPassword GetEncryptedPassword(int userId);
         int GetUserId(string email);
         string GetUsername(int userId);
+        DateTime? GetLastLogin(int userId);
+        void SetLastLogin(int userId, DateTime day);
     }
 
 }

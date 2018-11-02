@@ -51,5 +51,24 @@ namespace Mystivate.Logic
         {
             throw new NotImplementedException();
         }
+
+        public bool NewLogin()
+        {
+            DateTime? lastlogin = _accountAccess.GetLastLogin(GetUserId());
+            if (lastlogin.HasValue)
+            {
+                if(lastlogin.Value.Date != DateTime.Today)
+                {
+                    _accountAccess.SetLastLogin(GetUserId(), DateTime.Today);
+                    return true;
+                }
+                return false;
+            }
+            else
+            {
+                _accountAccess.SetLastLogin(GetUserId(), DateTime.Today);
+                return false;
+            }
+        }
     }
 }

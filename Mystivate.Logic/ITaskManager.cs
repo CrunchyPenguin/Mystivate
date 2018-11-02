@@ -15,5 +15,6 @@ namespace Mystivate.Logic
         int PositiveHabit(int habitId);
         int NegativeHabit(int habitId);
         int CheckTodo(int todoId);
+        void UncheckDailies();
     }
 }

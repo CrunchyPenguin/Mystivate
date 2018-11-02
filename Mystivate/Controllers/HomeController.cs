@@ -15,12 +15,14 @@ namespace Mystivate.Controllers
     public class HomeController : Controller
     {
         private readonly ITaskInfo _taskInfo;
+        private readonly ITaskManager _taskManager;
         private readonly IUserInfo _userInfo;
         private readonly ICharacterInfo _characterInfo;
 
-        public HomeController(ITaskInfo taskInfo, IUserInfo userInfo, ICharacterInfo characterInfo)
+        public HomeController(ITaskInfo taskInfo, IUserInfo userInfo, ICharacterInfo characterInfo, ITaskManager taskManager)
         {
             _taskInfo = taskInfo;
+            _taskManager = taskManager;
             _userInfo = userInfo;
             _characterInfo = characterInfo;
         }
@@ -28,6 +30,12 @@ namespace Mystivate.Controllers
         [Authorize]
         public IActionResult Index()
         {
+            // Checks if new login
+            if (_userInfo.NewLogin())
+            {
+                // Unchecks all dailies
+                _taskManager.UncheckDailies();
+            }
             CharacterInfoViewModel model = new CharacterInfoViewModel()
             {
                 DailyTasks = _taskInfo.GetDailyTaskList(),

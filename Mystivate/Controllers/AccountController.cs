@@ -16,6 +16,7 @@ namespace Mystivate.Controllers
     {
         private ISignInService _signInService;
         private IRegisterService _registerService;
+
         public AccountController(ISignInService signInService, IRegisterService registerService)
         {
             _signInService = signInService;
@@ -39,8 +40,14 @@ namespace Mystivate.Controllers
             if (ModelState.IsValid)
             {
                 Logic.SignInResult result = await _signInService.SignIn(model.Email, model.Password);
-                
-                return RedirectToAction("Index", "Home");
+                if(result == Logic.SignInResult.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    return RedirectToAction("Info", "Home");
+                }
             }
             return RedirectToAction("Info", "Home");
         }

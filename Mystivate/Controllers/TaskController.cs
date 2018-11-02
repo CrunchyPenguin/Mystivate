@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Mystivate.Logic;
 
 namespace Mystivate.Controllers
 {
+    [Authorize]
     public class TaskController : ControllerBase
     {
         private readonly ITaskManager _taskManager;

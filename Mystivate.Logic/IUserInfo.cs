@@ -12,6 +12,7 @@ namespace Mystivate.Logic
         string GetUserName();
         int GetUserId();
         string GetEmail();
+        bool NewLogin();
     }
 
 }

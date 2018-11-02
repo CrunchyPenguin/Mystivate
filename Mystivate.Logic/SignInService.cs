@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
+using Mystivate.Data;
 using Mystivate.Models;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
+using System.Linq;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Mystivate.Data;
+using System.Threading.Tasks;
 
 namespace Mystivate.Logic
 {
@@ -37,28 +38,36 @@ namespace Mystivate.Logic
             if (_accountAccess.UserExists(email))
             {
                 int id = _accountAccess.GetUserId(email);
+
                 EncryptedPassword pass = _accountAccess.GetEncryptedPassword(id);
-
-                var claims = new List<Claim>
+                if (PasswordEncryptor.PasswordCorrect(password, pass))
                 {
-                    new Claim(ClaimTypes.Name, email),
-                    new Claim(ClaimTypes.NameIdentifier, id.ToString())
-                };
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Name, email),
+                        new Claim(ClaimTypes.NameIdentifier, id.ToString()),
+                        new Claim("newDay", true.ToString())
+                    };
 
-                var claimsIdentity = new ClaimsIdentity(
-                    claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var claimsIdentity = new ClaimsIdentity(
+                        claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-                var authProperties = new AuthenticationProperties
+                    var authProperties = new AuthenticationProperties
+                    {
+                        AllowRefresh = true,
+                        ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
+                        IsPersistent = true,
+                        IssuedUtc = DateTime.Now,
+                        RedirectUri = "./Home/Index"
+                    };
+
+                    await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+                    return SignInResult.Succeeded;
+                }
+                else
                 {
-                    AllowRefresh = true,
-                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
-                    IsPersistent = true,
-                    IssuedUtc = DateTime.Now,
-                    RedirectUri = "./Home/Index"
-                };
-
-                await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
-                return SignInResult.Succeeded;
+                    return SignInResult.PasswordIncorrect;
+                }
             }
             else
             {
@@ -71,7 +80,7 @@ namespace Mystivate.Logic
             await _httpContextAccessor.HttpContext.SignOutAsync();
         }
     }
-
+    
     public enum SignInResult
     {
         EmailIncorrect,

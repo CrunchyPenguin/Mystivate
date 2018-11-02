@@ -97,5 +97,13 @@ namespace Mystivate.Data
                 _dbContext.SaveChanges();
             }
         }
+
+        public void UncheckDailyTasks(int userId)
+        {
+            foreach(DailyTask dailyTask in _dbContext.DailyTasks.Where(d => d.UserId == userId))
+            {
+                dailyTask.Done = false;
+            }
+        }
     }
 }

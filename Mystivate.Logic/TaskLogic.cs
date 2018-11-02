@@ -74,16 +74,16 @@ namespace Mystivate.Logic
             return xp;
         }
 
-        public CharacterInfoViewModel GetAllTasks()
-        {
-            CharacterInfoViewModel tasks = new CharacterInfoViewModel
-            {
-                DailyTasks = _taskAccess.GetDailyTasks(_userInfo.GetUserId()),
-                Habits = _taskAccess.GetHabits(_userInfo.GetUserId()),
-                ToDos = _taskAccess.GetTodos(_userInfo.GetUserId())
-            };
-            return tasks;
-        }
+        //public CharacterInfoViewModel GetAllTasks()
+        //{
+        //    CharacterInfoViewModel tasks = new CharacterInfoViewModel
+        //    {
+        //        DailyTasks = _taskAccess.GetDailyTasks(_userInfo.GetUserId()),
+        //        Habits = _taskAccess.GetHabits(_userInfo.GetUserId()),
+        //        ToDos = _taskAccess.GetTodos(_userInfo.GetUserId())
+        //    };
+        //    return tasks;
+        //}
 
         public List<DailyTask> GetDailyTaskList()
         {
@@ -115,6 +115,11 @@ namespace Mystivate.Logic
             int xp = 10;
             _characterManager.AddExperience(xp);
             return xp;
+        }
+
+        public void UncheckDailies()
+        {
+            _taskAccess.UncheckDailyTasks(_userInfo.GetUserId());
         }
     }
 }

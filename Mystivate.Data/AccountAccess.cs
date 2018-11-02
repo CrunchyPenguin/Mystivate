@@ -64,6 +64,11 @@ namespace Mystivate.Data
             };
         }
 
+        public DateTime? GetLastLogin(int userId)
+        {
+            return _dbContext.Users.Where(u => u.Id == userId).First().LastLogin;
+        }
+
         public User GetUser(int userId)
         {
             throw new NotImplementedException();
@@ -77,6 +82,12 @@ namespace Mystivate.Data
         public string GetUsername(int userId)
         {
             return _dbContext.Users.Where(u => u.Id == userId).First().Username;
+        }
+
+        public void SetLastLogin(int userId, DateTime day)
+        {
+            _dbContext.Users.Where(u => u.Id == userId).First().LastLogin = day;
+            _dbContext.SaveChanges();
         }
 
         public void SetPassword(int userId, string newPassKey, string newPassSalt)
