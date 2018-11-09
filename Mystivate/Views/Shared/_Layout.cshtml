@@ -6,19 +6,19 @@
     <title>@ViewData["Title"] - Mystivate</title>
 
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />*@
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment exclude="Development">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+        @*<link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />*@
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     </environment>
 </head>
 <body>
     <main>
-        <nav class="c-navbar">
+        <nav class="navbar">
             <ul>
                 <li class="item-brand">
                     <a asp-area="" asp-controller="Home" asp-action="Index">
@@ -27,8 +27,7 @@
                     </a>
                 </li>
                 <li><a asp-area="" asp-controller="Home" asp-action="Index"><h1>Tasks</h1></a></li>
-                <li><a asp-area="" asp-controller="Home" asp-action="About"><h1>About</h1></a></li>
-                <li><a asp-area="" asp-controller="Home" asp-action="Contact"><h1>Contact</h1></a></li>
+                <li><a asp-area="" asp-controller="Quest" asp-action="Index"><h1>Quest</h1></a></li>
                 <li class="item-right">
                     <form asp-action="Logout" asp-controller="Account" id="logoutForm">
                         <button type="submit">Logout</button>

@@ -1,10 +1,17 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
 for details on configuring this project to bundle and minify static web assets. */
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
 html {
     height: 100%;
 }
 
 body {
+    margin: 0;
     padding-top: 80px;
     background-color: #0F9AAA;
     font-family: Roboto, sans-serif;
@@ -12,14 +19,53 @@ body {
 }
 
 p {
+    margin: 0;
     color: white;
     font-size: 15px;
 }
+
+/*h2{
+    font-size: 30px;
+}*/
 
 h1, h2, h3, h4, h5, h6 {
     color: white;
     font-family: 'Berlin Sans FB', sans-serif;
     font-weight: normal;
+}
+
+h1, h2, h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+h4, h5, h6 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-size: 36px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+h4 {
+    font-size: 18px;
+}
+
+h5 {
+    font-size: 14px;
+}
+
+h6 {
+    font-size: 12px;
 }
 
 a {
@@ -33,6 +79,20 @@ a {
 li a {
     display: block;
 }
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+    button:focus {
+        outline: none;
+    }
+
+    button:disabled {
+        cursor: default;
+    }
 
 /* width */
 ::-webkit-scrollbar {
@@ -55,32 +115,33 @@ li a {
     }
 
 /*custom navbar*/
-.c-navbar {
-    background-color: #152D48;
+.navbar {
+    background-color: #24364e;
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 999;
 }
 
-    .c-navbar h1 {
+    .navbar h1 {
         font-size: 30px;
         line-height: 20px;
     }
 
-    .c-navbar ul {
+    .navbar ul {
         margin: 0;
     }
 
-    .c-navbar a {
+    .navbar a {
         text-decoration: none;
     }
 
-    /*.c-navbar li:hover {
+    /*.navbar li:hover {
         text-decoration: none;
         background-color: black
     }*/
 
-    .c-navbar button {
+    .navbar button {
         background-color: transparent;
         border: none;
         padding: 20px;
@@ -89,45 +150,45 @@ li a {
         color: white;
     }
 
-        .c-navbar button:focus {
+        .navbar button:focus {
             outline: none;
         }
 
-    .c-navbar ul {
+    .navbar ul {
         display: flex;
         padding: 0;
         list-style: none;
         align-items: center;
     }
 
-        .c-navbar ul h1 {
+        .navbar ul h1 {
             margin: 0;
         }
 
-    .c-navbar .item-brand {
+    .navbar .item-brand {
         margin-right: 20px;
     }
 
-        .c-navbar .item-brand a {
+        .navbar .item-brand a {
             display: flex;
             width: 220px;
             align-items: center;
             justify-content: space-between;
         }
 
-        .c-navbar .item-brand h1 {
+        .navbar .item-brand h1 {
             font-size: 30px !important;
         }
 
-    .c-navbar li a {
+    .navbar li a {
         padding: 20px;
     }
 
-    .c-navbar li h1 {
+    .navbar li h1 {
         font-size: 20px;
     }
 
-    .c-navbar .item-right {
+    .navbar .item-right {
         margin-left: auto;
         margin-right: 10px;
     }
@@ -318,28 +379,32 @@ li a {
 /* Character */
 
 .character-container {
-    height: 40%;
     margin: 0 auto;
     display: flex;
-    padding: 35px;
+    flex-wrap: wrap;
+    min-height: 355px;
+    padding: 33px 40px;
 }
 
 .character-box {
     width: 200px;
     height: 200px;
     background-color: white;
+    box-shadow: 5px 4px 20px #0000003b;
+    margin-right: 32px;
 }
 
 .character-info {
-    margin-left: 20px;
 }
 
-.c-progress-box {
+.progress-box {
     display: flex;
     margin-top: 7px;
+    align-items: center;
+    justify-content: center;
 }
 
-.c-progress {
+.progress {
     background-color: #00000017;
     border-radius: 2px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
@@ -348,7 +413,7 @@ li a {
     position: relative;
 }
 
-.c-progress-val {
+.progress-val {
     background-color: #ffffff;
     height: 100%;
     width: 0%;
@@ -356,19 +421,20 @@ li a {
     transition: width 2s ease;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
-    .c-progress-val p {
+    .progress-val p {
         transition: margin 2s ease;
         position: absolute;
         margin-left: 16px;
     }
 
-.c-progress-max {
+.progress-max {
     margin: 0 0 0 10px;
 }
 
-.c-progress-tooltip {
+.progress-tooltip {
     visibility: hidden;
     position: absolute;
     left: 50%;
@@ -383,7 +449,7 @@ li a {
     z-index: 1;
 }
 
-    .c-progress-tooltip::after {
+    .progress-tooltip::after {
         content: "";
         position: absolute;
         bottom: 100%;
@@ -394,12 +460,12 @@ li a {
         border-color: transparent transparent #00000082 transparent;
     }
 
-.c-progress:hover .c-progress-tooltip {
+.progress:hover .progress-tooltip {
     visibility: visible;
     opacity: 1;
 }
 
-#xp-bar .c-progress-val {
+#xp-bar .progress-val {
     background-color: #EBD651;
 }
 
@@ -408,31 +474,38 @@ li a {
     width: 100%;
 }
 
-#health-bar .c-progress-val {
+#health-bar .progress-val {
     background-color: #EC5252;
 }
 
-#health-bar .c-progress-val {
+#health-bar .progress-val {
     width: 100%;
 }
 
-#health-bar p{
+#health-bar p {
     margin-left: 0px;
 }
 
 /* Tasks*/
 .tasks {
-    height: 60%;
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 0 20px;
 }
 
 .tasks-box {
-    width: 30%;
     background-color: white;
-    height: 93%;
     display: flex;
     flex-direction: column;
+    box-shadow: 5px 4px 20px #0000003b;
+    flex-grow: 1;
+    flex-basis: 0;
+    min-width: 400px;
+    max-width: 592px;
+    margin: 0 20px;
+    height: 500px;
+    margin-bottom: 30px;
 }
 
 .tasks-box-top {
@@ -444,7 +517,7 @@ li a {
 }
 
     .tasks-box-top p {
-        font-size: 30px;
+        font-size: 24px;
         color: black;
         margin: 0;
     }
@@ -501,7 +574,7 @@ li a {
 .task-container {
     margin: 10px 0 20px 0;
     overflow: scroll;
-    height: 100%;
+    min-height: 390px;
     overflow-x: hidden;
     overflow-y: overlay;
     padding: 5px 30px;
@@ -525,6 +598,8 @@ li a {
         font-size: 18px;
         margin: 0 14px 0 14px;
         overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     .task:hover {
@@ -632,7 +707,6 @@ li a {
 
 .habit-button-negative {
     background-color: #F66C6C;
-    margin-left: auto;
     border-radius: 0 10px 10px 0;
 }
 
@@ -755,8 +829,86 @@ li a {
         margin: -2.5px 0 0 -12px;
     }
 
-#xp-notify-box {
+.dropdown {
+    margin-left: auto;
+    margin-right: 18px;
+    position: relative;
+}
+
+.dropdown-button {
+    background: none;
+    border: none;
+    opacity: 0;
+    transition: opacity ease 0.1s;
+    padding: 4px 8px;
+}
+
+    .dropdown-button:focus {
+        outline: none;
+    }
+
+    .dropdown-button img {
+        height: 20px;
+    }
+
+.dropdown-button-tasks {
+    background-image: url(/images/Dropdown.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 20px;
+    height: 20px;
+}
+
+.task:hover .dropdown-button {
+    opacity: 1;
+}
+
+.dropdown-menu {
+    background-color: white;
+    box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    width: 150px;
     position: absolute;
+    left: -131px;
+    margin-top: 4px;
+    z-index: 10;
+    display: none;
+    padding: 6px 0;
+    border-radius: 3px;
+}
+
+.show .dropdown-button {
+    opacity: 1;
+}
+
+.show .dropdown-menu {
+    display: flex;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 5px 8px 14px;
+}
+
+    .dropdown-item:hover {
+        background-color: #f7f7f7;
+    }
+
+    .dropdown-item img {
+        height: 26px;
+    }
+
+.dropup .dropdown-menu {
+    bottom: 25px;
+}
+
+
+/*XP notification*/
+#xp-notify-box {
+    position: fixed;
     top: 106px;
     right: 81px;
     display: flex;
@@ -764,6 +916,7 @@ li a {
     padding: 0 15px 16px 0;
     overflow: hidden;
     max-height: 242px;
+    z-index: 10;
 }
 
 .xp-notify {
@@ -788,3 +941,64 @@ li a {
     .xp-notify img {
         width: 26px;
     }
+
+
+/* Quest page */
+
+.quest-page-container{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quest-container {
+    background-image: url(/images/QuestBG.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 432px;
+    height: 699px;
+    filter: drop-shadow( 5px 5px 10px rgba(0,0,0, 0.4));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.quest-name {
+    display: block;
+    background-image: url(/images/QuestNameBG.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 65px;
+    line-height: 65px;
+    width: 550px;
+    text-align: center;
+    font-size: 29px;
+    margin: 13px 0 0 0;
+}
+
+.boss-image-box {
+    padding: 8px 1px;
+}
+
+.boss-image {
+    height: 400px;
+    display: block;
+    margin: 0 auto;
+}
+
+.boss-health {
+    width: 94%;
+    background-color: #162e49;
+    padding: 10px 38px;
+}
+
+    .boss-health .progress-box {
+        margin: 0 auto;
+    }
+
+.damage-box{
+
+}

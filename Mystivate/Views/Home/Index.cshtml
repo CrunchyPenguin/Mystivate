@@ -4,6 +4,7 @@
     ViewData["Title"] = "Home Page";
 }
 
+<div class="test"></div>
 <div id="xp-notify-box">
 </div>
 <div class="character-container">
@@ -11,23 +12,23 @@
     <div class="character-info">
         <h2>@Model.Character.Name</h2>
         <h3 id="level">Level</h3>
-        <div class="c-progress-box">
-            <div class="c-progress" id="xp-bar">
-                <div class="c-progress-val">
+        <div class="progress-box">
+            <div class="progress" id="xp-bar">
+                <div class="progress-val">
                     <p>0</p>
                 </div>
-                <span class="c-progress-tooltip">Experience</span>
+                <span class="progress-tooltip">Experience</span>
             </div>
-            <p class="c-progress-max">0</p>
+            <p class="progress-max">0</p>
         </div>
-        <div class="c-progress-box">
-            <div class="c-progress" id="health-bar">
-                <div class="c-progress-val">
+        <div class="progress-box">
+            <div class="progress" id="health-bar">
+                <div class="progress-val">
                     <p>100</p>
                 </div>
-                <span class="c-progress-tooltip">Health</span>
+                <span class="progress-tooltip">Health</span>
             </div>
-            <p class="c-progress-max">100</p>
+            <p class="progress-max">100</p>
         </div>
     </div>
 </div>
@@ -44,14 +45,23 @@
         <div class="task-container" id="daily-container">
             @for (int i = 0; i < Model.DailyTasks.Count; i++)
             {
-                <div class="task @(Model.DailyTasks[i].Done.Value ? "done" : "")">
-                    <button onClick="DailyCheck(this.id)" class="task-tick-button" @(Model.DailyTasks[i].Done.Value ? "disabled" : "") id="d@(Model.DailyTasks[i].Id)">
+                <div class="task @(Model.DailyTasks[i].Done.Value ? "done" : "")" id="d@(Model.DailyTasks[i].Id)">
+                    <button onClick="DailyCheck(this.parentElement.id)" class="task-tick-button" @(Model.DailyTasks[i].Done.Value ? "disabled" : "")>
                         <div class="tick-box">
                             <div class="tick-left"></div>
                             <div class="tick-right"></div>
                         </div>
                     </button>
                     <p>@Model.DailyTasks[i].Name</p>
+                    <div class="dropdown">
+                        <button class="dropdown-button dropdown-button-tasks" onclick="Dropdown(this)"></button>
+                        <div class="dropdown-menu">
+                            <button class="dropdown-item" onclick="DeleteTask(this.parentElement.parentElement.parentElement, @Model.DailyTasks[i].Id, 'daily')">
+                                <img src="~/images/Trashcan.svg" />
+                                <p style="color:red">Delete</p>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             }
         </div>
@@ -67,15 +77,24 @@
         <div class="task-container" id="habit-container">
             @for (int i = 0; i < Model.Habits.Count; i++)
             {
-                <div class="task">
-                    <button onClick="HabitPositive(this.id)" class="habit-button" id="h@(Model.Habits[i].Id)">
+                <div class="task" id="h@(Model.Habits[i].Id)">
+                    <button onClick="HabitPositive(this.parentElement.id)" class="habit-button">
                         <div class="habit-button-box">
                             <div class="habit-vert"></div>
                             <div class="habit-hori"></div>
                         </div>
                     </button>
                     <p>@Model.Habits[i].Name</p>
-                    <button onClick="HabitNegative(this.id)" class="habit-button habit-button-negative" id="h@(Model.Habits[i].Id)">
+                    <div class="dropdown">
+                        <button class="dropdown-button dropdown-button-tasks" onclick="Dropdown(this)"></button>
+                        <div class="dropdown-menu">
+                            <button class="dropdown-item" onclick="DeleteTask(this.parentElement.parentElement.parentElement, @Model.Habits[i].Id, 'habit')">
+                                <img src="~/images/Trashcan.svg" />
+                                <p style="color:red">Delete</p>
+                            </button>
+                        </div>
+                    </div>
+                    <button onClick="HabitNegative(this.parentElement.id)" class="habit-button habit-button-negative">
                         <div class="habit-button-box">
                             <div class="habit-hori"></div>
                         </div>
@@ -95,14 +114,23 @@
         <div class="task-container" id="todo-container">
             @for (int i = 0; i < Model.ToDos.Count; i++)
             {
-                <div class="task">
-                    <button onClick="TodoCheck(this.id)" class="task-tick-button todo-button" id="t@(Model.ToDos[i].Id)">
+                <div class="task" id="t@(Model.ToDos[i].Id)">
+                    <button onClick="TodoCheck(this.parentElement.id)" class="task-tick-button todo-button">
                         <div class="tick-box">
                             <div class="tick-left"></div>
                             <div class="tick-right"></div>
                         </div>
                     </button>
                     <p>@Model.ToDos[i].Name</p>
+                    <div class="dropdown">
+                        <button class="dropdown-button dropdown-button-tasks" onclick="Dropdown(this)"></button>
+                        <div class="dropdown-menu">
+                            <button class="dropdown-item" onclick="DeleteTask(this.parentElement.parentElement.parentElement, @Model.ToDos[i].Id, 'todo')">
+                                <img src="~/images/Trashcan.svg" />
+                                <p style="color:red">Delete</p>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             }
         </div>
@@ -141,7 +169,7 @@
                     valbox.width(xppercent + "%");
                     var val = valbox.children().first();
                     val.text(currentxp);
-                    var maxval = $(document.getElementById("xp-bar")).parent().children(".c-progress-max").first();
+                    var maxval = $(document.getElementById("xp-bar")).parent().children(".progress-max").first();
                     maxval.text(maxxp);
                     if (xppercent < 10) {
                         val.css("margin-left", val.width() + 8 + "px");
@@ -166,7 +194,7 @@
                     valbox.width(healthpercent + "%");
                     var val = valbox.children().first();
                     val.text(currenthealth);
-                    var maxval = $(document.getElementById("health-bar")).parent().children(".c-progress-max").first();
+                    var maxval = $(document.getElementById("health-bar")).parent().children(".progress-max").first();
                     maxval.text(maxhealth);
                     if (healthpercent < 10) {
                         val.css("margin-left", val.width() + 8 + "px");
@@ -179,7 +207,7 @@
                 });
             });
         }
-        
+
         function UpdateLevel() {
             $.post("@Url.Action("GetCurrentLevel", "Character")", function (level) {
                 document.getElementById("level").innerHTML = "Level " + level;
@@ -190,20 +218,24 @@
             var taskId = id.substr(1);
             $.post("@Url.Action("CheckDaily", "Task")", { id: taskId }, function (xp) {
                 AddExp(xp);
-                $("#" + id).children().children().first().css("transition", "background-color 1s ease");
-                $("#" + id).children().children().last().css("transition", "background-color 1s ease");
-                $("#" + id).attr("disabled", true);
-                $("#" + id).parent().addClass("done");
+                var button = $("#" + id).children("button").first();
+                console.log($("#" + id));
+                button.children().first().children().first().css("transition", "background-color 1s ease");
+                button.children().first().children().last().css("transition", "background-color 1s ease");
+                button.attr("disabled", true);
+                button.parent().addClass("done");
             });
         }
 
         function TodoCheck(id) {
+            console.log($("#" + id));   
             var taskId = id.substr(1);
             $.post("@Url.Action("CheckTodo", "Task")", { id: taskId }, function (xp) {
                 AddExp(xp);
-                $("#" + id).children().children().first().css("transition", "background-color 1s ease");
-                $("#" + id).children().children().last().css("transition", "background-color 1s ease");
-                $("#" + id).parent().fadeOut("normal", function () {
+                var button = $("#" + id).children("button").first();
+                button.children().children().first().css("transition", "background-color 1s ease");
+                button.children().children().last().css("transition", "background-color 1s ease");
+                $("#" + id).fadeOut("normal", function () {
                     $(this).remove();
                 });
             });
@@ -213,8 +245,9 @@
             var taskId = id.substr(1);
             $.post("@Url.Action("PositiveHabit", "Task")", { id: taskId }, function (xp) {
                 AddExp(xp);
-                $("#" + id).parent().removeClass("negative");
-                $("#" + id).parent().addClass("positive");
+                var button = $("#" + id).children("button").first();
+                button.parent().removeClass("negative");
+                button.parent().addClass("positive");
             });
         }
 
@@ -222,8 +255,9 @@
             var taskId = id.substr(1);
             $.post("@Url.Action("NegativeHabit", "Task")", { id: taskId }, function (xp) {
                 AddExp(xp);
-                $("#" + id).parent().removeClass("positive");
-                $("#" + id).parent().addClass("negative");
+                var button = $("#" + id).children("button").last();
+                button.parent().removeClass("positive");
+                button.parent().addClass("negative");
             });
 
         }
@@ -293,10 +327,10 @@
                     $.post("@Url.Action("AddDaily","Task")", { name: document.getElementById('new-task-input').value }, function (id) {
                         var task = $(document.createElement('div'));
                         task.addClass("task");
+                        task.attr("id", "d" + id);
                         var button = task.append(document.createElement('button')).children().last();
                         button.addClass("task-tick-button");
-                        button.attr("onclick", 'DailyCheck(this.id)');
-                        button.attr("id", "d" + id);
+                        button.attr("onclick", 'DailyCheck(this.parentElement.id)');
                         var tickbox = button.append(document.createElement('div')).children().last();
                         tickbox.addClass("tick-box");
                         var tickl = tickbox.append(document.createElement('div')).children().last();
@@ -305,6 +339,22 @@
                         tickr.addClass("tick-right");
                         var name = task.append(document.createElement('p')).children().last();
                         name.text(document.getElementById('new-task-input').value);
+                        var dropdown = task.append(document.createElement('div')).children().last();
+                        dropdown.addClass("dropdown");
+                        var dropdownbutton = dropdown.append(document.createElement('button')).children().last();
+                        dropdownbutton.addClass("dropdown-button dropdown-button-tasks");
+                        dropdownbutton.attr("onclick", 'Dropdown(this)');
+                        var dropdownmenu = dropdown.append(document.createElement('div')).children().last();
+                        dropdownmenu.addClass("dropdown-menu");
+                        var dropdownitem = dropdownmenu.append(document.createElement('button')).children().last();
+                        dropdownitem.addClass("dropdown-item");
+                        dropdownitem.attr("onclick", "DeleteTask(this.parentElement.parentElement.parentElement, " + id + ", 'daily')");
+                        var dropdownimg = dropdownitem.append(document.createElement('img')).children().last();
+                        dropdownimg.attr("src", "/images/Trashcan.svg");
+                        var dropdowntext = dropdownitem.append(document.createElement('p')).children().last();
+                        dropdowntext.text("Delete");
+                        dropdowntext.css("color", "red");
+
                         $(document.getElementById('daily-container')).append(task);
 
                         $("#new-task").remove();
@@ -316,10 +366,10 @@
                     $.post("@Url.Action("AddHabit","Task")", { name: document.getElementById('new-task-input').value }, function (id) {
                         var task = $(document.createElement('div'));
                         task.addClass("task");
+                        task.attr("id", "h" + id);
                         var button1 = task.append(document.createElement('button')).children().last();
                         button1.addClass("habit-button");
-                        button1.attr("onclick", 'HabitPositive(this.id)');
-                        button1.attr("id", "h" + id);
+                        button1.attr("onclick", 'HabitPositive(this.parentElement.id)');
                         var buttonbox1 = button1.append(document.createElement('div')).children().last();
                         buttonbox1.addClass("habit-button-box");
                         var vert1 = buttonbox1.append(document.createElement('div')).children().last();
@@ -328,10 +378,25 @@
                         hori1.addClass("habit-hori");
                         var name = task.append(document.createElement('p')).children().last();
                         name.text(document.getElementById('new-task-input').value);
+                        var dropdown = task.append(document.createElement('div')).children().last();
+                        dropdown.addClass("dropdown");
+                        var dropdownbutton = dropdown.append(document.createElement('button')).children().last();
+                        dropdownbutton.addClass("dropdown-button dropdown-button-tasks");
+                        dropdownbutton.attr("onclick", 'Dropdown(this)');
+                        var dropdownmenu = dropdown.append(document.createElement('div')).children().last();
+                        dropdownmenu.addClass("dropdown-menu");
+                        var dropdownitem = dropdownmenu.append(document.createElement('button')).children().last();
+                        dropdownitem.addClass("dropdown-item");
+                        dropdownitem.attr("onclick", "DeleteTask(this.parentElement.parentElement.parentElement, " + id + ", 'daily')");
+                        var dropdownimg = dropdownitem.append(document.createElement('img')).children().last();
+                        dropdownimg.attr("src", "/images/Trashcan.svg");
+                        var dropdowntext = dropdownitem.append(document.createElement('p')).children().last();
+                        dropdowntext.text("Delete");
+                        dropdowntext.css("color", "red");
                         var button2 = task.append(document.createElement('button')).children().last();
                         button2.addClass("habit-button");
                         button2.addClass("habit-button-negative");
-                        button2.attr("onclick", 'HabitNegative(this.id)');
+                        button2.attr("onclick", 'HabitNegative(this.parentElement.id)');
                         button2.attr("id", id);
                         var buttonbox2 = button2.append(document.createElement('div')).children().last();
                         buttonbox2.addClass("habit-button-box");
@@ -347,11 +412,11 @@
                     $.post("@Url.Action("AddTodo","Task")", { name: document.getElementById('new-task-input').value }, function (id) {
                         var task = $(document.createElement('div'));
                         task.addClass("task");
+                        task.attr("id", "t" + id);
                         var button = task.append(document.createElement('button')).children().last();
                         button.addClass("task-tick-button");
                         button.addClass("todo-button");
-                        button.attr("onclick", 'TodoCheck(this.id)');
-                        button.attr("id", "t" + id);
+                        button.attr("onclick", 'TodoCheck(this.parentElement.id)');
                         var tickbox = button.append(document.createElement('div')).children().last();
                         tickbox.addClass("tick-box");
                         var tickl = tickbox.append(document.createElement('div')).children().last();
@@ -360,12 +425,53 @@
                         tickr.addClass("tick-right");
                         var name = task.append(document.createElement('p')).children().last();
                         name.text(document.getElementById('new-task-input').value);
+                        var dropdown = task.append(document.createElement('div')).children().last();
+                        dropdown.addClass("dropdown");
+                        var dropdownbutton = dropdown.append(document.createElement('button')).children().last();
+                        dropdownbutton.addClass("dropdown-button dropdown-button-tasks");
+                        dropdownbutton.attr("onclick", 'Dropdown(this)');
+                        var dropdownmenu = dropdown.append(document.createElement('div')).children().last();
+                        dropdownmenu.addClass("dropdown-menu");
+                        var dropdownitem = dropdownmenu.append(document.createElement('button')).children().last();
+                        dropdownitem.addClass("dropdown-item");
+                        dropdownitem.attr("onclick", "DeleteTask(this.parentElement.parentElement.parentElement, " + id + ", 'daily')");
+                        var dropdownimg = dropdownitem.append(document.createElement('img')).children().last();
+                        dropdownimg.attr("src", "/images/Trashcan.svg");
+                        var dropdowntext = dropdownitem.append(document.createElement('p')).children().last();
+                        dropdowntext.text("Delete");
+                        dropdowntext.css("color", "red");
+
                         $(document.getElementById('todo-container')).append(task);
 
                         $("#new-task").remove();
                         $(".add-task-button").show();
                     });
                 }
+            }
+            else {
+                $("#new-task").remove();
+            }
+        }
+
+        function Dropdown(b) {
+            var dropdown = b.parentElement;
+            dropdown.classList.toggle('show');
+            if (dropdown.classList.contains('dropup')) {
+                dropdown.classList.remove('dropup');
+            }
+            var menu = $(dropdown).children().last();
+            if ((($(dropdown).parent().parent().offset().top + $(dropdown).parent().parent().innerHeight()) - (menu.offset().top + menu.height())) < 20) {
+                dropdown.classList.toggle('dropup');
+            }
+
+        }
+
+        function DeleteTask(taskdiv, id, tasktype) {
+            var c = confirm("Are you sure you want to delete this task?");
+            if (c) {
+                $.post("@Url.Action("DeleteTask", "Task")", { id: id, type: tasktype }, function () {
+                    $(taskdiv).remove();
+                });
             }
         }
 
@@ -381,15 +487,19 @@
                     }
                 }
             }
+            var dropdowns = document.getElementsByClassName("dropdown");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    if (!$(openDropdown).children("button").first().is($(e.target).first())) {
+                        openDropdown.classList.remove('show');
+                        if (openDropdown.classList.contains('dropup')) {
+                            openDropdown.classList.remove('dropup');
+                        }
+                    }
+                }
+            }
         });
-
-        //$(function () {
-        //    $(".task-tick-button").hover(function () {
-        //        $('#b').css('background-color', 'yellow');
-        //    }, function () {
-        //        // on mouseout, reset the background colour
-        //        $('#b').css('background-color', '');
-        //    });
-        //});
     </script>
 }

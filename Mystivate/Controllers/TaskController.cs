@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Mystivate.Logic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Mystivate.Logic;
 
 namespace Mystivate.Controllers
 {
@@ -59,6 +59,12 @@ namespace Mystivate.Controllers
         public int AddTodo(string name)
         {
             return _taskManager.AddTodo(name);
+        }
+
+        [HttpPost]
+        public void DeleteTask(int id, string type)
+        {
+            _taskManager.DeleteTask(type, id);
         }
     }
 }

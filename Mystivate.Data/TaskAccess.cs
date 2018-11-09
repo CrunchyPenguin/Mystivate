@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Mystivate.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Mystivate.Models;
 
 namespace Mystivate.Data
 {
@@ -30,7 +30,9 @@ namespace Mystivate.Data
             _dbContext.Habits.Add(new Habit
             {
                 Name = habit,
-                UserId = userId
+                UserId = userId,
+                Positive = 0,
+                Negative = 0
             });
             _dbContext.SaveChanges();
             return _dbContext.Habits.Where(d => d.UserId == userId).Last().Id;
@@ -100,9 +102,47 @@ namespace Mystivate.Data
 
         public void UncheckDailyTasks(int userId)
         {
-            foreach(DailyTask dailyTask in _dbContext.DailyTasks.Where(d => d.UserId == userId))
+            foreach (DailyTask dailyTask in _dbContext.DailyTasks.Where(d => d.UserId == userId))
             {
                 dailyTask.Done = false;
+            }
+            _dbContext.SaveChanges();
+        }
+
+        public void ResetHabits(int userId)
+        {
+            foreach (Habit habit in _dbContext.Habits.Where(h => h.UserId == userId))
+            {
+                habit.Positive = 0;
+                habit.Negative = 0;
+            }
+            _dbContext.SaveChanges();
+        }
+
+        public void DeleteDaily(int dailyId, int userId)
+        {
+            if (_dbContext.DailyTasks.Any(d => d.UserId == userId && d.Id == dailyId))
+            {
+                _dbContext.DailyTasks.Remove(_dbContext.DailyTasks.SingleOrDefault(d => d.Id == dailyId));
+                _dbContext.SaveChanges();
+            }
+        }
+
+        public void DeleteHabit(int habitId, int userId)
+        {
+            if (_dbContext.Habits.Any(h => h.UserId == userId && h.Id == habitId))
+            {
+                _dbContext.Habits.Remove(_dbContext.Habits.SingleOrDefault(h => h.Id == habitId));
+                _dbContext.SaveChanges();
+            }
+        }
+
+        public void DeleteTodo(int todoId, int userId)
+        {
+            if (_dbContext.ToDos.Any(t => t.UserId == userId && t.Id == todoId))
+            {
+                _dbContext.ToDos.Remove(_dbContext.ToDos.SingleOrDefault(t => t.Id == todoId));
+                _dbContext.SaveChanges();
             }
         }
     }

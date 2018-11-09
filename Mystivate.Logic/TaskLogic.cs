@@ -74,6 +74,16 @@ namespace Mystivate.Logic
             return xp;
         }
 
+        public void DeleteTask(string type, int id)
+        {
+            if (type == "daily")
+                _taskAccess.DeleteDaily(id, _userInfo.GetUserId());
+            if (type == "habit")
+                _taskAccess.DeleteHabit(id, _userInfo.GetUserId());
+            if (type == "todo")
+                _taskAccess.DeleteTodo(id, _userInfo.GetUserId());
+        }
+
         //public CharacterInfoViewModel GetAllTasks()
         //{
         //    CharacterInfoViewModel tasks = new CharacterInfoViewModel
@@ -115,6 +125,11 @@ namespace Mystivate.Logic
             int xp = 10;
             _characterManager.AddExperience(xp);
             return xp;
+        }
+
+        public void ResetHabits()
+        {
+            _taskAccess.ResetHabits(_userInfo.GetUserId());
         }
 
         public void UncheckDailies()

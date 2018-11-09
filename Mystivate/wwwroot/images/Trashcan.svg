@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 25">
+  <defs>
+    <style>
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-6 {
+        fill: none;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4 {
+        stroke: #d61414;
+      }
+
+      .cls-2 {
+        stroke-width: 2px;
+      }
+
+      .cls-3 {
+        stroke-width: 4px;
+      }
+
+      .cls-4 {
+        stroke-width: 3px;
+      }
+
+      .cls-5 {
+        stroke: none;
+      }
+    </style>
+  </defs>
+  <g id="Trash_can" data-name="Trash can" transform="translate(-394.5 -664)">
+    <g id="Rectangle_33" data-name="Rectangle 33" class="cls-1" transform="translate(395 666)">
+      <rect class="cls-5" width="17" height="23" rx="3"/>
+      <rect class="cls-6" x="0.5" y="0.5" width="16" height="22" rx="2.5"/>
+    </g>
+    <line id="Line_24" data-name="Line 24" class="cls-2" y2="12" transform="translate(400.5 672.5)"/>
+    <line id="Line_25" data-name="Line 25" class="cls-2" y2="12" transform="translate(406.5 672.5)"/>
+    <line id="Line_26" data-name="Line 26" class="cls-3" x1="18" transform="translate(394.5 667.5)"/>
+    <line id="Line_27" data-name="Line 27" class="cls-4" x1="6" transform="translate(400.5 665.5)"/>
+  </g>
+</svg>

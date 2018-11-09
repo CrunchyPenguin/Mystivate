@@ -30,11 +30,12 @@ namespace Mystivate.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            // Checks if new login
+            // Checks if new login day
             if (_userInfo.NewLogin())
             {
                 // Unchecks all dailies
                 _taskManager.UncheckDailies();
+                _taskManager.ResetHabits();
             }
             CharacterInfoViewModel model = new CharacterInfoViewModel()
             {

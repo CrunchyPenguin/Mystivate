@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7 25">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #707070;
+      }
+    </style>
+  </defs>
+  <g id="Dropdown-Edit" transform="translate(-540.322 -569)">
+    <circle id="Ellipse_3" data-name="Ellipse 3" class="cls-1" cx="3.5" cy="3.5" r="3.5" transform="translate(540.322 569)"/>
+    <circle id="Ellipse_4" data-name="Ellipse 4" class="cls-1" cx="3.5" cy="3.5" r="3.5" transform="translate(540.322 578)"/>
+    <circle id="Ellipse_5" data-name="Ellipse 5" class="cls-1" cx="3.5" cy="3.5" r="3.5" transform="translate(540.322 587)"/>
+  </g>
+</svg>
