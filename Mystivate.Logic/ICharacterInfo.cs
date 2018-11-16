@@ -15,5 +15,6 @@ namespace Mystivate.Logic
         int GetExperienceNextLevel();
         int GetMaxHealth();
         int GetCurrentHealth();
+        int GetCharacterId();
     }
 }

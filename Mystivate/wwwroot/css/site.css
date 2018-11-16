@@ -992,13 +992,39 @@ button {
 .boss-health {
     width: 94%;
     background-color: #162e49;
-    padding: 10px 38px;
+    padding: 10px 4px;
 }
 
     .boss-health .progress-box {
         margin: 0 auto;
     }
 
-.damage-box{
+    .boss-health .progress {
+        width: 100%;
+        height: 30px;
+    }
 
+    .boss-health .progress-val {
+        background-color: #d93939 !important;
+    }
+
+
+.damage-box {
+    width: 93%;
+}
+
+    .damage-box p {
+        color: black;
+        margin-top: 6px;
+        margin-left: 10px;
+        font-weight: 500;
+        font-size: 13px;
+    }
+
+.progress-val-bottom {
+    height: 40%;
+    width: 100%;
+    background-color: #a92727;
+    transform: translateY(75%);
+    border-radius: 2px;
 }

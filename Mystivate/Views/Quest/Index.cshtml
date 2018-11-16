@@ -1,27 +1,28 @@
-﻿
+﻿@model QuestModel
 @{
     ViewData["Title"] = "Index";
 }
 
 <div class="quest-page-container">
     <div class="quest-container">
-        <h2 class="quest-name">Baraka The Unforgiven</h2>
+        <h2 class="quest-name">@Model.Name</h2>
         <div class="boss-image-box">
-            <img class="boss-image" src="https://img.itch.zone/aW1hZ2UvMTc0NjI1LzgxNTk1Ny5naWY=/original/PBwTQy.gif" />
+            <img class="boss-image" src="~/images/Quests/Bosses/@Model.Image" />
         </div>
         <div class="boss-health">
             <div class="progress-box">
                 <div class="progress" id="health-bar">
                     <div class="progress-val">
+                        <div class="progress-val-bottom"></div>
                         @*<p>100</p>*@
                     </div>
-                    <span class="progress-tooltip">Health</span>
+                    @*<span class="progress-tooltip">Health</span>*@
                 </div>
                 @*<p class="progress-max">100</p>*@
             </div>
         </div>
         <div class="damage-box">
-
+            <p>Damage today:</p>
         </div>
     </div>
 </div>

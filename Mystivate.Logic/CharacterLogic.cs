@@ -100,5 +100,10 @@ namespace Mystivate.Logic
         {
             _characterAccess.AddHealth(_userInfo.GetUserId(), amount);
         }
+
+        public int GetCharacterId()
+        {
+            return _characterAccess.GetCharacterId(_userInfo.GetUserId());
+        }
     }
 }

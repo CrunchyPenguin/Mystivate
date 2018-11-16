@@ -53,7 +53,7 @@ namespace Mystivate.Data
         {
             if (_dbContext.DailyTasks.Any(d => d.Id == dailyId))
             {
-                _dbContext.DailyTasks.Where(d => d.Id == dailyId).First().Done = true;
+                _dbContext.DailyTasks.SingleOrDefault(d => d.Id == dailyId).Done = true;
                 _dbContext.SaveChanges();
             }
         }
@@ -62,7 +62,7 @@ namespace Mystivate.Data
         {
             if (_dbContext.ToDos.Any(t => t.Id == todoId))
             {
-                _dbContext.ToDos.Remove(_dbContext.ToDos.Where(t => t.Id == todoId).First());
+                _dbContext.ToDos.Remove(_dbContext.ToDos.SingleOrDefault(t => t.Id == todoId));
                 _dbContext.SaveChanges();
             }
         }
@@ -86,7 +86,7 @@ namespace Mystivate.Data
         {
             if (_dbContext.Habits.Any(h => h.Id == habitId))
             {
-                _dbContext.Habits.Where(h => h.Id == habitId).First().Positive++;
+                _dbContext.Habits.SingleOrDefault(h => h.Id == habitId).Positive++;
                 _dbContext.SaveChanges();
             }
         }
@@ -95,7 +95,7 @@ namespace Mystivate.Data
         {
             if (_dbContext.Habits.Any(h => h.Id == habitId))
             {
-                _dbContext.Habits.Where(h => h.Id == habitId).First().Negative++;
+                _dbContext.Habits.SingleOrDefault(h => h.Id == habitId).Negative++;
                 _dbContext.SaveChanges();
             }
         }

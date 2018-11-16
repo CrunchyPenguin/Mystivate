@@ -56,7 +56,7 @@ namespace Mystivate.Data
 
         public EncryptedPassword GetEncryptedPassword(int userId)
         {
-            User user = _dbContext.Users.Where(u => u.Id == userId).First();
+            User user = _dbContext.Users.SingleOrDefault(u => u.Id == userId);
             return new EncryptedPassword
             {
                 PasswordKey = user.PasswordKey,
@@ -66,7 +66,7 @@ namespace Mystivate.Data
 
         public DateTime? GetLastLogin(int userId)
         {
-            return _dbContext.Users.Where(u => u.Id == userId).First().LastLogin;
+            return _dbContext.Users.SingleOrDefault(u => u.Id == userId).LastLogin;
         }
 
         public User GetUser(int userId)
@@ -76,23 +76,23 @@ namespace Mystivate.Data
 
         public int GetUserId(string email)
         {
-            return _dbContext.Users.Where(u => u.Email == email).First().Id;
+            return _dbContext.Users.SingleOrDefault(u => u.Email == email).Id;
         }
 
         public string GetUsername(int userId)
         {
-            return _dbContext.Users.Where(u => u.Id == userId).First().Username;
+            return _dbContext.Users.SingleOrDefault(u => u.Id == userId).Username;
         }
 
         public void SetLastLogin(int userId, DateTime day)
         {
-            _dbContext.Users.Where(u => u.Id == userId).First().LastLogin = day;
+            _dbContext.Users.SingleOrDefault(u => u.Id == userId).LastLogin = day;
             _dbContext.SaveChanges();
         }
 
         public void SetPassword(int userId, string newPassKey, string newPassSalt)
         {
-            User user = _dbContext.Users.Where(u => u.Id == userId).First();
+            User user = _dbContext.Users.SingleOrDefault(u => u.Id == userId);
             user.PasswordKey = newPassKey;
             user.PasswordSalt = newPassSalt;
             _dbContext.Users.Update(user);
