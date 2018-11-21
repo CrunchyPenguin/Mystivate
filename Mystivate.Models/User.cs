@@ -8,8 +8,8 @@ namespace Mystivate.Models
         public User()
         {
             Character = new HashSet<Character>();
+            DailyTask = new HashSet<DailyTask>();
             Habit = new HashSet<Habit>();
-            Task = new HashSet<DailyTask>();
             ToDo = new HashSet<ToDo>();
         }
 
@@ -21,8 +21,8 @@ namespace Mystivate.Models
         public DateTime? LastLogin { get; set; }
 
         public ICollection<Character> Character { get; set; }
+        public ICollection<DailyTask> DailyTask { get; set; }
         public ICollection<Habit> Habit { get; set; }
-        public ICollection<DailyTask> Task { get; set; }
         public ICollection<ToDo> ToDo { get; set; }
     }
 }

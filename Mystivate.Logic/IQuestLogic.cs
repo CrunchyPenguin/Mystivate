@@ -9,5 +9,9 @@ namespace Mystivate.Logic
     {
         void SelectQuest();
         QuestModel GetCurrentQuest();
+        int GetDamageDoneToday();
+        int GetCurrentHealth();
+        void AddDamage(int damage);
+        void Attack();
     }
 }

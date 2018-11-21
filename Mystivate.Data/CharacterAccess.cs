@@ -30,13 +30,13 @@ namespace Mystivate.Data
         public int AddHealth(int userId, int amount)
         {
             Character character = _dbContext.Characters.SingleOrDefault(c => c.UserId == userId);
-            character.CurrentLives += amount;
-            if(character.CurrentLives < 0)
+            character.CurrentHealth += amount;
+            if(character.CurrentHealth < 0)
             {
-                character.CurrentLives = 0;
+                character.CurrentHealth = 0;
             }
             _dbContext.SaveChanges();
-            return character.CurrentLives;
+            return character.CurrentHealth;
         }
 
         public Character GetCharacter(int userId)
@@ -62,12 +62,12 @@ namespace Mystivate.Data
 
         public int GetCurrentHealth(int userId)
         {
-            return _dbContext.Characters.SingleOrDefault(c => c.UserId == userId).CurrentLives;
+            return _dbContext.Characters.SingleOrDefault(c => c.UserId == userId).CurrentHealth;
         }
 
         public int GetMaxHealth(int userId)
         {
-            return _dbContext.Characters.SingleOrDefault(c => c.UserId == userId).MaxLives;
+            return _dbContext.Characters.SingleOrDefault(c => c.UserId == userId).MaxHealth;
         }
     }
 }

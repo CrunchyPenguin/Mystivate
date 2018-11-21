@@ -595,7 +595,7 @@ button {
     .task p {
         transition: color 1s ease;
         color: black;
-        font-size: 18px;
+        font-size: 17px;
         margin: 0 14px 0 14px;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -907,7 +907,7 @@ button {
 
 
 /*XP notification*/
-#xp-notify-box {
+#notify-box {
     position: fixed;
     top: 106px;
     right: 81px;
@@ -919,8 +919,7 @@ button {
     z-index: 10;
 }
 
-.xp-notify {
-    width: 118px;
+.notify {
     height: 38px;
     background-color: white;
     border-radius: 10px;
@@ -930,22 +929,27 @@ button {
     box-shadow: 6px 4px 14px 0px rgba(0, 0, 0, 0.28);
     margin-top: 9px;
     flex-shrink: 0;
+    align-self: flex-end;
 }
 
-    .xp-notify p {
+    .notify p {
         color: #ebd651;
         font-size: 17px;
         margin: 0 auto;
     }
 
-    .xp-notify img {
+    .notify img {
+        margin-left: 20px;
         width: 26px;
+        max-height: 26px;
     }
 
+.damage-notify p {
+    color: black;
+}
 
 /* Quest page */
-
-.quest-page-container{
+.quest-page-container {
     height: 100%;
     display: flex;
     align-items: center;
@@ -977,16 +981,17 @@ button {
     text-align: center;
     font-size: 29px;
     margin: 13px 0 0 0;
+    filter: drop-shadow( 0px 0px 4px rgba(0,0,0, 0.4));
 }
 
 .boss-image-box {
-    padding: 8px 1px;
+    /*padding: 8px 1px;*/
 }
 
 .boss-image {
-    height: 400px;
+    height: 384px;
     display: block;
-    margin: 0 auto;
+    margin: 9px;
 }
 
 .boss-health {
@@ -1002,12 +1007,49 @@ button {
     .boss-health .progress {
         width: 100%;
         height: 30px;
+        background-color: rgba(0, 0, 0, 0.29);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.62) inset;
+        position: relative;
+        display: flex;
+        justify-content: center;
     }
 
     .boss-health .progress-val {
         background-color: #d93939 !important;
+        position: absolute;
+        left: 0;
+        align-items: flex-end;
     }
 
+    .boss-health .boss-health-val {
+        position: relative;
+    }
+
+    .boss-health .boss-percentage {
+        position: relative;
+        margin-left: 23px
+    }
+
+    .boss-health p {
+        line-height: 30px;
+        font-size: 18px;
+        text-align: center;
+    }
+
+.progress-val-bottom {
+    height: 36%;
+    width: 100%;
+    background-color: #a92727;
+    border-radius: 0px 0px 2px 2px;
+}
+
+#boss-health-bar .progress-val {
+    background-color: #EC5252;
+}
+
+#boss-health-bar .progress-val {
+    width: 100%;
+}
 
 .damage-box {
     width: 93%;
@@ -1021,10 +1063,19 @@ button {
         font-size: 13px;
     }
 
-.progress-val-bottom {
-    height: 40%;
+.damage-done {
+    display: flex;
     width: 100%;
-    background-color: #a92727;
-    transform: translateY(75%);
-    border-radius: 2px;
+    justify-content: center;
+    align-items: center;
 }
+
+    .damage-done img {
+        width: 30px;
+        filter: drop-shadow( 1px 1px 2px rgba(0,0,0, 0.6));
+    }
+
+    .damage-done p {
+        font-size: 17px;
+        margin: 11px 0 0 8px;
+    }

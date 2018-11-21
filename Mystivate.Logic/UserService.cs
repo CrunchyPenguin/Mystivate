@@ -38,8 +38,15 @@ namespace Mystivate.Logic
         public int GetUserId()
         {
             var identity = (ClaimsIdentity)_httpContextAccessor.HttpContext.User.Identity;
-            int id = Convert.ToInt32(identity.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value);
-            return id;
+            Claim id = identity.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+            if(id != null)
+            {
+                return Convert.ToInt32(id.Value);
+            }
+            else
+            {
+                return -1;
+            }
         }
 
         public string GetUserName()

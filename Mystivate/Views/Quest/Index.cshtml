@@ -11,18 +11,56 @@
         </div>
         <div class="boss-health">
             <div class="progress-box">
-                <div class="progress" id="health-bar">
+                <div class="progress" id="boss-health-bar">
                     <div class="progress-val">
                         <div class="progress-val-bottom"></div>
-                        @*<p>100</p>*@
                     </div>
-                    @*<span class="progress-tooltip">Health</span>*@
+                    <p class="boss-health-val">0 / 0</p>
+                    <p class="boss-percentage">100%</p>
                 </div>
-                @*<p class="progress-max">100</p>*@
             </div>
         </div>
         <div class="damage-box">
             <p>Damage today:</p>
+            <div class="damage-done">
+                <img src="~/images/BloodDrop.svg"/>
+                <p id="boss-damage">0</p>
+            </div>
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script>
+        var maxhealth, currenthealth, healthpercent;
+        UpdateHealthBar();
+        UpdateDamageDone();
+        function UpdateHealthBar() {
+            $.post("@Url.Action("GetMaxHealth", "Quest")", function (health) {
+                maxhealth = health;
+                $.post("@Url.Action("GetCurrentHealth", "Quest")", function (health) {
+                    currenthealth = health;
+                    healthpercent = currenthealth / maxhealth * 100;
+                    var valbox = $(document.getElementById("boss-health-bar")).children().first();
+                    valbox.width(healthpercent + "%");
+                    $("#boss-health-bar").children(".boss-health-val").first().text(currenthealth + " / " + maxhealth);
+                    $("#boss-health-bar").children(".boss-percentage").first().text(Math.round(healthpercent) + "%");
+                    //if (healthpercent < 10) {
+                    //    val.css("margin-left", val.width() + 8 + "px");
+                    //    valbox.css("justify-content", "flex-end");
+                    //}
+                    //else {
+                    //    valbox.css("justify-content", "center");
+                    //    val.css("margin-left", "0px");
+                    //}
+                });
+            });
+        }
+
+        function UpdateDamageDone() {
+            $.post("@Url.Action("GetDamageDone", "Quest")", function (damage) {
+                $("#boss-damage").text(damage);
+            });
+        }
+    </script>
+ }

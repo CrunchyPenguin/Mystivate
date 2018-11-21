@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ncrontab" Version="3.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Mystivate.Data\Mystivate.Data.csproj" />
     <ProjectReference Include="..\Mystivate.Models\Mystivate.Models.csproj" />
   </ItemGroup>

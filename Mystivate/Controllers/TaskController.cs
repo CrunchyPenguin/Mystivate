@@ -19,26 +19,26 @@ namespace Mystivate.Controllers
         }
 
         [HttpPost]
-        public int CheckDaily(int id)
+        public ITaskReturn CheckDaily(int id)
         {
             return _taskManager.CheckDaily(id);
         }
 
         [HttpPost]
-        public int CheckTodo(int id)
+        public ITaskReturn CheckTodo(int id)
         {
             return _taskManager.CheckTodo(id);
         }
 
         [HttpPost]
-        public int PositiveHabit(int id)
+        public ITaskReturn PositiveHabit(int id)
         {
             return _taskManager.PositiveHabit(id);
         }
 
 
         [HttpPost]
-        public int NegativeHabit(int id)
+        public ITaskReturn NegativeHabit(int id)
         {
             return _taskManager.NegativeHabit(id);
         }

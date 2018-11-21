@@ -57,7 +57,7 @@ namespace Mystivate.Logic
                         AllowRefresh = true,
                         ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
                         IsPersistent = true,
-                        IssuedUtc = DateTime.Now,
+                        IssuedUtc = DateTime.UtcNow,
                         RedirectUri = "./Home/Index"
                     };
 

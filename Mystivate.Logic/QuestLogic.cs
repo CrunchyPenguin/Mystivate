@@ -25,13 +25,33 @@ namespace Mystivate.Logic
                 Id = quest.Id,
                 Name = quest.Name,
                 Image = quest.BossImage,
-                Lives = quest.Lives,
+                Health = quest.Health,
                 RecLevel = quest.RecLevel.Value,
                 CoinReward = quest.CoinRewards
             };
         }
 
         public void SelectQuest()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetCurrentHealth()
+        {
+            return _questAccess.GetQuestHealth(_characterInfo.GetCharacterId()) - _questAccess.GetDamage(_characterInfo.GetCharacterId());
+        }
+
+        public int GetDamageDoneToday()
+        {
+            return _questAccess.GetDamageToday(_characterInfo.GetCharacterId());
+        }
+
+        public void AddDamage(int damage)
+        {
+            _questAccess.AddDamage(_characterInfo.GetCharacterId(), damage);
+        }
+
+        public void Attack()
         {
             throw new NotImplementedException();
         }

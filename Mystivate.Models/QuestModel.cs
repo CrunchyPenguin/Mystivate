@@ -9,7 +9,7 @@ namespace Mystivate.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Image { get; set; }
-        public int Lives { get; set; }
+        public int Health { get; set; }
         public int CoinReward { get; set; }
         public int RecLevel { get; set; }
     }

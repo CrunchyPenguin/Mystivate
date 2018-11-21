@@ -100,11 +100,34 @@ namespace Mystivate.Data
             }
         }
 
+        public void UncheckDailyTasks()
+        {
+            List<DailyTask> allDailyTasks = _dbContext.DailyTasks.ToList();
+            foreach (DailyTask dailyTask in allDailyTasks)
+            {
+                dailyTask.DoneYesterday = dailyTask.Done.Value ? true : false;
+                dailyTask.Done = false;
+            }
+            _dbContext.SaveChanges();
+        }
+
         public void UncheckDailyTasks(int userId)
         {
             foreach (DailyTask dailyTask in _dbContext.DailyTasks.Where(d => d.UserId == userId))
             {
+                dailyTask.DoneYesterday = dailyTask.Done.Value ? true : false;
                 dailyTask.Done = false;
+            }
+            _dbContext.SaveChanges();
+        }
+
+        public void ResetHabits()
+        {
+            List<Habit> allHabits = _dbContext.Habits.ToList();
+            foreach (Habit habit in allHabits)
+            {
+                habit.Positive = 0;
+                habit.Negative = 0;
             }
             _dbContext.SaveChanges();
         }

@@ -15,7 +15,7 @@ namespace Mystivate.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string BossImage { get; set; }
-        public int Lives { get; set; }
+        public int Health { get; set; }
         public int CoinRewards { get; set; }
         public int? RecLevel { get; set; }
 

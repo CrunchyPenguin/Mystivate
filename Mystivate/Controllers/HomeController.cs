@@ -18,25 +18,20 @@ namespace Mystivate.Controllers
         private readonly ITaskManager _taskManager;
         private readonly IUserInfo _userInfo;
         private readonly ICharacterInfo _characterInfo;
+        private readonly IQuestLogic _questLogic;
 
-        public HomeController(ITaskInfo taskInfo, IUserInfo userInfo, ICharacterInfo characterInfo, ITaskManager taskManager)
+        public HomeController(ITaskInfo taskInfo, IUserInfo userInfo, ICharacterInfo characterInfo, ITaskManager taskManager, IQuestLogic questLogic)
         {
             _taskInfo = taskInfo;
             _taskManager = taskManager;
             _userInfo = userInfo;
             _characterInfo = characterInfo;
+            _questLogic = questLogic;
         }
 
         [Authorize]
         public IActionResult Index()
         {
-            // Checks if new login day
-            if (_userInfo.NewLogin())
-            {
-                // Unchecks all dailies
-                _taskManager.UncheckDailies();
-                _taskManager.ResetHabits();
-            }
             CharacterInfoViewModel model = new CharacterInfoViewModel()
             {
                 DailyTasks = _taskInfo.GetDailyTaskList(),
@@ -45,6 +40,17 @@ namespace Mystivate.Controllers
                 Character = _characterInfo.GetCharacterInfo()
             };
             return View(model);
+        }
+
+        public void CheckNewLogin()
+        {
+            // Checks if new login day
+            if (_userInfo.NewLogin())
+            {
+                // Unchecks all dailies
+                _taskManager.UncheckDailies();
+                _taskManager.ResetHabits();
+            }
         }
         
         public IActionResult Info(bool register = false)

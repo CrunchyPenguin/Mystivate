@@ -12,12 +12,14 @@ namespace Mystivate.Logic
         private readonly ITaskAccess _taskAccess;
         private readonly IUserInfo _userInfo;
         private readonly ICharacterManager _characterManager;
+        private readonly IQuestLogic _questLogic;
 
-        public TaskLogic(ITaskAccess taskAccess, IUserInfo userInfo, ICharacterManager characterManager)
+        public TaskLogic(ITaskAccess taskAccess, IUserInfo userInfo, ICharacterManager characterManager, IQuestLogic questLogic)
         {
             _taskAccess = taskAccess;
             _userInfo = userInfo;
             _characterManager = characterManager;
+            _questLogic = questLogic;
         }
 
 
@@ -57,21 +59,25 @@ namespace Mystivate.Logic
             }
         }
 
-        public int CheckDaily(int dailyId)
+        public ITaskReturn CheckDaily(int dailyId)
         {
             _taskAccess.CheckDaily(dailyId);
             int xp = 40;
             _characterManager.AddExperience(xp);
-            return xp;
+            int damage = 60;
+            _questLogic.AddDamage(damage);
+            return new TaskReturn(xp, damage);
 
         }
 
-        public int CheckTodo(int todoId)
+        public ITaskReturn CheckTodo(int todoId)
         {
             _taskAccess.CheckTodo(todoId);
             int xp = 60;
             _characterManager.AddExperience(xp);
-            return xp;
+            int damage = 100;
+            _questLogic.AddDamage(damage);
+            return new TaskReturn(xp, damage);
         }
 
         public void DeleteTask(string type, int id)
@@ -110,21 +116,23 @@ namespace Mystivate.Logic
             return _taskAccess.GetTodos(_userInfo.GetUserId());
         }
 
-        public int NegativeHabit(int habitId)
+        public ITaskReturn NegativeHabit(int habitId)
         {
             _taskAccess.NegativeHabit(habitId);
             int xp = -10;
             _characterManager.AddExperience(xp);
             _characterManager.AddHealth(-4);
-            return xp;
+            return new TaskReturn(xp, 0);
         }
 
-        public int PositiveHabit(int habitId)
+        public ITaskReturn PositiveHabit(int habitId)
         {
             _taskAccess.PositiveHabit(habitId);
             int xp = 10;
             _characterManager.AddExperience(xp);
-            return xp;
+            int damage = 20;
+            _questLogic.AddDamage(damage);
+            return new TaskReturn(xp, damage);
         }
 
         public void ResetHabits()
@@ -136,5 +144,17 @@ namespace Mystivate.Logic
         {
             _taskAccess.UncheckDailyTasks(_userInfo.GetUserId());
         }
+    }
+
+    public class TaskReturn : ITaskReturn
+    {
+        public TaskReturn(int xp, int damage)
+        {
+            XP = xp;
+            Damage = damage;
+        }
+
+        public int XP { get; private set; }
+        public int Damage { get; private set; }
     }
 }

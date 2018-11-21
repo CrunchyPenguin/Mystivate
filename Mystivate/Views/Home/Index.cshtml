@@ -5,7 +5,7 @@
 }
 
 <div class="test"></div>
-<div id="xp-notify-box">
+<div id="notify-box">
 </div>
 <div class="character-container">
     <div class="character-box"></div>
@@ -45,7 +45,7 @@
         <div class="task-container" id="daily-container">
             @for (int i = 0; i < Model.DailyTasks.Count; i++)
             {
-                <div class="task @(Model.DailyTasks[i].Done.Value ? "done" : "")" id="d@(Model.DailyTasks[i].Id)">
+                <div class="task @(Model.DailyTasks[i].Done.Value ? "done" : "")" id="d@(Model.DailyTasks[i].Id)" draggable="true">
                     <button onClick="DailyCheck(this.parentElement.id)" class="task-tick-button" @(Model.DailyTasks[i].Done.Value ? "disabled" : "")>
                         <div class="tick-box">
                             <div class="tick-left"></div>
@@ -77,7 +77,7 @@
         <div class="task-container" id="habit-container">
             @for (int i = 0; i < Model.Habits.Count; i++)
             {
-                <div class="task" id="h@(Model.Habits[i].Id)">
+                <div class="task" id="h@(Model.Habits[i].Id)" draggable="true">
                     <button onClick="HabitPositive(this.parentElement.id)" class="habit-button">
                         <div class="habit-button-box">
                             <div class="habit-vert"></div>
@@ -114,7 +114,7 @@
         <div class="task-container" id="todo-container">
             @for (int i = 0; i < Model.ToDos.Count; i++)
             {
-                <div class="task" id="t@(Model.ToDos[i].Id)">
+                <div class="task" id="t@(Model.ToDos[i].Id)" draggable="true">
                     <button onClick="TodoCheck(this.parentElement.id)" class="task-tick-button todo-button">
                         <div class="tick-box">
                             <div class="tick-left"></div>
@@ -216,8 +216,8 @@
 
         function DailyCheck(id) {
             var taskId = id.substr(1);
-            $.post("@Url.Action("CheckDaily", "Task")", { id: taskId }, function (xp) {
-                AddExp(xp);
+            $.post("@Url.Action("CheckDaily", "Task")", { id: taskId }, function (taskreturn) {
+                UpdateCharacter(taskreturn.xp, taskreturn.damage);
                 var button = $("#" + id).children("button").first();
                 console.log($("#" + id));
                 button.children().first().children().first().css("transition", "background-color 1s ease");
@@ -230,8 +230,8 @@
         function TodoCheck(id) {
             console.log($("#" + id));   
             var taskId = id.substr(1);
-            $.post("@Url.Action("CheckTodo", "Task")", { id: taskId }, function (xp) {
-                AddExp(xp);
+            $.post("@Url.Action("CheckTodo", "Task")", { id: taskId }, function (taskreturn) {
+                UpdateCharacter(taskreturn.xp, taskreturn.damage);
                 var button = $("#" + id).children("button").first();
                 button.children().children().first().css("transition", "background-color 1s ease");
                 button.children().children().last().css("transition", "background-color 1s ease");
@@ -243,8 +243,8 @@
 
         function HabitPositive(id) {
             var taskId = id.substr(1);
-            $.post("@Url.Action("PositiveHabit", "Task")", { id: taskId }, function (xp) {
-                AddExp(xp);
+            $.post("@Url.Action("PositiveHabit", "Task")", { id: taskId }, function (taskreturn) {
+                UpdateCharacter(taskreturn.xp, taskreturn.damage);
                 var button = $("#" + id).children("button").first();
                 button.parent().removeClass("negative");
                 button.parent().addClass("positive");
@@ -253,8 +253,8 @@
 
         function HabitNegative(id) {
             var taskId = id.substr(1);
-            $.post("@Url.Action("NegativeHabit", "Task")", { id: taskId }, function (xp) {
-                AddExp(xp);
+            $.post("@Url.Action("NegativeHabit", "Task")", { id: taskId }, function (taskreturn) {
+                UpdateCharacter(taskreturn.xp, taskreturn.damage);
                 var button = $("#" + id).children("button").last();
                 button.parent().removeClass("positive");
                 button.parent().addClass("negative");
@@ -262,15 +262,15 @@
 
         }
 
-        function AddExp(amount) {
+        function UpdateCharacter(xp, damage) {
             var expblock = $(document.createElement('div'));
-            expblock.addClass("xp-notify");
+            expblock.addClass("notify");
             var exptext = expblock.append(document.createElement('p')).children().last();
-            if (amount < 0) {
-                exptext.text("- " + Math.abs(amount) + " exp.");
+            if (xp < 0) {
+                exptext.text("- " + Math.abs(xp) + " exp.");
             }
             else {
-                exptext.text("+ " + amount + " exp.");
+                exptext.text("+ " + xp + " exp.");
             }
             var expimg = expblock.append(document.createElement('img')).children().last();
             expimg.attr("src", "/images/ExpIcon.svg");
@@ -280,11 +280,35 @@
                     $(this).remove();
                 });
             });
-            $("#xp-notify-box").append(expblock);
+            $("#notify-box").append(expblock);
 
+            if (damage != 0) {
+                AddDamage(damage);
+            }
             UpdateExpBar();
             UpdateLevel();
             UpdateHealthBar();
+        }
+
+        function AddDamage(damage) {
+            var expblock = $(document.createElement('div'));
+            expblock.addClass("notify damage-notify");
+            var exptext = expblock.append(document.createElement('p')).children().last();
+            if (damage < 0) {
+                exptext.text("- " + Math.abs(damage) + " damage done.");
+            }
+            else {
+                exptext.text(damage + " damage done.");
+            }
+            var expimg = expblock.append(document.createElement('img')).children().last();
+            expimg.attr("src", "/images/BloodDrop.svg");
+            expblock.hide();
+            expblock.fadeIn(400, function () {
+                $(this).delay(2500).fadeOut(400, function () {
+                    $(this).remove();
+                });
+            });
+            $("#notify-box").append(expblock);
         }
 
         function AddTask(id) {

@@ -30,8 +30,8 @@ namespace Mystivate.Logic
             CharacterModel model = new CharacterModel()
             {
                 Name = character.Name,
-                CurrentLives = character.CurrentLives,
-                MaxLives = character.MaxLives,
+                CurrentHealth = character.CurrentHealth,
+                MaxHealth = character.MaxHealth,
                 Level = GetLevel(),
                 Experience = GetExperience(),
                 Coins = character.Coins

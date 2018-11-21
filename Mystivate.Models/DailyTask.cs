@@ -9,6 +9,7 @@ namespace Mystivate.Models
         public int UserId { get; set; }
         public string Name { get; set; }
         public bool? Done { get; set; }
+        public bool? DoneYesterday { get; set; }
 
         public User User { get; set; }
     }

@@ -22,5 +22,21 @@ namespace Mystivate.Controllers
             QuestModel quest = _questLogic.GetCurrentQuest();
             return View(quest);
         }
+
+        public int GetCurrentHealth()
+        {
+            return _questLogic.GetCurrentHealth();
+        }
+
+        public int GetMaxHealth()
+        {
+            QuestModel quest = _questLogic.GetCurrentQuest();
+            return quest.Health;
+        }
+
+        public int GetDamageDone()
+        {
+            return _questLogic.GetDamageDoneToday();
+        }
     }
 }

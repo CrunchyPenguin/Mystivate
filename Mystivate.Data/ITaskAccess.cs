@@ -18,7 +18,9 @@ namespace Mystivate.Data
         void PositiveHabit(int habitId);
         void NegativeHabit(int habitId);
         void CheckTodo(int todoId);
+        void UncheckDailyTasks();
         void UncheckDailyTasks(int userId);
+        void ResetHabits();
         void ResetHabits(int userId);
         void DeleteDaily(int dailyId, int userId);
         void DeleteHabit(int habitId, int userId);

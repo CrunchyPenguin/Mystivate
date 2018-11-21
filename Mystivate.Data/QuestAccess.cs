@@ -1,4 +1,5 @@
-﻿using Mystivate.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Mystivate.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +15,40 @@ namespace Mystivate.Data
             _dbContext = db;
         }
 
+        public void AddDamage(int QuestInventoryId, int damage)
+        {
+            _dbContext.QuestInventory.SingleOrDefault(q => q.Id == QuestInventoryId).DamageToday += damage;
+            _dbContext.SaveChanges();
+        }
+
         public Quest GetCurrentQuest(int characterId)
         {
-            List<Quest> quests = _dbContext.QuestInventory.Where(q => q.CharacterId == characterId).Select(q => q.Quest).ToList();
-            return _dbContext.QuestInventory.Where(q => q.CharacterId == characterId).SingleOrDefault(q => q.QuestStatus.Status == "ongoing").Quest;
+            return _dbContext.QuestInventory.Where(q => q.CharacterId == characterId).Include(q => q.Quest).SingleOrDefault(q => q.QuestStatus.Status == "ongoing").Quest;
+        }
+
+        public int GetDamageToday(int characterId)
+        {
+            return _dbContext.QuestInventory.Where(q => q.CharacterId == characterId).SingleOrDefault(q => q.QuestStatus.Status == "ongoing").DamageToday;
+        }
+
+        public int GetDamage(int characterId)
+        {
+            return _dbContext.QuestInventory.Where(q => q.CharacterId == characterId).SingleOrDefault(q => q.QuestStatus.Status == "ongoing").DamageDone;
+        }
+
+        public int GetQuestHealth(int characterId)
+        {
+            return _dbContext.QuestInventory.Where(q => q.CharacterId == characterId).Include(q => q.Quest).SingleOrDefault(q => q.QuestStatus.Status == "ongoing").Quest.Health;
+        }
+
+        public void DamageTodayToDamageDone()
+        {
+            List<QuestInventory> allQuestInventories = _dbContext.QuestInventory.ToList();
+            foreach(QuestInventory questInventory in allQuestInventories)
+            {
+                questInventory.DamageDone += questInventory.DamageToday;
+                questInventory.DamageToday = 0;
+            }
         }
     }
 }

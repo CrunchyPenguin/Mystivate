@@ -1,6 +1,6 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using System;
 
 namespace Mystivate.Models
 {
@@ -16,6 +16,7 @@ namespace Mystivate.Models
         }
 
         public virtual DbSet<Character> Characters { get; set; }
+        public virtual DbSet<DailyTask> DailyTasks { get; set; }
         public virtual DbSet<Gear> Gear { get; set; }
         public virtual DbSet<GearInventory> GearInventory { get; set; }
         public virtual DbSet<GearQuestReward> GearQuestRewards { get; set; }
@@ -24,7 +25,6 @@ namespace Mystivate.Models
         public virtual DbSet<Quest> Quests { get; set; }
         public virtual DbSet<QuestInventory> QuestInventory { get; set; }
         public virtual DbSet<QuestStatus> QuestStatus { get; set; }
-        public virtual DbSet<DailyTask> DailyTasks { get; set; }
         public virtual DbSet<ToDo> ToDos { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Weapon> Weapons { get; set; }
@@ -34,7 +34,11 @@ namespace Mystivate.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
+//            if (!optionsBuilder.IsConfigured)
+//            {
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+//                optionsBuilder.UseSqlServer("Server=tcp:mystivate.database.windows.net,1433;Initial Catalog=Mystivate_db;Persist Security Info=False;User ID=Mystivate;Password=Myst1vate01!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+//            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -55,7 +59,9 @@ namespace Mystivate.Models
 
             modelBuilder.Entity<Character>(entity =>
             {
-                entity.Property(e => e.MaxLives).HasDefaultValueSql("((100))");
+                entity.Property(e => e.CurrentHealth).HasDefaultValueSql("((100))");
+
+                entity.Property(e => e.MaxHealth).HasDefaultValueSql("((100))");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -66,6 +72,27 @@ namespace Mystivate.Models
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FKCharacter650031");
+            });
+
+            modelBuilder.Entity<DailyTask>(entity =>
+            {
+                entity.Property(e => e.Done)
+                    .IsRequired()
+                    .HasDefaultValueSql("(0)");
+
+                entity.Property(e => e.DoneYesterday)
+                    .IsRequired()
+                    .HasDefaultValueSql("(1)");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(255);
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.DailyTask)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FKTask917793");
             });
 
             modelBuilder.Entity<Gear>(entity =>
@@ -177,23 +204,6 @@ namespace Mystivate.Models
                     .IsRequired()
                     .HasMaxLength(20)
                     .IsUnicode(false);
-            });
-
-            modelBuilder.Entity<DailyTask>(entity =>
-            {
-                entity.Property(e => e.Done)
-                    .IsRequired()
-                    .HasDefaultValueSql("('0')");
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(255);
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.Task)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FKTask917793");
             });
 
             modelBuilder.Entity<ToDo>(entity =>

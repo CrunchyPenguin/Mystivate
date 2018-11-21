@@ -9,6 +9,8 @@ namespace Mystivate.Models
         public int CharacterId { get; set; }
         public int QuestId { get; set; }
         public int QuestStatusId { get; set; }
+        public int DamageDone { get; set; }
+        public int DamageToday { get; set; }
 
         public Character Character { get; set; }
         public Quest Quest { get; set; }
