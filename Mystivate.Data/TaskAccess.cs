@@ -105,7 +105,7 @@ namespace Mystivate.Data
             List<DailyTask> allDailyTasks = _dbContext.DailyTasks.ToList();
             foreach (DailyTask dailyTask in allDailyTasks)
             {
-                dailyTask.DoneYesterday = dailyTask.Done.Value ? true : false;
+                dailyTask.DoneYesterday = dailyTask.Done.Value;
                 dailyTask.Done = false;
             }
             _dbContext.SaveChanges();
@@ -115,7 +115,7 @@ namespace Mystivate.Data
         {
             foreach (DailyTask dailyTask in _dbContext.DailyTasks.Where(d => d.UserId == userId))
             {
-                dailyTask.DoneYesterday = dailyTask.Done.Value ? true : false;
+                dailyTask.DoneYesterday = dailyTask.Done.Value;
                 dailyTask.Done = false;
             }
             _dbContext.SaveChanges();
