@@ -8,7 +8,10 @@
 <div id="notify-box">
 </div>
 <div class="character-container">
-    <div class="character-box"><img src="~/images/Characters/guy3.png"/></div>
+    <div class="character-box">
+        <img src="~/images/Characters/Character.png" />
+        <img src="~/images/Characters/Hair.png" />
+    </div>
     <div class="character-info">
         <h2>@Model.Character.Name</h2>
         <h3 id="level">Level</h3>
@@ -228,7 +231,7 @@
         }
 
         function TodoCheck(id) {
-            console.log($("#" + id));   
+            console.log($("#" + id));
             var taskId = id.substr(1);
             $.post("@Url.Action("CheckTodo", "Task")", { id: taskId }, function (taskreturn) {
                 UpdateCharacter(taskreturn.xp, taskreturn.damage);

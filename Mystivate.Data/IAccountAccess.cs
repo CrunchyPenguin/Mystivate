@@ -9,7 +9,7 @@ namespace Mystivate.Data
     public interface IAccountAccess
     {
         User GetUser(int userId);
-        void CreateUserAccount(string username, string email, string passKey, string passSalt);
+        bool CreateUserAccount(string username, string email, string passKey, string passSalt);
         bool UserExists(string email = "", string username = "");
         void SetPassword(int userId, string newPassKey, string newPassSalt);
         EncryptedPassword GetEncryptedPassword(int userId);

@@ -97,7 +97,7 @@ namespace Mystivate.Models
 
             modelBuilder.Entity<Gear>(entity =>
             {
-                entity.Property(e => e.Image)
+                entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(255)
                     .IsUnicode(false);
@@ -244,7 +244,7 @@ namespace Mystivate.Models
 
             modelBuilder.Entity<Weapon>(entity =>
             {
-                entity.Property(e => e.Image)
+                entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(255)
                     .IsUnicode(false);

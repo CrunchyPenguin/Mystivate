@@ -14,7 +14,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Mystivate.Data;
 using Mystivate.Logic;
-using Mystivate.Logic.Scheduling;
 using Mystivate.Models;
 
 namespace Mystivate
@@ -59,13 +58,6 @@ namespace Mystivate
             services.AddTransient<IQuestAccess, QuestAccess>();
 
             services.AddDbContext<Mystivate_dbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddSingleton<IScheduledTask, ScheduledDailyTasks>();
-            services.AddScheduler((sender, args) =>
-            {
-                Console.Write(args.Exception.Message);
-                args.SetObserved();
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

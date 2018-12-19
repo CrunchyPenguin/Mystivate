@@ -18,39 +18,59 @@ namespace Mystivate.Data
             _dbContext = db;
         }
 
-        public void CreateUserAccount(string username, string email, string passKey, string passSalt)
+        public bool CreateUserAccount(string username, string email, string passKey, string passSalt)
         {
-            using (var connection = _dbContext.Database.GetDbConnection())
+            if (!_dbContext.Database.IsInMemory())
             {
-                try
+                using (var connection = _dbContext.Database.GetDbConnection())
                 {
-                    var command = connection.CreateCommand();
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.CommandText = "usp_CreateUser";
-                    var parameter = command.CreateParameter();
-                    parameter.ParameterName = "@Email";
-                    parameter.Value = email;
-                    command.Parameters.Add(parameter);
-                    parameter = command.CreateParameter();
-                    parameter.ParameterName = "@Username";
-                    parameter.Value = username;
-                    command.Parameters.Add(parameter);
-                    parameter = command.CreateParameter();
-                    parameter.ParameterName = "@PasswordKey";
-                    parameter.Value = passKey;
-                    command.Parameters.Add(parameter);
-                    parameter = command.CreateParameter();
-                    parameter.ParameterName = "@PasswordSalt";
-                    parameter.Value = passSalt;
-                    command.Parameters.Add(parameter);
-                    connection.Open();
-                    command.ExecuteNonQuery();
-                    connection.Close();
+                    try
+                    {
+                        var command = connection.CreateCommand();
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.CommandText = "usp_CreateUser";
+                        var parameter = command.CreateParameter();
+                        parameter.ParameterName = "@Email";
+                        parameter.Value = email;
+                        command.Parameters.Add(parameter);
+                        parameter = command.CreateParameter();
+                        parameter.ParameterName = "@Username";
+                        parameter.Value = username;
+                        command.Parameters.Add(parameter);
+                        parameter = command.CreateParameter();
+                        parameter.ParameterName = "@PasswordKey";
+                        parameter.Value = passKey;
+                        command.Parameters.Add(parameter);
+                        parameter = command.CreateParameter();
+                        parameter.ParameterName = "@PasswordSalt";
+                        parameter.Value = passSalt;
+                        command.Parameters.Add(parameter);
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        connection.Close();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        return false;
+                    }
                 }
-                catch (Exception ex)
+            }
+            else
+            {
+                if (!UserExists(email, username))
                 {
-                    throw ex;
+                    _dbContext.Users.Add(new User
+                    {
+                        Username = username,
+                        Email = email,
+                        PasswordKey = passKey,
+                        PasswordSalt = passSalt
+                    });
+                    _dbContext.SaveChanges();
+                    return true;
                 }
+                return false;
             }
         }
 
@@ -100,26 +120,9 @@ namespace Mystivate.Data
 
         public bool UserExists(string email = "", string username = "")
         {
-            if (email != "" && username == "")
+            if (_dbContext.Users.Where(u => (u.Email == email) || (u.Username == username)).Count() != 0)
             {
-                if (_dbContext.Users.Where(u => u.Email == email).Count() != 0)
-                {
-                    return true;
-                }
-            }
-            else if (username != "" && email == "")
-            {
-                if (_dbContext.Users.Where(u => u.Username == username).Count() != 0)
-                {
-                    return true;
-                }
-            }
-            else if(username != "" && email != "")
-            {
-                if (_dbContext.Users.Where(u => (u.Email == email) && (u.Username == username)).Count() != 0)
-                {
-                    return true;
-                }
+                return true;
             }
             return false;
         }

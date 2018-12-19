@@ -392,10 +392,15 @@ button {
     background-color: white;
     box-shadow: 5px 4px 20px #0000003b;
     margin-right: 32px;
+    position: relative;
 }
 
-.character-info {
-}
+    .character-box img{
+        position: absolute;
+    }
+
+    .character-info {
+    }
 
 .progress-box {
     display: flex;

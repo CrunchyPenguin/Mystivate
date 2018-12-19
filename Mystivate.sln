@@ -5,11 +5,13 @@ VisualStudioVersion = 15.0.28010.2016
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mystivate", "Mystivate\Mystivate.csproj", "{EA3AB907-6D30-4691-BCDB-728AC6C3E8CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mystivate.Logic", "Mystivate.Logic\Mystivate.Logic.csproj", "{FB3215DC-DA5C-4036-BE5C-78FEC5C8F6BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mystivate.Logic", "Mystivate.Logic\Mystivate.Logic.csproj", "{FB3215DC-DA5C-4036-BE5C-78FEC5C8F6BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mystivate.Data", "Mystivate.Data\Mystivate.Data.csproj", "{1DBBCB1A-97D9-4951-91E0-8770F8A33D64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mystivate.Data", "Mystivate.Data\Mystivate.Data.csproj", "{1DBBCB1A-97D9-4951-91E0-8770F8A33D64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mystivate.Models", "Mystivate.Models\Mystivate.Models.csproj", "{899EA2AC-339C-4959-B7B9-5F118358C8A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mystivate.Models", "Mystivate.Models\Mystivate.Models.csproj", "{899EA2AC-339C-4959-B7B9-5F118358C8A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mystivate.Tests", "Mystivate.Tests\Mystivate.Tests.csproj", "{122ADA5D-9781-4D4A-A316-361136246B0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{899EA2AC-339C-4959-B7B9-5F118358C8A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{899EA2AC-339C-4959-B7B9-5F118358C8A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{899EA2AC-339C-4959-B7B9-5F118358C8A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{122ADA5D-9781-4D4A-A316-361136246B0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{122ADA5D-9781-4D4A-A316-361136246B0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{122ADA5D-9781-4D4A-A316-361136246B0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{122ADA5D-9781-4D4A-A316-361136246B0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

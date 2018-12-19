@@ -13,7 +13,7 @@ namespace Mystivate.Models
 
         public int Id { get; set; }
         public int GearTypeId { get; set; }
-        public string Image { get; set; }
+        public string Name { get; set; }
         public int? Price { get; set; }
 
         public GearType GearType { get; set; }

@@ -16,37 +16,58 @@ namespace Mystivate.Data
 
         public int AddDailyTask(int userId, string task)
         {
-            _dbContext.DailyTasks.Add(new DailyTask
+            if (_dbContext.Users.Any(u => u.Id == userId))
             {
-                Name = task,
-                UserId = userId
-            });
-            _dbContext.SaveChanges();
-            return _dbContext.DailyTasks.Where(d => d.UserId == userId).Last().Id;
+                _dbContext.DailyTasks.Add(new DailyTask
+                {
+                    Name = task,
+                    UserId = userId
+                });
+                _dbContext.SaveChanges();
+                return _dbContext.DailyTasks.Where(d => d.UserId == userId).Last().Id;
+            }
+            else
+            {
+                return -1;
+            }
         }
 
         public int AddHabit(int userId, string habit)
         {
-            _dbContext.Habits.Add(new Habit
+            if (_dbContext.Users.Any(u => u.Id == userId))
             {
-                Name = habit,
-                UserId = userId,
-                Positive = 0,
-                Negative = 0
-            });
-            _dbContext.SaveChanges();
-            return _dbContext.Habits.Where(d => d.UserId == userId).Last().Id;
+                _dbContext.Habits.Add(new Habit
+                {
+                    Name = habit,
+                    UserId = userId,
+                    Positive = 0,
+                    Negative = 0
+                });
+                _dbContext.SaveChanges();
+                return _dbContext.Habits.Where(d => d.UserId == userId).Last().Id;
+            }
+            else
+            {
+                return -1;
+            }
         }
 
         public int AddTodo(int userId, string todo)
         {
-            _dbContext.ToDos.Add(new ToDo
+            if (_dbContext.Users.Any(u => u.Id == userId))
             {
-                Name = todo,
-                UserId = userId
-            });
-            _dbContext.SaveChanges();
-            return _dbContext.ToDos.Where(d => d.UserId == userId).Last().Id;
+                _dbContext.ToDos.Add(new ToDo
+                {
+                    Name = todo,
+                    UserId = userId
+                });
+                _dbContext.SaveChanges();
+                return _dbContext.ToDos.Where(d => d.UserId == userId).Last().Id;
+            }
+            else
+            {
+                return -1;
+            }
         }
 
         public void CheckDaily(int dailyId)
