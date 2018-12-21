@@ -22,5 +22,6 @@ namespace Mystivate.Data
         int GetCoins(int userId);
         Character GetCharacter(int userId);
         int GetCharacterId(int userId);
+        Character GetCharacterWithInventory(int userId);
     }
 }

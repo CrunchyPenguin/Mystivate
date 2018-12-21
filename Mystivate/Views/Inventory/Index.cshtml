@@ -1,5 +1,69 @@
-﻿
+﻿@model Character
 @{
     ViewData["Title"] = "Index";
 }
 
+<div class="inventory-div">
+    <div class="inventory-character-box">
+
+    </div>
+    <div class="inventory-box">
+        <div class="inventory-catagory-box">
+            <h3>Weapons</h3>
+            <hr />
+            <div class="inventory-slot-box-box">
+                <div class="inventory-slot-box">
+                    @foreach (Weapon weapon in Model.InventorySlot.Select(i => i.Equipment).OfType<Weapon>())
+                    {
+                        <div id="@weapon.Id" class="inventory-slot" onclick="SetEquipment(this.id)">
+                            <img src="~/images/Equipment/@weapon.Image" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="inventory-catagory-box">
+            <h3>Gear</h3>
+            <hr />
+            <div class="inventory-slot-box-box">
+                <div class="inventory-slot-box">
+                    @foreach (Gear gearpiece in Model.InventorySlot.Select(i => i.Equipment).OfType<Gear>())
+                    {
+                        <div id="@gearpiece.Id" class="inventory-slot" onclick="SetEquipment(this.id)">
+                            <img src="~/images/Equipment/@gearpiece.Image" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        ReloadWearing();
+
+        function SetEquipment(id) {
+            $.post("@Url.Action("SetWearing", "Inventory")", { equipmentId: id }, function () {
+                ReloadWearing();
+            });
+        }
+
+        var slots = document.getElementsByClassName("inventory-slot");
+
+        function ReloadWearing() {
+            $.post("@Url.Action("GetWearing", "Inventory")", function (array) {
+                for (var i = 0; i < slots.length; i++) {
+                    if (array.includes(parseInt(slots[i].id))) {
+                        console.log(slots[i]);
+                        slots[i].style.backgroundColor = "yellow";
+                    }
+                    else {
+                        slots[i].style.backgroundColor = "#c9f9ff";
+                    }
+                }
+            });
+        }
+    </script>
+
+}

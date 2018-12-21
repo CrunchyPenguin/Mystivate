@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Mystivate.Models;
 
 namespace Mystivate.Data
@@ -68,6 +69,11 @@ namespace Mystivate.Data
         public int GetMaxHealth(int userId)
         {
             return _dbContext.Characters.SingleOrDefault(c => c.UserId == userId).MaxHealth;
+        }
+
+        public Character GetCharacterWithInventory(int userId)
+        {
+            return _dbContext.Characters.Include(c => c.InventorySlot).ThenInclude(c => c.Equipment).ThenInclude(e => (e as Weapon).WeaponType).Include(c => c.InventorySlot).ThenInclude(c => c.Equipment).ThenInclude(e => (e as Gear).GearType).SingleOrDefault(c => c.UserId == userId);
         }
     }
 }

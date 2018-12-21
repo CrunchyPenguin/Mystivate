@@ -24,13 +24,25 @@ namespace Mystivate.Logic
 
         public RegisterResult RegisterUser(RegisterModel user)
         {
-            if (!_accountAccess.UserExists(user.Email, user.Username))
+            if (_accountAccess.UserExists(user.Email))
             {
-                EncryptedPassword encryptPass = PasswordEncryptor.EncryptPassword(user.Password);
-                _accountAccess.CreateUserAccount(user.Username, user.Email, encryptPass.PasswordKey, encryptPass.PasswordSalt);
-                return RegisterResult.Succeeded;
+                return RegisterResult.UsernameEmailExists;
             }
-            return RegisterResult.EmailExists;
+            if (_accountAccess.UserExists("", user.Username))
+            {
+                return RegisterResult.UsernameEmailExists;
+            }
+            if(user.Password.Length < 4)
+            {
+                return RegisterResult.PasswordShort;
+            }
+            if (user.Username.Length < 4)
+            {
+                return RegisterResult.UsernameShort;
+            }
+            EncryptedPassword encryptPass = PasswordEncryptor.EncryptPassword(user.Password);
+            _accountAccess.CreateUserAccount(user.Username, user.Email, encryptPass.PasswordKey, encryptPass.PasswordSalt);
+            return RegisterResult.Succeeded;
         }
 
         public async Task<SignInResult> SignIn(string email, string password)
@@ -80,7 +92,7 @@ namespace Mystivate.Logic
             await _httpContextAccessor.HttpContext.SignOutAsync();
         }
     }
-    
+
     public enum SignInResult
     {
         EmailIncorrect,
@@ -90,7 +102,9 @@ namespace Mystivate.Logic
 
     public enum RegisterResult
     {
-        EmailExists,
+        UsernameEmailExists,
+        PasswordShort,
+        UsernameShort,
         Succeeded
     }
 }

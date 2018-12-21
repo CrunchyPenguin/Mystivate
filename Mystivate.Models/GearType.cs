@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Infrastructure;
+using System;
 using System.Collections.Generic;
 
 namespace Mystivate.Models
@@ -7,12 +8,12 @@ namespace Mystivate.Models
     {
         public GearType()
         {
-            Gear = new HashSet<Gear>();
+            Equipment = new HashSet<Equipment>();
         }
 
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public ICollection<Gear> Gear { get; set; }
+        public ICollection<Equipment> Equipment { get; set; }
     }
 }

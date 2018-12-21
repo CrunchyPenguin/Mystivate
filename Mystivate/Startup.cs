@@ -51,11 +51,13 @@ namespace Mystivate
             services.AddTransient<ITaskManager, TaskLogic>();
             services.AddTransient<ITaskInfo, TaskLogic>();
             services.AddTransient<IQuestLogic, QuestLogic>();
+            services.AddTransient<IInventoryLogic, InventoryLogic>();
 
             services.AddTransient<IAccountAccess, AccountAccess>();
             services.AddTransient<ITaskAccess, TaskAccess>();
             services.AddTransient<ICharacterAccess, CharacterAccess>();
             services.AddTransient<IQuestAccess, QuestAccess>();
+            services.AddTransient<IInventoryAccess, InventoryAccess>();
 
             services.AddDbContext<Mystivate_dbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }

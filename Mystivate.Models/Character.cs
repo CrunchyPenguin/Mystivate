@@ -7,9 +7,8 @@ namespace Mystivate.Models
     {
         public Character()
         {
-            GearInventory = new HashSet<GearInventory>();
+            InventorySlot = new HashSet<InventorySlot>();
             QuestInventory = new HashSet<QuestInventory>();
-            WeaponInventory = new HashSet<WeaponInventory>();
         }
 
         public int Id { get; set; }
@@ -21,8 +20,7 @@ namespace Mystivate.Models
         public int CurrentHealth { get; set; }
 
         public User User { get; set; }
-        public ICollection<GearInventory> GearInventory { get; set; }
+        public ICollection<InventorySlot> InventorySlot { get; set; }
         public ICollection<QuestInventory> QuestInventory { get; set; }
-        public ICollection<WeaponInventory> WeaponInventory { get; set; }
     }
 }

@@ -1,23 +1,16 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Infrastructure;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 
 namespace Mystivate.Models
 {
-    public partial class Weapon
+    public class Weapon : Equipment
     {
-        public Weapon()
-        {
-            WeaponInventory = new HashSet<WeaponInventory>();
-            WeaponQuestReward = new HashSet<WeaponQuestReward>();
-        }
-
-        public int Id { get; set; }
-        public int WeaponTypeId { get; set; }
-        public string Name { get; set; }
-        public int? Price { get; set; }
+        public int? Damage { get; set; }
+        public int? WeaponTypeId { get; set; }
 
         public WeaponType WeaponType { get; set; }
-        public ICollection<WeaponInventory> WeaponInventory { get; set; }
-        public ICollection<WeaponQuestReward> WeaponQuestReward { get; set; }
     }
 }

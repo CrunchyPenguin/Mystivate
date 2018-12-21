@@ -105,5 +105,10 @@ namespace Mystivate.Logic
         {
             return _characterAccess.GetCharacterId(_userInfo.GetUserId());
         }
+
+        public Character GetCharacterInfo(bool includeInventory)
+        {
+            return _characterAccess.GetCharacterWithInventory(_userInfo.GetUserId());
+        }
     }
 }

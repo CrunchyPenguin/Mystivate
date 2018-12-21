@@ -1,23 +1,16 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Infrastructure;
+using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Mystivate.Models
 {
-    public partial class Gear
+    public class Gear : Equipment
     {
-        public Gear()
-        {
-            GearInventory = new HashSet<GearInventory>();
-            GearQuestReward = new HashSet<GearQuestReward>();
-        }
-
-        public int Id { get; set; }
-        public int GearTypeId { get; set; }
-        public string Name { get; set; }
-        public int? Price { get; set; }
+        
+        public int? Armor { get; set; }
+        public int? GearTypeId { get; set; }
 
         public GearType GearType { get; set; }
-        public ICollection<GearInventory> GearInventory { get; set; }
-        public ICollection<GearQuestReward> GearQuestReward { get; set; }
     }
 }

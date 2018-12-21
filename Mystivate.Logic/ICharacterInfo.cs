@@ -12,6 +12,7 @@ namespace Mystivate.Logic
         int GetExperience();
         int GetCoins();
         CharacterModel GetCharacterInfo();
+        Character GetCharacterInfo(bool includeInventory);
         int GetExperienceNextLevel();
         int GetMaxHealth();
         int GetCurrentHealth();

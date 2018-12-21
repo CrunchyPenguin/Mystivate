@@ -21,7 +21,9 @@ namespace Mystivate.Data
                 _dbContext.DailyTasks.Add(new DailyTask
                 {
                     Name = task,
-                    UserId = userId
+                    UserId = userId,
+                    Done = false,
+                    DoneYesterday = false
                 });
                 _dbContext.SaveChanges();
                 return _dbContext.DailyTasks.Where(d => d.UserId == userId).Last().Id;
