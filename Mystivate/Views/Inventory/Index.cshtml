@@ -1,6 +1,6 @@
 ﻿@model Character
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Inventory";
 }
 
 <div class="inventory-div">
@@ -55,7 +55,6 @@
             $.post("@Url.Action("GetWearing", "Inventory")", function (array) {
                 for (var i = 0; i < slots.length; i++) {
                     if (array.includes(parseInt(slots[i].id))) {
-                        console.log(slots[i]);
                         slots[i].style.backgroundColor = "yellow";
                     }
                     else {

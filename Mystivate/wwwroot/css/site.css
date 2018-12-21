@@ -1084,6 +1084,8 @@ button {
         margin: 11px 0 0 8px;
     }
 
+/* Inventory Page */
+
 .inventory-div {
     display: flex;
     /*flex-wrap: wrap;*/
@@ -1135,6 +1137,46 @@ button {
 }
 
     .inventory-slot img {
+        max-width: 75px;
+        max-height: 75px;
+    }
+
+/* Shop Page */
+
+.shop-div {
+    display: flex;
+    /*flex-wrap: wrap;*/
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.shop-box {
+    height: 800px;
+    width: 50%;
+    margin: 20px;
+    background-color: white;
+    box-shadow: 5px 4px 20px #0000003b;
+}
+
+
+.shop-slot-box {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.shop-slot {
+    width: 81px;
+    height: 81px;
+    margin: 3px;
+    outline: 2px solid #404040;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #c9f9ff;
+}
+
+    .shop-slot img {
         max-width: 75px;
         max-height: 75px;
     }
