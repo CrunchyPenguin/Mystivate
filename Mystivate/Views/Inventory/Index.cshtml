@@ -5,7 +5,16 @@
 
 <div class="inventory-div">
     <div class="inventory-character-box">
+        <div class="equipment-slots">
+            <div class="helmet-slot">
+                <img />
+            </div>
+            <div class="armor-slot"></div>
+            <div class="weapon-slot"></div>
+        </div>
+        <div class="character-box">
 
+        </div>
     </div>
     <div class="inventory-box">
         <div class="inventory-catagory-box">
@@ -16,7 +25,7 @@
                     @foreach (Weapon weapon in Model.InventorySlot.Select(i => i.Equipment).OfType<Weapon>())
                     {
                         <div id="@weapon.Id" class="inventory-slot" onclick="SetEquipment(this.id)">
-                            <img src="~/images/Equipment/@weapon.Image" />
+                            <img src="~/images/Equipment/@weapon.Image-trim.gif" />
                         </div>
                     }
                 </div>
@@ -30,7 +39,7 @@
                     @foreach (Gear gearpiece in Model.InventorySlot.Select(i => i.Equipment).OfType<Gear>())
                     {
                         <div id="@gearpiece.Id" class="inventory-slot" onclick="SetEquipment(this.id)">
-                            <img src="~/images/Equipment/@gearpiece.Image" />
+                            <img src="~/images/Equipment/@gearpiece.Image-trim.gif" />
                         </div>
                     }
                 </div>

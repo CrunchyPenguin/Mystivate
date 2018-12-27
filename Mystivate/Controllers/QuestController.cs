@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Mystivate.Logic;
 using Mystivate.Models;
 
 namespace Mystivate.Controllers
 {
+    [Authorize]
     public class QuestController : Controller
     {
         private readonly IQuestLogic _questLogic;

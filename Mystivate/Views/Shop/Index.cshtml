@@ -6,11 +6,19 @@
 
 <div class="shop-div">
     <div class="shop-box">
+        <h3>Shop</h3>
+        <hr />
         <div class="shop-slot-box">
             @foreach (Equipment equipment in Model)
             {
-                <div class="shop-slot">
-                    <img src="~/images/Equipment/@equipment.Image" />
+                <div class="shop-slot-with-price">
+                    <div class="shop-slot">
+                        <img src="~/images/Equipment/@equipment.Image-trim.gif" />
+                    </div>
+                    <div class="shop-price">
+                        <img src="~/images/Mysticoin.svg" />
+                        <p>@equipment.Price</p>
+                    </div>
                 </div>
             }
         </div>

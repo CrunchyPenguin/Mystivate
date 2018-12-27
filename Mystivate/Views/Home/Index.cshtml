@@ -1,4 +1,4 @@
-﻿@model Mystivate.Models.CharacterInfoViewModel
+﻿@model CharacterInfoViewModel
 
 @{
     ViewData["Title"] = "Tasks";
@@ -9,8 +9,30 @@
 </div>
 <div class="character-container">
     <div class="character-box">
-        <img src="~/images/Characters/Character.png" />
-        <img src="~/images/Characters/Hair.png" />
+        @{
+            IEnumerable<Equipment> wearing = Model.Character.InventorySlot.Where(i => i.Wearing == true).Select(i => i.Equipment);
+            if (wearing.OfType<Gear>().Any(g => g.GearType.Name == "Wings"))
+            {
+                <img src="~/images/Equipment/@(wearing.OfType<Gear>().SingleOrDefault(g => g.GearType.Name == "Wings").Image).gif" />
+            }
+            <img src="~/images/Characters/character.gif" />
+            if (wearing.OfType<Gear>().Any(g => g.GearType.Name == "Chestplate"))
+            {
+                <img src="~/images/Equipment/@(wearing.OfType<Gear>().SingleOrDefault(g => g.GearType.Name == "Chestplate").Image).gif" />
+            }
+            if (wearing.OfType<Gear>().Any(g => g.GearType.Name == "Helmet"))
+            {
+                <img src="~/images/Equipment/@(wearing.OfType<Gear>().SingleOrDefault(g => g.GearType.Name == "Helmet").Image).gif" />
+            }
+            else
+            {
+                <img src="~/images/Characters/hair1.gif" />
+            }
+            if (wearing.OfType<Weapon>().Any())
+            {
+                <img src="~/images/Equipment/@(wearing.OfType<Weapon>().SingleOrDefault().Image).gif" />
+            }
+        }
     </div>
     <div class="character-info">
         <h2>@Model.Character.Name</h2>

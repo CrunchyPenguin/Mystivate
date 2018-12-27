@@ -10,6 +10,6 @@ namespace Mystivate.Models
         public List<DailyTask> DailyTasks { get; set; }
         public List<Habit> Habits { get; set; }
         public List<ToDo> ToDos { get; set; }
-        public CharacterModel Character { get; set; }
+        public Character Character { get; set; }
     }
 }

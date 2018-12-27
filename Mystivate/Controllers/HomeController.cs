@@ -37,7 +37,7 @@ namespace Mystivate.Controllers
                 DailyTasks = _taskInfo.GetDailyTaskList(),
                 Habits = _taskInfo.GetHabitList(),
                 ToDos = _taskInfo.GetTodoList(),
-                Character = _characterInfo.GetCharacterInfo()
+                Character = _characterInfo.GetCharacterInfo(true)
             };
             return View(model);
         }
