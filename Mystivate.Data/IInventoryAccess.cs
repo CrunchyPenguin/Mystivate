@@ -11,5 +11,6 @@ namespace Mystivate.Data
         List<Quest> GetQuests(int userId);
         List<Equipment> GetQuestRewards(int questId);
         void WearEquipment(int userId, int equipmentId);
+        void AddEquipment(int characterId, int equipmentId);
     }
 }

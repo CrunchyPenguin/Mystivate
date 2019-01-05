@@ -11,6 +11,7 @@ namespace Mystivate.Models
         public string Image { get; set; }
         public int Health { get; set; }
         public int CoinReward { get; set; }
+        public int ExperienceReward { get; set; }
         public int RecLevel { get; set; }
     }
 }

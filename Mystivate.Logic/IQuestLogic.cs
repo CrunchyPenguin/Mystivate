@@ -12,6 +12,8 @@ namespace Mystivate.Logic
         int GetDamageDoneToday();
         int GetCurrentHealth();
         void AddDamage(int damage);
-        void Attack();
+        QuestInventory GetQuestInventory();
+        Equipment GetQuestRewards();
+        bool QuestCompleted();
     }
 }

@@ -15,6 +15,17 @@ namespace Mystivate.Data
             _dbContext = db;
         }
 
+        public void AddEquipment(int characterId, int equipmentId)
+        {
+            _dbContext.InventorySlots.Add(new InventorySlot
+            {
+                CharacterId = characterId,
+                EquipmentId = equipmentId,
+                Left = false,
+                Wearing = false
+            });
+        }
+
         public List<InventorySlot> GetEquipment(int userId)
         {
             return _dbContext.InventorySlots.Include(i => i.Equipment).Where(i => i.Character.UserId == userId).ToList();

@@ -12,6 +12,8 @@ namespace Mystivate.Data
         int GetDamage(int characterId);
         int GetDamageToday(int characterId);
         int GetQuestHealth(int characterId);
-        void DamageTodayToDamageDone();
+        List<QuestEquipmentReward> GetQuestEquipmentRewards(int characterId);
+        void SetQuestRewarded(int characterId);
+        bool HasCompletedQuest(int characterId);
     }
 }
