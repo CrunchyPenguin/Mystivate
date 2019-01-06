@@ -8,7 +8,7 @@ namespace Mystivate.Data
     public interface IQuestAccess
     {
         Quest GetCurrentQuest(int characterId);
-        void AddDamage(int questInventoryId, int damage);
+        void AddDamage(int characterId, int damage);
         int GetDamage(int characterId);
         int GetDamageToday(int characterId);
         int GetQuestHealth(int characterId);
