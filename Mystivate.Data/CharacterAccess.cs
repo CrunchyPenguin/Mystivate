@@ -75,5 +75,11 @@ namespace Mystivate.Data
         {
             return _dbContext.Characters.Include(c => c.InventorySlot).ThenInclude(c => c.Equipment).ThenInclude(e => (e as Weapon).WeaponType).Include(c => c.InventorySlot).ThenInclude(c => c.Equipment).ThenInclude(e => (e as Gear).GearType).SingleOrDefault(c => c.UserId == userId);
         }
+
+        public void RemoveCoins(int amount, int characterId)
+        {
+            _dbContext.Characters.SingleOrDefault(c => c.Id == characterId).Coins -= amount;
+            _dbContext.SaveChanges();
+        }
     }
 }

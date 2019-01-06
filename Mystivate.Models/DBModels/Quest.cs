@@ -18,6 +18,7 @@ namespace Mystivate.Models
         public int CoinReward { get; set; }
         public int ExperienceReward { get; set; }
         public int? RecLevel { get; set; }
+        public int? Damage { get; set; }
 
         public ICollection<QuestEquipmentReward> QuestEquipmentRewards { get; set; }
         public ICollection<QuestInventory> QuestInventory { get; set; }

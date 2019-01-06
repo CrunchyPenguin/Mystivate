@@ -41,7 +41,7 @@ namespace Mystivate.Logic
 
         public int GetCoins()
         {
-            throw new NotImplementedException();
+            return GetCharacterInfo().Coins;
         }
 
         public int GetExperience()
@@ -109,6 +109,11 @@ namespace Mystivate.Logic
         public Character GetCharacterInfo(bool includeInventory)
         {
             return _characterAccess.GetCharacterWithInventory(_userInfo.GetUserId());
+        }
+
+        public void RemoveCoins(int amount)
+        {
+            _characterAccess.RemoveCoins(amount, GetCharacterId());
         }
     }
 }

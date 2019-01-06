@@ -24,7 +24,7 @@
                 <div class="inventory-slot-box">
                     @foreach (Weapon weapon in Model.InventorySlot.Select(i => i.Equipment).OfType<Weapon>())
                     {
-                        <div id="@weapon.Id" class="inventory-slot" onclick="SetEquipment(this.id)">
+                        <div data-tippy="<b>@weapon.Name</b><p style='font-size: 12px;'>@weapon.WeaponType.Name</p><hr style='margin: 1px 0;' /><p style='font-size: 14px;'>Damage: @(weapon.Damage)</p>" data-tippy-followCursor="true" data-tippy-placement="bottom-end" id="@weapon.Id" class="inventory-slot" onclick="SetEquipment(this.id)">
                             <img src="~/images/Equipment/@weapon.Image-trim.gif" />
                         </div>
                     }
@@ -38,7 +38,7 @@
                 <div class="inventory-slot-box">
                     @foreach (Gear gearpiece in Model.InventorySlot.Select(i => i.Equipment).OfType<Gear>())
                     {
-                        <div id="@gearpiece.Id" class="inventory-slot" onclick="SetEquipment(this.id)">
+                        <div data-tippy="<b>@gearpiece.Name</b><p style='font-size: 12px;'>@gearpiece.GearType.Name</p><hr style='margin: 1px 0;' /><p style='font-size: 14px;'>Armor: @(gearpiece.Armor)</p>" data-tippy-followCursor="true" data-tippy-placement="bottom-end" id="@gearpiece.Id" class="inventory-slot" onclick="SetEquipment(this.id)">
                             <img src="~/images/Equipment/@gearpiece.Image-trim.gif" />
                         </div>
                     }
@@ -72,6 +72,17 @@
                 }
             });
         }
+
+        @*@foreach(Equipment equipment in Model.InventorySlot.Select(i => i.Equipment))
+        {
+        <text>
+
+        tippy('#@(equipment.Id)', {
+            content: document.querySelector('.myTemplate1')
+        });
+                
+        </text>
+        }*@
     </script>
 
 }

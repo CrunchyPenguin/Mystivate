@@ -24,5 +24,10 @@ namespace Mystivate.Controllers
             List<Equipment> equipment = _equipmentLogic.GetEquipment(false);
             return View(equipment);
         }
+
+        public int BuyItem(int equipmentId)
+        {
+            return _equipmentLogic.BuyEquipment(equipmentId);
+        }
     }
 }

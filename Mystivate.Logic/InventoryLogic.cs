@@ -10,12 +10,17 @@ namespace Mystivate.Logic
     public class InventoryLogic : IInventoryLogic
     {
         private readonly IInventoryAccess _inventoryAccess;
-        private readonly IUserInfo _userInfo;
+        private readonly ICharacterInfo _characterInfo;
 
-        public InventoryLogic(IInventoryAccess inventoryAccess, IUserInfo userInfo)
+        public InventoryLogic(IInventoryAccess inventoryAccess, ICharacterInfo characterInfo)
         {
             _inventoryAccess = inventoryAccess;
-            _userInfo = userInfo;
+            _characterInfo = characterInfo;
+        }
+
+        public void AddEquipment(int equipmentId)
+        {
+            _inventoryAccess.AddEquipment(_characterInfo.GetCharacterId(), equipmentId);
         }
 
         public void AddQuest(int questInventoryId)
@@ -25,12 +30,12 @@ namespace Mystivate.Logic
 
         public List<Equipment> GetInventory()
         {
-            return _inventoryAccess.GetEquipment(_userInfo.GetUserId()).Select(i => i.Equipment).ToList();
+            return _inventoryAccess.GetEquipment(_characterInfo.GetCharacterId()).Select(i => i.Equipment).ToList();
         }
 
         public List<Equipment> GetInventory(bool isWearing)
         {
-            return _inventoryAccess.GetEquipment(_userInfo.GetUserId()).Where(i => i.Wearing == isWearing).Select(i => i.Equipment).ToList();
+            return _inventoryAccess.GetEquipment(_characterInfo.GetCharacterId()).Where(i => i.Wearing == isWearing).Select(i => i.Equipment).ToList();
         }
 
         public List<Quest> GetQuestInventory()
@@ -43,9 +48,9 @@ namespace Mystivate.Logic
             throw new NotImplementedException();
         }
 
-        public void SetEquipment(int equipmentId)
+        public void WearEquipment(int equipmentId)
         {
-            _inventoryAccess.WearEquipment(_userInfo.GetUserId(), equipmentId);
+            _inventoryAccess.WearEquipment(_characterInfo.GetCharacterId(), equipmentId);
         }
     }
 }

@@ -11,7 +11,7 @@
         <div class="shop-slot-box">
             @foreach (Equipment equipment in Model)
             {
-                <div class="shop-slot-with-price">
+                <div id="@equipment.Id" class="shop-slot-with-price" style="cursor: pointer" onclick="BuyItem(@equipment.Id)">
                     <div class="shop-slot">
                         <img src="~/images/Equipment/@equipment.Image-trim.gif" />
                     </div>
@@ -24,3 +24,18 @@
         </div>
     </div>
 </div>
+
+@section Scripts{ 
+    <script>
+        function BuyItem(id) {
+            $.post("@Url.Action("BuyItem", "Shop")", { equipmentId: id }, function (moneyNeeded) {
+                if (moneyNeeded <= 0) {
+                    $("#" + id).remove();
+                }
+                else {
+                    alert("You need " + moneyNeeded + " more Mysticoins...\nComplete quests to earns coins!");
+                }
+            });
+        }
+    </script>
+}

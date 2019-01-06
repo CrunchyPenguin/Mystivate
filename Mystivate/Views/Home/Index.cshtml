@@ -11,31 +11,40 @@
     <div class="character-box">
         @{
             IEnumerable<Equipment> wearing = Model.Character.InventorySlot.Where(i => i.Wearing == true).Select(i => i.Equipment);
-            if (wearing.OfType<Gear>().Any(g => g.GearType.Name == "Wings"))
+            if (wearing != null)
             {
-                <img src="~/images/Equipment/@(wearing.OfType<Gear>().SingleOrDefault(g => g.GearType.Name == "Wings").Image).gif" />
-            }
-            <img src="~/images/Characters/character.gif" />
-            if (wearing.OfType<Gear>().Any(g => g.GearType.Name == "Chestplate"))
-            {
-                <img src="~/images/Equipment/@(wearing.OfType<Gear>().SingleOrDefault(g => g.GearType.Name == "Chestplate").Image).gif" />
-            }
-            if (wearing.OfType<Gear>().Any(g => g.GearType.Name == "Helmet"))
-            {
-                <img src="~/images/Equipment/@(wearing.OfType<Gear>().SingleOrDefault(g => g.GearType.Name == "Helmet").Image).gif" />
+                <img src="~/images/Characters/Shadow.gif" />
+                if (wearing.OfType<Gear>().Any(g => g.GearType.Name == "Back"))
+                {
+                    <img src="~/images/Equipment/@(wearing.OfType<Gear>().SingleOrDefault(g => g.GearType.Name == "Back").Image).gif" />
+                }
+                <img src="~/images/Characters/Body.gif" />
+                if (wearing.OfType<Gear>().Any(g => g.GearType.Name == "Leggings"))
+                {
+                    <img src="~/images/Equipment/@(wearing.OfType<Gear>().SingleOrDefault(g => g.GearType.Name == "Leggings").Image).gif" />
+                }
+                if (wearing.OfType<Gear>().Any(g => g.GearType.Name == "Chestplate"))
+                {
+                    <img src="~/images/Equipment/@(wearing.OfType<Gear>().SingleOrDefault(g => g.GearType.Name == "Chestplate").Image).gif" />
+                }
+                if (wearing.OfType<Gear>().Any(g => g.GearType.Name == "Helmet"))
+                {
+                    <img src="~/images/Equipment/@(wearing.OfType<Gear>().SingleOrDefault(g => g.GearType.Name == "Helmet").Image).gif" />
+                }
+                if (wearing.OfType<Weapon>().Any())
+                {
+                    <img src="~/images/Equipment/@(wearing.OfType<Weapon>().SingleOrDefault().Image).gif" />
+                }
             }
             else
             {
-                <img src="~/images/Characters/hair1.gif" />
-            }
-            if (wearing.OfType<Weapon>().Any())
-            {
-                <img src="~/images/Equipment/@(wearing.OfType<Weapon>().SingleOrDefault().Image).gif" />
+                <img src="~/images/Characters/Shadow.gif" />
+                <img src="~/images/Characters/Body.gif" />
             }
         }
     </div>
     <div class="character-info">
-        <h2>@Model.Character.Name</h2>
+        <h2 style="margin-top: 13px;">@Model.Character.Name</h2>
         <h3 id="level">Level</h3>
         <div class="progress-box">
             <div class="progress" id="xp-bar">
@@ -54,6 +63,10 @@
                 <span class="progress-tooltip">Health</span>
             </div>
             <p class="progress-max">100</p>
+        </div>
+        <div class="coin-box">
+            <img src="~/images/Mysticoin.svg"/>
+            <p>@Model.Character.Coins</p>
         </div>
     </div>
 </div>

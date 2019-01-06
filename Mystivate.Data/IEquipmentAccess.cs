@@ -8,5 +8,6 @@ namespace Mystivate.Data
     public interface IEquipmentAccess
     {
         List<Equipment> GetAllEquipment();
+        Equipment GetEquipmentById(int equipmentId);
     }
 }

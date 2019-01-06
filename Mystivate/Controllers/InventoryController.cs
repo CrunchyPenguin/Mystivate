@@ -29,7 +29,7 @@ namespace Mystivate.Controllers
 
         public void SetWearing(int equipmentId)
         {
-            _inventoryLogic.SetEquipment(equipmentId);
+            _inventoryLogic.WearEquipment(equipmentId);
         }
 
         public int[] GetWearing()

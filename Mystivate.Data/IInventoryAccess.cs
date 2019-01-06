@@ -7,10 +7,10 @@ namespace Mystivate.Data
 {
     public interface IInventoryAccess
     {
-        List<InventorySlot> GetEquipment(int userId);
-        List<Quest> GetQuests(int userId);
+        List<InventorySlot> GetEquipment(int characterId);
+        List<Quest> GetQuests(int characterId);
         List<Equipment> GetQuestRewards(int questId);
-        void WearEquipment(int userId, int equipmentId);
+        void WearEquipment(int characterId, int equipmentId);
         void AddEquipment(int characterId, int equipmentId);
     }
 }

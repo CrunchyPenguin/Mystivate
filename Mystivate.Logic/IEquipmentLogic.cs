@@ -9,5 +9,6 @@ namespace Mystivate.Logic
     {
         List<Equipment> GetEquipment();
         List<Equipment> GetEquipment(bool owned);
+        int BuyEquipment(int equipmentId);
     }
 }

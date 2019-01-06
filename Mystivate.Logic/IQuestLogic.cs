@@ -7,13 +7,14 @@ namespace Mystivate.Logic
 {
     public interface IQuestLogic
     {
-        void SelectQuest();
+        void SelectQuest(int questInventoryId);
         QuestModel GetCurrentQuest();
         int GetDamageDoneToday();
         int GetCurrentHealth();
         void AddDamage(int damage);
-        QuestInventory GetQuestInventory();
+        List<QuestInventory> GetQuestInventory();
         Equipment GetQuestRewards();
         bool QuestCompleted();
+        void CancelQuest();
     }
 }

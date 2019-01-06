@@ -19,5 +19,10 @@ namespace Mystivate.Data
         {
             return _dbContext.Equipment.Include(e => e.InventorySlot).ToList();
         }
+
+        public Equipment GetEquipmentById(int equipmentId)
+        {
+            return _dbContext.Equipment.SingleOrDefault(e => e.Id == equipmentId);
+        }
     }
 }

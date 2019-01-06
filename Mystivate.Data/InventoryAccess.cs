@@ -24,11 +24,12 @@ namespace Mystivate.Data
                 Left = false,
                 Wearing = false
             });
+            _dbContext.SaveChanges();
         }
 
-        public List<InventorySlot> GetEquipment(int userId)
+        public List<InventorySlot> GetEquipment(int characterId)
         {
-            return _dbContext.InventorySlots.Include(i => i.Equipment).Where(i => i.Character.UserId == userId).ToList();
+            return _dbContext.InventorySlots.Include(i => i.Equipment).Where(i => i.CharacterId == characterId).ToList();
         }
 
         public List<Equipment> GetQuestRewards(int questId)
@@ -36,14 +37,15 @@ namespace Mystivate.Data
             throw new NotImplementedException();
         }
 
-        public List<Quest> GetQuests(int userId)
+        public List<Quest> GetQuests(int characterId)
         {
             throw new NotImplementedException();
         }
 
-        public void WearEquipment(int userId, int equipmentId)
+        public void WearEquipment(int characterId, int equipmentId)
         {
-            _dbContext.InventorySlots.SingleOrDefault(i => i.Character.UserId == userId && i.EquipmentId == equipmentId).Wearing = true;
+            bool wearing = _dbContext.InventorySlots.First(i => i.CharacterId == characterId && i.EquipmentId == equipmentId).Wearing;
+            _dbContext.InventorySlots.First(i => i.CharacterId == characterId && i.EquipmentId == equipmentId).Wearing = !wearing;
             _dbContext.SaveChanges();
         }
     }

@@ -23,21 +23,25 @@ namespace Mystivate.Logic
         public QuestModel GetCurrentQuest()
         {
             Quest quest = _questAccess.GetCurrentQuest(_characterInfo.GetCharacterId());
-            return new QuestModel
+            if(quest != null)
             {
-                Id = quest.Id,
-                Name = quest.Name,
-                Image = quest.BossImage,
-                Health = quest.Health,
-                RecLevel = quest.RecLevel.Value,
-                CoinReward = quest.CoinReward,
-                ExperienceReward = quest.ExperienceReward
-            };
+                return new QuestModel
+                {
+                    Id = quest.Id,
+                    Name = quest.Name,
+                    Image = quest.BossImage,
+                    Health = quest.Health,
+                    RecLevel = quest.RecLevel.Value,
+                    CoinReward = quest.CoinReward,
+                    ExperienceReward = quest.ExperienceReward
+                };
+            }
+            return null;
         }
 
-        public void SelectQuest()
+        public void SelectQuest(int questInventoryId)
         {
-            throw new NotImplementedException();
+            _questAccess.SetQuest(_characterInfo.GetCharacterId(), questInventoryId);
         }
 
         public int GetCurrentHealth()
@@ -55,9 +59,9 @@ namespace Mystivate.Logic
             _questAccess.AddDamage(_characterInfo.GetCharacterId(), damage);
         }
 
-        public QuestInventory GetQuestInventory()
+        public List<QuestInventory> GetQuestInventory()
         {
-            throw new NotImplementedException();
+            return _questAccess.GetQuestInventory(_characterInfo.GetCharacterId());
         }
 
         public Equipment GetQuestRewards()
@@ -76,7 +80,7 @@ namespace Mystivate.Logic
                         cumulativeList.Add(equipmentRewards[i].Chance + cumulativeList[i - 1]);
                     }
                     Random r = new Random();
-                    int randomNumber = r.Next(1, cumulativeList.Last());
+                    int randomNumber = r.Next(1, 100);
                     for (int i = 0; i < cumulativeList.Count; i++)
                     {
                         if (cumulativeList[i] >= randomNumber)
@@ -93,6 +97,11 @@ namespace Mystivate.Logic
         public bool QuestCompleted()
         {
             return _questAccess.HasCompletedQuest(_characterInfo.GetCharacterId());
+        }
+
+        public void CancelQuest()
+        {
+            _questAccess.CancelQuest(_characterInfo.GetCharacterId());
         }
     }
 }

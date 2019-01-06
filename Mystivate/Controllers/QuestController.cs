@@ -22,7 +22,8 @@ namespace Mystivate.Controllers
         public IActionResult Index()
         {
             QuestModel quest = _questLogic.GetCurrentQuest();
-            return View(quest);
+            List<QuestInventory> questInventory = _questLogic.GetQuestInventory();
+            return View(new Tuple<QuestModel, List<QuestInventory>>(quest, questInventory));
         }
 
         public int GetCurrentHealth()
@@ -39,6 +40,21 @@ namespace Mystivate.Controllers
         public int GetDamageDone()
         {
             return _questLogic.GetDamageDoneToday();
+        }
+
+        public void CancelQuest()
+        {
+            _questLogic.CancelQuest();
+        }
+
+        public void SelectQuest(int questInventoryId)
+        {
+            _questLogic.SelectQuest(questInventoryId);
+        }
+
+        public string ClaimReward()
+        {
+            return _questLogic.GetQuestRewards().Name;
         }
     }
 }

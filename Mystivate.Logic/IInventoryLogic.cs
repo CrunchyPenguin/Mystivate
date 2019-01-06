@@ -12,6 +12,7 @@ namespace Mystivate.Logic
         List<Quest> GetQuestInventory();
         List<Equipment> GetQuestRewards(int questId);
         void AddQuest(int questInventoryId);
-        void SetEquipment(int equipmentId);
+        void WearEquipment(int equipmentId);
+        void AddEquipment(int equipmentId);
     }
 }

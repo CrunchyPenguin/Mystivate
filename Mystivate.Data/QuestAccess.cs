@@ -15,33 +15,33 @@ namespace Mystivate.Data
             _dbContext = db;
         }
 
-        public void AddDamage(int QuestInventoryId, int damage)
+        public void AddDamage(int questInventoryId, int damage)
         {
-            if (_dbContext.QuestInventory.Any(q => q.Id == QuestInventoryId))
+            if (_dbContext.QuestInventory.Any(q => q.Id == questInventoryId))
             {
-                _dbContext.QuestInventory.SingleOrDefault(q => q.Id == QuestInventoryId).DamageToday += damage;
+                _dbContext.QuestInventory.SingleOrDefault(q => q.Id == questInventoryId).DamageToday += damage;
                 _dbContext.SaveChanges();
             }
         }
 
         public Quest GetCurrentQuest(int characterId)
         {
-            return _dbContext.QuestInventory.Where(q => q.CharacterId == characterId).Include(q => q.Quest).SingleOrDefault(q => q.QuestStatus.Status == "ongoing").Quest;
+            return _dbContext.QuestInventory.Where(q => q.CharacterId == characterId).Include(q => q.Quest).SingleOrDefault(q => q.QuestStatus.Status == "active" || q.QuestStatus.Status == "complete")?.Quest;
         }
 
         public int GetDamageToday(int characterId)
         {
-            return _dbContext.QuestInventory.Where(q => q.CharacterId == characterId).SingleOrDefault(q => q.QuestStatus.Status == "ongoing").DamageToday;
+            return _dbContext.QuestInventory.Where(q => q.CharacterId == characterId).SingleOrDefault(q => q.QuestStatus.Status == "active" || q.QuestStatus.Status == "complete").DamageToday;
         }
 
         public int GetDamage(int characterId)
         {
-            return _dbContext.QuestInventory.Where(q => q.CharacterId == characterId).SingleOrDefault(q => q.QuestStatus.Status == "ongoing").DamageDone;
+            return _dbContext.QuestInventory.Where(q => q.CharacterId == characterId).SingleOrDefault(q => q.QuestStatus.Status == "active" || q.QuestStatus.Status == "complete").DamageDone;
         }
 
         public int GetQuestHealth(int characterId)
         {
-            return _dbContext.QuestInventory.Where(q => q.CharacterId == characterId).Include(q => q.Quest).SingleOrDefault(q => q.QuestStatus.Status == "ongoing").Quest.Health;
+            return _dbContext.QuestInventory.Where(q => q.CharacterId == characterId).Include(q => q.Quest).SingleOrDefault(q => q.QuestStatus.Status == "active" || q.QuestStatus.Status == "complete").Quest.Health;
         }
 
         public List<QuestEquipmentReward> GetQuestEquipmentRewards(int characterId)
@@ -56,13 +56,37 @@ namespace Mystivate.Data
 
         public void SetQuestRewarded(int characterId)
         {
-            _dbContext.QuestInventory.Where(q => q.CharacterId == characterId).Include(q => q.Quest).SingleOrDefault(q => q.QuestStatus.Status == "complete").QuestStatusId = _dbContext.QuestStatus.SingleOrDefault(s => s.Status == "rewarded").Id;
+            _dbContext.QuestInventory.Where(q => q.CharacterId == characterId).SingleOrDefault(q => q.QuestStatus.Status == "complete").QuestStatusId = _dbContext.QuestStatus.SingleOrDefault(s => s.Status == "rewarded").Id;
             _dbContext.SaveChanges();
         }
 
         public bool HasCompletedQuest(int characterId)
         {
             return _dbContext.QuestInventory.Where(q => q.CharacterId == characterId).Include(q => q.Quest).Any(q => q.QuestStatus.Status == "complete");
+        }
+
+        public List<QuestInventory> GetQuestInventory(int characterId)
+        {
+            return _dbContext.QuestInventory.Where(q => q.CharacterId == characterId).Include(q => q.Quest).Include(q => q.QuestStatus).ToList();
+        }
+
+        public void CancelQuest(int characterId)
+        {
+            QuestInventory questInventory = _dbContext.QuestInventory.Where(q => q.CharacterId == characterId).SingleOrDefault(q => q.QuestStatus.Status == "active");
+            questInventory.DamageDone = 0;
+            questInventory.DamageToday = 0;
+            questInventory.QuestStatusId = _dbContext.QuestStatus.SingleOrDefault(s => s.Status == "owned").Id;
+            _dbContext.SaveChanges();
+        }
+
+        public void SetQuest(int characterId, int questInventoryId)
+        {
+            if(_dbContext.QuestInventory.Where(q => q.CharacterId == characterId).Any(q => q.Id == questInventoryId))
+            {
+                QuestInventory questInventory = _dbContext.QuestInventory.SingleOrDefault(q => q.Id == questInventoryId);
+                questInventory.QuestStatusId = _dbContext.QuestStatus.SingleOrDefault(s => s.Status == "active").Id;
+                _dbContext.SaveChanges();
+            }
         }
     }
 }

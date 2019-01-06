@@ -81,6 +81,7 @@ li a {
 }
 
 button {
+    font-family: Roboto, sans-serif;
     background: none;
     border: none;
     cursor: pointer;
@@ -476,6 +477,7 @@ button {
 #level {
     display: inline-block;
     width: 100%;
+    margin-top: 5px;
 }
 
 #health-bar .progress-val {
@@ -489,6 +491,22 @@ button {
 #health-bar p {
     margin-left: 0px;
 }
+
+.coin-box {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+    .coin-box img {
+        width: 25px;
+        filter: drop-shadow( 0px 0px 3px rgba(0,0,0, 0.2));
+    }
+
+    .coin-box p {
+        margin-left: 5px;
+        font-size: 18px;
+    }
 
 /* Tasks*/
 .tasks {
@@ -578,7 +596,7 @@ button {
 .task-container {
     margin: 10px 0 20px 0;
     overflow: scroll;
-    min-height: 390px;
+    height: 390px;
     overflow-x: hidden;
     overflow-y: overlay;
     padding: 5px 30px;
@@ -957,7 +975,7 @@ button {
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .quest-container {
@@ -1084,8 +1102,98 @@ button {
         margin: 11px 0 0 8px;
     }
 
-/* Inventory Page */
+.quest-inventory {
+    height: 780px;
+    width: 770px;
+    background-color: white;
+    border: 8px solid #162e49;
+    box-shadow: 5px 5px 20px rgba(0,0,0, 0.4);
+    display: flex;
+    flex-direction: column;
+}
 
+    .quest-inventory h2 {
+        padding: 5px;
+        text-align: center;
+        background-color: #d93939;
+        margin-top: 13px;
+        margin-bottom: 0px;
+        width: 100%;
+    }
+
+    .quest-inventory p {
+        color: black;
+    }
+
+.quest-inventory-slot-box {
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    padding-top: 10px;
+    min-height: 691px;
+    overflow-x: hidden;
+    overflow-y: overlay;
+}
+
+    .quest-inventory-slot-box h3 {
+        color: #162e49;
+        text-align: center;
+        margin: 0;
+    }
+
+    .quest-inventory-slot-box hr {
+        width: 100%;
+        border-color: #162e49;
+        margin: 8px 0 0 0;
+    }
+
+.quest-inventory-slot {
+    display: flex;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-top: 2px solid #162e49;
+    border-bottom: 2px solid #162e49;
+    margin: 5px 0;
+}
+
+    .quest-inventory-slot img {
+        width: 64px;
+        border-right: 2px solid #162e49;
+    }
+
+.quest-inventory-info {
+    margin-left: 4px;
+    height: 62px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+    .quest-inventory-info h3 {
+        margin: 2px 0;
+        color: black;
+        text-align: left;
+    }
+
+.quest-inventory-options {
+    margin-left: auto;
+    height: 62px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.quest-inventory-button {
+    color: white;
+    font-size: 15px;
+    background-color: #162e49;
+    padding: 5px 10px;
+}
+
+    .quest-inventory-button.completed {
+        background-color: #d93939;
+    }
+
+/* Inventory Page */
 .inventory-div {
     display: flex;
     /*flex-wrap: wrap;*/
@@ -1103,7 +1211,7 @@ button {
 
 .inventory-box {
     height: 771px;
-    width: 50%;
+    width: 964px;
     margin: 20px;
     background-color: white;
     box-shadow: 5px 4px 20px #0000003b;
@@ -1117,7 +1225,18 @@ button {
     margin: 15px;
 }
 
+    .inventory-catagory-box hr {
+        border-color: #24364e;
+    }
+
+    .inventory-catagory-box h3 {
+        margin: 10px 0;
+        color: #24364e;
+    }
+
 .inventory-slot-box-box {
+    max-height: 262px;
+    overflow: auto;
 }
 
 .inventory-slot-box {
@@ -1159,14 +1278,15 @@ button {
     box-shadow: 5px 4px 20px #0000003b;
     padding: 20px;
 }
-    .shop-box h3{
+
+    .shop-box h3 {
         color: black;
     }
 
-    .shop-slot-box {
-        display: flex;
-        flex-wrap: wrap;
-    }
+.shop-slot-box {
+    display: flex;
+    flex-wrap: wrap;
+}
 
 .shop-slot {
     width: 81px;
@@ -1186,10 +1306,10 @@ button {
     box-shadow: 5px 4px 20px #0000003b;
 }
 
-    .shop-slot img {
-        max-width: 75px;
-        max-height: 75px;
-    }
+.shop-slot img {
+    max-width: 75px;
+    max-height: 75px;
+}
 
 
 .shop-price {
@@ -1207,7 +1327,7 @@ button {
         width: 20px;
     }
 
-    .shop-price p{
+    .shop-price p {
         color: black;
         line-height: 30px;
         margin-left: 5px;

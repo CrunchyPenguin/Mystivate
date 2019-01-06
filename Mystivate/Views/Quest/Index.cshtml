@@ -1,66 +1,158 @@
-﻿@model QuestModel
+﻿@model Tuple<QuestModel, List<QuestInventory>>
 @{
     ViewData["Title"] = "Quest";
 }
 
 <div class="quest-page-container">
-    <div class="quest-container">
-        <h2 class="quest-name">@Model.Name</h2>
-        <div class="boss-image-box">
-            <img class="boss-image" src="~/images/Quests/Bosses/@Model.Image" />
-        </div>
-        <div class="boss-health">
-            <div class="progress-box">
-                <div class="progress" id="boss-health-bar">
-                    <div class="progress-val">
-                        <div class="progress-val-bottom"></div>
+    @if (Model.Item1 != null)
+    {
+        <div class="quest-container">
+            <h2 class="quest-name">@Model.Item1.Name</h2>
+            <div class="boss-image-box">
+                <img class="boss-image" src="~/images/Quests/Bosses/@Model.Item1.Image" />
+            </div>
+            <div class="boss-health">
+                <div class="progress-box">
+                    <div class="progress" id="boss-health-bar">
+                        <div class="progress-val">
+                            <div class="progress-val-bottom"></div>
+                        </div>
+                        <p class="boss-health-val">0 / 0</p>
+                        <p class="boss-percentage">100%</p>
                     </div>
-                    <p class="boss-health-val">0 / 0</p>
-                    <p class="boss-percentage">100%</p>
+                </div>
+            </div>
+            <div class="damage-box">
+                <p>Damage today:</p>
+                <div class="damage-done">
+                    <img src="~/images/BloodDrop.svg" />
+                    <p id="boss-damage">0</p>
                 </div>
             </div>
         </div>
-        <div class="damage-box">
-            <p>Damage today:</p>
-            <div class="damage-done">
-                <img src="~/images/BloodDrop.svg"/>
-                <p id="boss-damage">0</p>
-            </div>
+    }
+    <div class="quest-inventory">
+        <h2>Quests</h2>
+        <div class="quest-inventory-slot-box">
+            @{
+                bool anyActive = Model.Item2.Any(q => q.QuestStatus.Status == "active" || q.QuestStatus.Status == "complete");
+                if (anyActive)
+                {
+                    QuestInventory activeQuest = Model.Item2.SingleOrDefault(q => q.QuestStatus.Status == "active" || q.QuestStatus.Status == "complete");
+                    @if (activeQuest.QuestStatus.Status == "complete")
+                    {
+                        <h3>Completed!</h3>
+                    }
+                    else
+                    {
+                        <h3>Active</h3>
+                    }
+                    <hr />
+                    <div class="quest-inventory-slot" style="@(activeQuest.QuestStatus.Status == "complete" ? "background-color: #ffe1e1;" : "")" >
+                        <img src="~/images/Quests/Bosses/@activeQuest.Quest.BossImage" style="@(activeQuest.QuestStatus.Status == "complete" ? "background-color: #ff7676;" : "")" />
+                        <div class="quest-inventory-info">
+                            <h3>@activeQuest.Quest.Name</h3>
+                            <p>Recommended level: @activeQuest.Quest.RecLevel</p>
+                        </div>
+                        <div class="quest-inventory-options">
+                            @if (activeQuest.QuestStatus.Status == "complete")
+                            {
+                                <button class="quest-inventory-button completed" onclick="ClaimRewards()">Claim Reward!</button>
+                            }
+                            else
+                            {
+                                <button class="quest-inventory-button" onclick="CancelQuest()">Cancel quest</button>
+                            }
+                        </div>
+                    </div>
+                }
+                if (Model.Item2.Any(q => q.QuestStatus.Status != "active" && q.QuestStatus.Status != "complete"))
+                {
+                    <h3 style="margin-top: 10px;">Inventory</h3>
+                    <hr />
+                }
+                foreach (QuestInventory quest in Model.Item2.Where(q => q.QuestStatus.Status != "active" && q.QuestStatus.Status != "complete"))
+                {
+                    <div class="quest-inventory-slot" style="@(quest.QuestStatus.Status == "active" ? "background-color: #ffe1e1;" : "")">
+                        <img src="~/images/Quests/Bosses/@quest.Quest.BossImage" style="@(quest.QuestStatus.Status == "active" ? "background-color: #ff7676;" : "")" />
+                        <div class="quest-inventory-info">
+                            <h3>@quest.Quest.Name</h3>
+                            <p>Recommended level: @quest.Quest.RecLevel</p>
+                        </div>
+                        @if (!anyActive)
+                        {
+                            <div class="quest-inventory-options">
+                                <button class="quest-inventory-button" onclick="SelectQuest(@quest.Id)">Select quest</button>
+                            </div>
+                        }
+                    </div>
+                }
+            }
         </div>
     </div>
 </div>
 
 @section Scripts{
-    <script>
-        var maxhealth, currenthealth, healthpercent;
-        UpdateHealthBar();
-        UpdateDamageDone();
-        function UpdateHealthBar() {
-            $.post("@Url.Action("GetMaxHealth", "Quest")", function (health) {
-                maxhealth = health;
-                $.post("@Url.Action("GetCurrentHealth", "Quest")", function (health) {
-                    currenthealth = health;
-                    healthpercent = currenthealth / maxhealth * 100;
-                    var valbox = $(document.getElementById("boss-health-bar")).children().first();
-                    valbox.width(healthpercent + "%");
-                    $("#boss-health-bar").children(".boss-health-val").first().text(currenthealth + " / " + maxhealth);
-                    $("#boss-health-bar").children(".boss-percentage").first().text(Math.round(healthpercent) + "%");
-                    //if (healthpercent < 10) {
-                    //    val.css("margin-left", val.width() + 8 + "px");
-                    //    valbox.css("justify-content", "flex-end");
-                    //}
-                    //else {
-                    //    valbox.css("justify-content", "center");
-                    //    val.css("margin-left", "0px");
-                    //}
+    @if (Model.Item1 != null)
+    {
+        <script>
+            var maxhealth, currenthealth, healthpercent;
+            UpdateHealthBar();
+            UpdateDamageDone();
+
+            function UpdateHealthBar() {
+                $.post("@Url.Action("GetMaxHealth", "Quest")", function (health) {
+                    maxhealth = health;
+                    $.post("@Url.Action("GetCurrentHealth", "Quest")", function (health) {
+                        currenthealth = health;
+                        healthpercent = currenthealth / maxhealth * 100;
+                        var valbox = $(document.getElementById("boss-health-bar")).children().first();
+                        valbox.width(healthpercent + "%");
+                        $("#boss-health-bar").children(".boss-health-val").first().text(currenthealth + " / " + maxhealth);
+                        $("#boss-health-bar").children(".boss-percentage").first().text(Math.round(healthpercent) + "%");
+                        //if (healthpercent < 10) {
+                        //    val.css("margin-left", val.width() + 8 + "px");
+                        //    valbox.css("justify-content", "flex-end");
+                        //}
+                        //else {
+                        //    valbox.css("justify-content", "center");
+                        //    val.css("margin-left", "0px");
+                        //}
+                    });
                 });
+            }
+
+            function UpdateDamageDone() {
+                $.post("@Url.Action("GetDamageDone", "Quest")", function (damage) {
+                    $("#boss-damage").text(damage);
+                });
+            }
+
+        </script>
+    }
+    <script>
+        function CancelQuest() {
+            var cancel = confirm("Are you sure you want to cancel the current Quest?\nAll progress will be lost...");
+            if (cancel) {
+                $.post("@Url.Action("CancelQuest", "Quest")", function () {
+                    location.reload();
+                });
+            }
+        }
+        
+        function SelectQuest(questInventoryId) {
+            $.post("@Url.Action("SelectQuest", "Quest")", { questInventoryId: questInventoryId }, function () {
+                location.reload();
             });
         }
 
-        function UpdateDamageDone() {
-            $.post("@Url.Action("GetDamageDone", "Quest")", function (damage) {
-                $("#boss-damage").text(damage);
+        function ClaimRewards() {
+            $.post("@Url.Action("ClaimReward", "Quest")", function (reward) {
+                if (reward != null) {
+                    alert("You got " + reward + "!\nCheck your inventory!");
+                }
+                location.reload();
             });
         }
     </script>
- }
+}
