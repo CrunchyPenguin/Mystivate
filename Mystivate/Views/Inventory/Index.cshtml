@@ -38,9 +38,16 @@
                 <div class="inventory-slot-box">
                     @foreach (Gear gearpiece in Model.InventorySlot.Select(i => i.Equipment).OfType<Gear>())
                     {
-                        <div data-tippy="<b>@gearpiece.Name</b><p style='font-size: 12px;'>@gearpiece.GearType.Name</p><hr style='margin: 1px 0;' /><p style='font-size: 14px;'>Armor: @(gearpiece.Armor)</p>" data-tippy-followCursor="true" data-tippy-placement="bottom-end" id="@gearpiece.Id" class="inventory-slot" onclick="SetEquipment(this.id)">
+                    <div data-tippy="<b>@gearpiece.Name</b><p style='font-size: 12px;'>@gearpiece.GearType.Name</p><hr style='margin: 1px 0;' /><p style='font-size: 14px;'>Armor: @(gearpiece.Armor)</p>" data-tippy-followCursor="true" data-tippy-placement="bottom-end" id="@gearpiece.Id" class="inventory-slot" onclick="SetEquipment(this.id)">
+                        @if (gearpiece.GearType.Name == "Back")
+                        {
+                            <img style="position: relative;" src="~/images/Equipment/@gearpiece.Image-back-trim.gif" />
+                        }
+                        else
+                        {
                             <img src="~/images/Equipment/@gearpiece.Image-trim.gif" />
-                        </div>
+                        }
+                    </div>
                     }
                 </div>
             </div>

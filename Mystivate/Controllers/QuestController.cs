@@ -54,7 +54,8 @@ namespace Mystivate.Controllers
 
         public string ClaimReward()
         {
-            return _questLogic.GetQuestRewards().Name;
+            Equipment reward = _questLogic.GetQuestRewards();
+            return reward?.Name;
         }
     }
 }

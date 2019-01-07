@@ -85,8 +85,15 @@ namespace Mystivate.Logic
                     {
                         if (cumulativeList[i] >= randomNumber)
                         {
-                            _inventoryAccess.AddEquipment(characterId, equipmentRewards[i].EquipmentId);
-                            return equipmentRewards[i].Equipment;
+                            if (!_inventoryAccess.GetEquipment(characterId).Any(e => e.EquipmentId == equipmentRewards[i].EquipmentId))
+                            {
+                                _inventoryAccess.AddEquipment(characterId, equipmentRewards[i].EquipmentId);
+                                return equipmentRewards[i].Equipment;
+                            }
+                            else
+                            {
+                                return null;
+                            }
                         }
                     }
                 }
