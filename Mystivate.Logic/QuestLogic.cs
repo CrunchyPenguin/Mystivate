@@ -94,13 +94,14 @@ namespace Mystivate.Logic
                             }
                             else
                             {
-                                _characterManager.AddCoin(200);
+                                _characterManager.AddCoins(200);
                                 return null;
                             }
                         }
                     }
                 }
             }
+            _characterManager.AddCoins(200);
             return null;
         }
 

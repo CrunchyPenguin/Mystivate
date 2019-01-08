@@ -87,5 +87,18 @@ namespace Mystivate.Data
             _dbContext.Characters.SingleOrDefault(c => c.Id == characterId).Coins += amount;
             _dbContext.SaveChanges();
         }
+
+        public void SetExperience(int experience, int characterId)
+        {
+            _dbContext.Characters.SingleOrDefault(c => c.Id == characterId).Experience = experience;
+            _dbContext.SaveChanges();
+        }
+
+        public void HealthToMax(int characterId)
+        {
+            Character character = _dbContext.Characters.SingleOrDefault(c => c.Id == characterId);
+            character.CurrentHealth = character.MaxHealth;
+            _dbContext.SaveChanges();
+        }
     }
 }

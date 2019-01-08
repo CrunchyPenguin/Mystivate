@@ -152,6 +152,14 @@ namespace Mystivate.Models
                     .HasForeignKey(d => d.EquipmentId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FKInventoryS790889");
+
+                entity.Property(e => e.Wearing)
+                    .IsRequired()
+                    .HasDefaultValueSql("('0')");
+
+                entity.Property(e => e.Left)
+                    .IsRequired()
+                    .HasDefaultValueSql("('0')");
             });
 
             modelBuilder.Entity<Quest>(entity =>

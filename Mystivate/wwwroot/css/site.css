@@ -1282,14 +1282,32 @@ button {
     padding: 20px;
 }
 
-    .shop-box h3 {
+    .shop-box hr{
+        border-color: black;
+    }
+
+.shop-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+    .shop-header h3 {
+        color: black;
+        margin: 2px;
+    }
+
+    .shop-header p {
         color: black;
     }
 
-.shop-slot-box {
-    display: flex;
-    flex-wrap: wrap;
-}
+    .shop-header .coin-box {
+        margin: 0 5px;
+    }
+
+    .shop-slot-box {
+        display: flex;
+        flex-wrap: wrap;
+    }
 
 .shop-slot {
     width: 81px;

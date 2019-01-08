@@ -1,4 +1,4 @@
-﻿@model List<Equipment>
+﻿@model Tuple<List<Equipment>, int>
 
 @{
     ViewData["Title"] = "Shop";
@@ -6,10 +6,16 @@
 
 <div class="shop-div">
     <div class="shop-box">
-        <h3>Shop</h3>
+        <div class="shop-header">
+            <h3>Shop</h3>
+            <div class="coin-box">
+                <img src="~/images/Mysticoin.svg" />
+                <p id="coins" style="color: black">@Model.Item2</p>
+            </div>
+        </div>
         <hr />
         <div class="shop-slot-box">
-            @foreach (Equipment equipment in Model)
+            @foreach (Equipment equipment in Model.Item1)
             {
                 <div id="@equipment.Id" class="shop-slot-with-price" style="cursor: pointer" onclick="BuyItem(@equipment.Id)">
                     <div class="shop-slot">
@@ -31,10 +37,17 @@
             $.post("@Url.Action("BuyItem", "Shop")", { equipmentId: id }, function (moneyNeeded) {
                 if (moneyNeeded <= 0) {
                     $("#" + id).remove();
+                    RefreshCoins();
                 }
                 else {
                     alert("You need " + moneyNeeded + " more Mysticoins...\nComplete quests to earns coins!");
                 }
+            });
+        }
+
+        function RefreshCoins() {
+            $.post("@Url.Action("GetCoins", "Shop")", function (coins) {
+                $("#coins").text(coins);
             });
         }
     </script>

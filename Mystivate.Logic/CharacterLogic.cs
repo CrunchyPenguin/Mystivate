@@ -22,10 +22,12 @@ namespace Mystivate.Logic
         public void AddExperience(int amount)
         {
             _characterAccess.AddExperience(_userInfo.GetUserId(), amount);
+            CheckHealth();
         }
 
         public CharacterModel GetCharacterInfo()
         {
+            CheckHealth();
             Character character = _characterAccess.GetCharacter(_userInfo.GetUserId());
             CharacterModel model = new CharacterModel()
             {
@@ -41,32 +43,38 @@ namespace Mystivate.Logic
 
         public int GetCoins()
         {
+            CheckHealth();
             return GetCharacterInfo().Coins;
         }
 
         public int GetExperience()
         {
+            CheckHealth();
             return CalculateCurrentExp(_characterAccess.GetExperience(_userInfo.GetUserId()));
         }
 
         public int GetExperienceNextLevel()
         {
+            CheckHealth();
             return CalculateNextLevelExp(_characterAccess.GetExperience(_userInfo.GetUserId()));
         }
 
         public int GetLevel()
         {
+            CheckHealth();
             return CalculateLevel(_characterAccess.GetExperience(_userInfo.GetUserId()));
         }
 
         public int GetCurrentHealth()
         {
+            CheckHealth();
             return _characterAccess.GetCurrentHealth(_userInfo.GetUserId());
             // if health is 0 do something
         }
 
         public int GetMaxHealth()
         {
+            CheckHealth();
             return _characterAccess.GetMaxHealth(_userInfo.GetUserId());
         }
 
@@ -98,6 +106,7 @@ namespace Mystivate.Logic
 
         public void AddHealth(int amount)
         {
+            CheckHealth();
             _characterAccess.AddHealth(_userInfo.GetUserId(), amount);
         }
 
@@ -108,17 +117,38 @@ namespace Mystivate.Logic
 
         public Character GetCharacterInfo(bool includeInventory)
         {
+            CheckHealth();
             return _characterAccess.GetCharacterWithInventory(_userInfo.GetUserId());
         }
 
         public void RemoveCoins(int amount)
         {
+            CheckHealth();
             _characterAccess.RemoveCoins(amount, GetCharacterId());
         }
 
-        public void AddCoin(int amount)
+        public void AddCoins(int amount)
         {
+            CheckHealth();
             _characterAccess.AddCoins(amount, GetCharacterId());
         }
+
+        private void CheckHealth(int health = -1)
+        {
+            if(health < 0)
+            {
+                health = _characterAccess.GetCurrentHealth(_userInfo.GetUserId());
+            }
+
+            if(health == 0)
+            {
+                int characterId = GetCharacterId();
+                int level = CalculateLevel(_characterAccess.GetExperience(_userInfo.GetUserId()));
+                int experienceToSet = CalculateExperience(level - 1);
+                _characterAccess.SetExperience(experienceToSet, characterId);
+                _characterAccess.HealthToMax(characterId);
+            }
+        }
+        
     }
 }

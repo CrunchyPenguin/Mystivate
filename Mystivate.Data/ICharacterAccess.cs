@@ -25,5 +25,7 @@ namespace Mystivate.Data
         Character GetCharacterWithInventory(int userId);
         void RemoveCoins(int amount, int characterId);
         void AddCoins(int amount, int characterId);
+        void SetExperience(int experience, int characterId);
+        void HealthToMax(int characterId);
     }
 }
