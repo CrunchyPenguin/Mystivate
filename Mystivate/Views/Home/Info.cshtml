@@ -1,4 +1,4 @@
-﻿
+﻿@model RegisterViewModel
 @{
     Layout = null;
 }
@@ -29,11 +29,11 @@
             <div class="info-main-content">
                 @if (!(bool)ViewData["register"])
                 {
-                    @await Html.PartialAsync("/Views/Account/_Login.cshtml");
+                    @await Html.PartialAsync("/Views/Account/_Login.cshtml", new LoginViewModel());
                 }
                 else
                 {
-                    @await Html.PartialAsync("/Views/Account/_Register.cshtml");
+                    @await Html.PartialAsync("/Views/Account/_Register.cshtml", Model);
                 }
             </div>
         </div>

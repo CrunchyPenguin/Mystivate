@@ -81,5 +81,11 @@ namespace Mystivate.Data
             _dbContext.Characters.SingleOrDefault(c => c.Id == characterId).Coins -= amount;
             _dbContext.SaveChanges();
         }
+
+        public void AddCoins(int amount, int characterId)
+        {
+            _dbContext.Characters.SingleOrDefault(c => c.Id == characterId).Coins += amount;
+            _dbContext.SaveChanges();
+        }
     }
 }

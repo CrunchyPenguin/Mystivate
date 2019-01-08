@@ -1200,13 +1200,15 @@ button {
     align-items: center;
     width: 100%;
     height: 100%;
+    justify-content: space-evenly;
 }
 
 .inventory-character-box {
     height: 500px;
-    width: 50%;
+    width: 192px;
     margin: 20px;
     align-self: flex-start;
+    padding-top: 200px;
 }
 
 .inventory-box {
@@ -1268,11 +1270,12 @@ button {
     align-items: center;
     width: 100%;
     height: 100%;
+    justify-content: center;
 }
 
 .shop-box {
     height: 800px;
-    width: 50%;
+    width: 1000px;
     margin: 20px;
     background-color: white;
     box-shadow: 5px 4px 20px #0000003b;

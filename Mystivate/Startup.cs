@@ -60,7 +60,12 @@ namespace Mystivate
             services.AddTransient<IQuestAccess, QuestAccess>();
             services.AddTransient<IInventoryAccess, InventoryAccess>();
             services.AddTransient<IEquipmentAccess, EquipmentAccess>();
+            
+            ConfigureDatabase(services);
+        }
 
+        public virtual void ConfigureDatabase(IServiceCollection services)
+        {
             services.AddDbContext<Mystivate_dbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 

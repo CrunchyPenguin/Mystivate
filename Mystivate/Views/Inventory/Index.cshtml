@@ -13,7 +13,43 @@
             <div class="weapon-slot"></div>
         </div>
         <div class="character-box">
-
+            @{
+                IEnumerable<Equipment> wearing = Model.InventorySlot.Where(i => i.Wearing == true).Select(i => i.Equipment);
+                if (wearing != null)
+                {
+                    <img src="~/images/Characters/Shadow.gif" />
+                    if (wearing.OfType<Gear>().Any(g => g.GearType.Name == "Back"))
+                    {
+                        <img src="~/images/Equipment/@(wearing.OfType<Gear>().SingleOrDefault(g => g.GearType.Name == "Back").Image)-back.gif" />
+                    }
+                    <img src="~/images/Characters/Body.gif" />
+                    if (wearing.OfType<Gear>().Any(g => g.GearType.Name == "Leggings"))
+                    {
+                        <img src="~/images/Equipment/@(wearing.OfType<Gear>().SingleOrDefault(g => g.GearType.Name == "Leggings").Image).gif" />
+                    }
+                    if (wearing.OfType<Gear>().Any(g => g.GearType.Name == "Chestplate"))
+                    {
+                        <img src="~/images/Equipment/@(wearing.OfType<Gear>().SingleOrDefault(g => g.GearType.Name == "Chestplate").Image).gif" />
+                    }
+                    if (wearing.OfType<Gear>().Any(g => g.GearType.Name == "Helmet"))
+                    {
+                        <img src="~/images/Equipment/@(wearing.OfType<Gear>().SingleOrDefault(g => g.GearType.Name == "Helmet").Image).gif" />
+                    }
+                    if (wearing.OfType<Gear>().Any(g => g.GearType.Name == "Back"))
+                    {
+                        <img src="~/images/Equipment/@(wearing.OfType<Gear>().SingleOrDefault(g => g.GearType.Name == "Back").Image)-front.gif" />
+                    }
+                    if (wearing.OfType<Weapon>().Any())
+                    {
+                        <img src="~/images/Equipment/@(wearing.OfType<Weapon>().SingleOrDefault().Image).gif" />
+                    }
+                }
+                else
+                {
+                    <img src="~/images/Characters/Shadow.gif" />
+                    <img src="~/images/Characters/Body.gif" />
+                }
+            }
         </div>
     </div>
     <div class="inventory-box">
@@ -62,6 +98,7 @@
         function SetEquipment(id) {
             $.post("@Url.Action("SetWearing", "Inventory")", { equipmentId: id }, function () {
                 ReloadWearing();
+                location.reload();
             });
         }
 

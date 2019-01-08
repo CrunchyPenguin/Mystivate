@@ -26,11 +26,11 @@ namespace Mystivate.Logic
         {
             if (_accountAccess.UserExists(user.Email))
             {
-                return RegisterResult.UsernameEmailExists;
+                return RegisterResult.EmailExists;
             }
             if (_accountAccess.UserExists("", user.Username))
             {
-                return RegisterResult.UsernameEmailExists;
+                return RegisterResult.UsernameExists;
             }
             if(user.Password.Length < 4)
             {
@@ -102,7 +102,8 @@ namespace Mystivate.Logic
 
     public enum RegisterResult
     {
-        UsernameEmailExists,
+        EmailExists,
+        UsernameExists,
         PasswordShort,
         UsernameShort,
         Succeeded

@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mystivate.Data", "Mystivate
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mystivate.Models", "Mystivate.Models\Mystivate.Models.csproj", "{899EA2AC-339C-4959-B7B9-5F118358C8A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mystivate.Tests", "Mystivate.Tests\Mystivate.Tests.csproj", "{122ADA5D-9781-4D4A-A316-361136246B0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mystivate.UnitTests", "Mystivate.Tests\Mystivate.UnitTests.csproj", "{122ADA5D-9781-4D4A-A316-361136246B0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mystivate.IntegrationTests", "Mystivate.IntegrationTests\Mystivate.IntegrationTests.csproj", "{D3CAE343-E4B3-40FC-9C3A-ABC7AE7D510D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{122ADA5D-9781-4D4A-A316-361136246B0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{122ADA5D-9781-4D4A-A316-361136246B0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{122ADA5D-9781-4D4A-A316-361136246B0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3CAE343-E4B3-40FC-9C3A-ABC7AE7D510D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3CAE343-E4B3-40FC-9C3A-ABC7AE7D510D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3CAE343-E4B3-40FC-9C3A-ABC7AE7D510D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3CAE343-E4B3-40FC-9C3A-ABC7AE7D510D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

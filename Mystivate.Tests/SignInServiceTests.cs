@@ -53,7 +53,7 @@ namespace Mystivate.Tests
 
                 string username = "test";
                 string email = "test@test.nl";
-                string password = "tst1";
+                string password = "ts1";
 
                 RegisterResult result = registerService.RegisterUser(new RegisterModel
                 {
@@ -183,7 +183,7 @@ namespace Mystivate.Tests
                     Password = password
                 });
 
-                Assert.AreEqual(RegisterResult.UsernameEmailExists, result2);
+                Assert.AreEqual(RegisterResult.UsernameExists, result2);
             }
         }
 
@@ -220,7 +220,7 @@ namespace Mystivate.Tests
                     Password = password
                 });
 
-                Assert.AreEqual(RegisterResult.UsernameEmailExists, result2);
+                Assert.AreEqual(RegisterResult.EmailExists, result2);
             }
         }
     }

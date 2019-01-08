@@ -115,5 +115,10 @@ namespace Mystivate.Logic
         {
             _characterAccess.RemoveCoins(amount, GetCharacterId());
         }
+
+        public void AddCoin(int amount)
+        {
+            _characterAccess.AddCoins(amount, GetCharacterId());
+        }
     }
 }

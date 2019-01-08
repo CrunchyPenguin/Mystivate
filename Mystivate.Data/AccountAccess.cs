@@ -120,7 +120,7 @@ namespace Mystivate.Data
 
         public bool UserExists(string email = "", string username = "")
         {
-            if (_dbContext.Users.Where(u => (u.Email == email) || (u.Username == username)).Count() != 0)
+            if (_dbContext.Users.Any(u => (u.Email == email) || (u.Username == username)))
             {
                 return true;
             }

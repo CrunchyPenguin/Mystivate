@@ -12,12 +12,14 @@ namespace Mystivate.Logic
         private readonly IQuestAccess _questAccess;
         private readonly IInventoryAccess _inventoryAccess;
         private readonly ICharacterInfo _characterInfo;
+        private readonly ICharacterManager _characterManager;
 
-        public QuestLogic(IQuestAccess questAccess, ICharacterInfo characterInfo, IInventoryAccess inventoryAccess)
+        public QuestLogic(IQuestAccess questAccess, ICharacterInfo characterInfo, IInventoryAccess inventoryAccess, ICharacterManager characterManager)
         {
             _questAccess = questAccess;
             _characterInfo = characterInfo;
             _inventoryAccess = inventoryAccess;
+            _characterManager = characterManager;
         }
 
         public QuestModel GetCurrentQuest()
@@ -92,6 +94,7 @@ namespace Mystivate.Logic
                             }
                             else
                             {
+                                _characterManager.AddCoin(200);
                                 return null;
                             }
                         }

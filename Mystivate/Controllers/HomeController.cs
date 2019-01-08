@@ -42,17 +42,17 @@ namespace Mystivate.Controllers
             return View(model);
         }
 
-        public void CheckNewLogin()
-        {
-            // Checks if new login day
-            if (_userInfo.NewLogin())
-            {
-                // Unchecks all dailies
-                _taskManager.UncheckDailies();
-                _taskManager.ResetHabits();
-            }
-        }
-        
+        //public void CheckNewLogin()
+        //{
+        //    // Checks if new login day
+        //    if (_userInfo.NewLogin())
+        //    {
+        //        // Unchecks all dailies
+        //        _taskManager.UncheckDailies();
+        //        _taskManager.ResetHabits();
+        //    }
+        //}
+
         public IActionResult Info(bool register = false)
         {
             if (HttpContext.User.Identity.IsAuthenticated)

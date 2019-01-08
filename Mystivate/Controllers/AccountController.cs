@@ -70,9 +70,27 @@ namespace Mystivate.Controllers
                 };
                 RegisterResult result = _registerService.RegisterUser(register);
 
-                return RedirectToAction("Index", "Home");
+                switch (result)
+                {
+                    case RegisterResult.EmailExists:
+                        TempData["Message"] = "Email already exists.";
+                        return RedirectToAction("Info", "Home", new { register = true });
+                    case RegisterResult.UsernameExists:
+                        TempData["Message"] = "Username already exists.";
+                        return RedirectToAction("Info", "Home", new { register = true });
+                    case RegisterResult.PasswordShort:
+                        TempData["Message"] = "The password is too short.";
+                        return RedirectToAction("Info", "Home", new { register = true });
+                    case RegisterResult.UsernameShort:
+                        TempData["Message"] = "The username is too short.";
+                        return RedirectToAction("Info", "Home", new { register = true });
+                    case RegisterResult.Succeeded:
+                        return RedirectToAction("Info", "Home");
+                    default:
+                        return PartialView("_Register", model);
+                }
             }
-            return RedirectToAction("Info", "Home");
+            return PartialView("_Register", model);
         }
 
         public async Task<IActionResult> Logout()

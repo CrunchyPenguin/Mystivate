@@ -11,5 +11,6 @@ namespace Mystivate.Logic
         void AddExperience(int amount);
         void AddHealth(int amount);
         void RemoveCoins(int amount);
+        void AddCoin(int amount);
     }
 }

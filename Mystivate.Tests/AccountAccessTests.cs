@@ -14,7 +14,7 @@ namespace Mystivate.Tests
         public void RegisterUser_NormalCredentials_True()
         {
             var options = new DbContextOptionsBuilder<Mystivate_dbContext>()
-                .UseInMemoryDatabase(databaseName: "RegisterUser_NormalCredentials_True")
+                .UseInMemoryDatabase(databaseName: "Account_RegisterUser_NormalCredentials_True")
                 .Options;
 
             using (var context = new Mystivate_dbContext(options))
