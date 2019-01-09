@@ -26,7 +26,7 @@ namespace Mystivate.Controllers
             List<Equipment> equipment = _equipmentLogic.GetEquipment(false);
             return View(new Tuple<List<Equipment>, int>(equipment, GetCoins()));
         }
-
+        
         public int BuyItem(int equipmentId)
         {
             return _equipmentLogic.BuyEquipment(equipmentId);

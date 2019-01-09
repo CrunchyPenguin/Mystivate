@@ -64,8 +64,12 @@ namespace Mystivate.Logic
             _taskAccess.CheckDaily(dailyId);
             int xp = 40;
             _characterManager.AddExperience(xp);
-            int damage = 60;
-            _questLogic.AddDamage(damage);
+            int damage = 0;
+            if (_questLogic.GetCurrentQuest() != null)
+            {
+                damage = 60;
+                _questLogic.AddDamage(damage);
+            }
             return new TaskReturn(xp, damage);
 
         }
@@ -75,8 +79,12 @@ namespace Mystivate.Logic
             _taskAccess.CheckTodo(todoId);
             int xp = 60;
             _characterManager.AddExperience(xp);
-            int damage = 100;
-            _questLogic.AddDamage(damage);
+            int damage = 0;
+            if (_questLogic.GetCurrentQuest() != null)
+            {
+                damage = 100;
+                _questLogic.AddDamage(damage);
+            }
             return new TaskReturn(xp, damage);
         }
 
@@ -130,8 +138,12 @@ namespace Mystivate.Logic
             _taskAccess.PositiveHabit(habitId);
             int xp = 10;
             _characterManager.AddExperience(xp);
-            int damage = 20;
-            _questLogic.AddDamage(damage);
+            int damage = 0;
+            if (_questLogic.GetCurrentQuest() != null)
+            {
+                damage = 20;
+                _questLogic.AddDamage(damage);
+            }
             return new TaskReturn(xp, damage);
         }
 

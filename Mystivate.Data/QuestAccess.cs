@@ -17,8 +17,11 @@ namespace Mystivate.Data
 
         public void AddDamage(int characterId, int damage)
         {
-            _dbContext.QuestInventory.Where(q => q.CharacterId == characterId).Include(q => q.Quest).SingleOrDefault(q => q.QuestStatus.Status == "active").DamageToday += damage;
-            _dbContext.SaveChanges();
+            if (_dbContext.QuestInventory.Any(q => q.CharacterId == characterId && q.QuestStatus.Status == "active"))
+            {
+                _dbContext.QuestInventory.Where(q => q.CharacterId == characterId).Include(q => q.Quest).SingleOrDefault(q => q.QuestStatus.Status == "active").DamageToday += damage;
+                _dbContext.SaveChanges();
+            }
         }
 
         public Quest GetCurrentQuest(int characterId)

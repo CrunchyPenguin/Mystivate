@@ -41,18 +41,7 @@ namespace Mystivate.Controllers
             };
             return View(model);
         }
-
-        //public void CheckNewLogin()
-        //{
-        //    // Checks if new login day
-        //    if (_userInfo.NewLogin())
-        //    {
-        //        // Unchecks all dailies
-        //        _taskManager.UncheckDailies();
-        //        _taskManager.ResetHabits();
-        //    }
-        //}
-
+        
         public IActionResult Info(bool register = false)
         {
             if (HttpContext.User.Identity.IsAuthenticated)
@@ -62,29 +51,7 @@ namespace Mystivate.Controllers
             ViewData["register"] = register;
             return View();
         }
-
-        [Authorize]
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        [Authorize]
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        [Authorize]
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
+        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

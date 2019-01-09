@@ -7,6 +7,7 @@ using System.Net.Http;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using System.Threading.Tasks;
+using System;
 
 namespace Mystivate.IntegrationTests
 {
@@ -37,7 +38,6 @@ namespace Mystivate.IntegrationTests
             var response = await client.GetAsync(request);
 
             response.EnsureSuccessStatusCode();
-
             Assert.IsTrue(true);
         }
     }
